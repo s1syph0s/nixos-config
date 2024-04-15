@@ -121,6 +121,8 @@
     userEmail = "pasha@fstn.top";
   };
 
+  programs.lazygit.enable = true;
+
   programs.alacritty = {
     enable = true;
     settings = {
