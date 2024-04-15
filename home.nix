@@ -20,6 +20,7 @@
   imports = [
     ./home/neovim
     ./home/tmux
+    ./home/hyprland
   ];
 
   # The home.packages option allows you to install Nix packages into your
@@ -97,10 +98,10 @@
     # ".screenrc".source = dotfiles/screenrc;
 
     # hyprland config TODO: Migrate to better solution
-    ".config/hypr" = {
-      source = ./config/hypr;
-      recursive = true;
-    };
+    # ".config/hypr" = {
+    #   source = ./config/hypr;
+    #   recursive = true;
+    # };
     # waybar config TODO: Migrate to better solution
     ".config/waybar" = {
       source = ./config/waybar;
@@ -189,9 +190,9 @@
     EDITOR = "nvim";
   };
 
-  wayland.windowManager.hyprland = {
-    enable = true;
-  };
+  # wayland.windowManager.hyprland = {
+  #   enable = true;
+  # };
 
   programs.waybar.enable = true;
 
