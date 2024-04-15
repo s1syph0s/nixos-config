@@ -64,6 +64,7 @@
 
     swaybg
     grim
+    slurp
 
     btop
 
