@@ -1,0 +1,270 @@
+{
+	"spacing": 0,
+	"layer": "top",
+	"margin-top": 5,
+	"margin-left": 10,
+	"margin-right": 10,
+	"modules-left": [
+		"hyprland/workspaces",
+		"hyprland/window"
+	],
+	"modules-center": [
+		"clock",
+	],
+	"modules-right": [
+		"tray",
+		"custom/sep",
+		"idle_inhibitor",
+		"custom/sep",
+		"custom/layout",
+		"custom/sep",
+		"pulseaudio",
+		"custom/sep",
+		"network",
+		"custom/sep",
+        "temperature",
+        "custom/sep",
+		"custom/space"
+	],
+
+	"custom/sep": {
+		"format": " | "
+	},
+	"custom/space": {
+		"format": "     "
+	},
+    "custom/layout": {
+        "format": "{}",
+        "tooltip": false,
+        "exec": "~/.config/waybar/scripts/hypr-kblayout hp,-inc-hyperx-alloy-origins",
+        "return-type": "json",
+    },
+	"hyprland/window": {
+		"format": "  {}",
+		"max-length": 50,
+		"separate-outputs": true
+	},
+    "hyprland/language": {
+        "format": "{}",
+        "format-us": "US",
+        "format-de": "DE",
+        "keyboard-name": "hp,-inc-hyperx-alloy-origins"
+    },
+	"idle_inhibitor": {
+		"format": "{icon}",
+		"format-icons": {
+			"activated": "",
+			"deactivated": ""
+		}
+	},
+	"custom/notification": {
+		"tooltip": true,
+		"format": " {icon} ",
+		"format-icons": {
+			"notification": "",
+			"none": "",
+			"dnd-notification": "",
+			"dnd-none": ""
+		},
+		"return-type": "json",
+		"exec-if": "which swaync-client",
+		"exec": "swaync-client -swb",
+		"on-click": "swaync-client -t -sw",
+		"on-click-right": "swaync-client -d -sw",
+		"escape": true
+	},
+	"custom/session": {
+		"format": "{icon}",
+		"format-icons": {
+			"default": " 💀 "
+		},
+		"toolip": true,
+		"on-click": "wlogout -p layer-shell"
+	},
+	"backlight": {
+		"format": "{icon} {percent}%",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			""
+		]
+	},
+	"hyprland/workspaces": {
+		"disable-scroll": true,
+		"all-outputs": false,
+		"on-click": "activate",
+		"format": "{icon}",
+		"format-icons": {
+			"1": "I",
+			"2": "II",
+			"3": "III",
+			"4": "IV",
+			"5": "V",
+			"6": "VI",
+			"7": "VII",
+			"8": "VIII",
+			"9": "IX",
+			"urgent": ""
+		}
+	},
+	"mwlr/workspaces": {
+		"disable-scroll": true,
+		"on-click": "activate",
+		"format": "{icon}",
+		"all-outputs": false,
+		"persistent_workspaces": {
+			"1": [],
+			"2": [],
+			"3": [],
+			"4": [],
+			"5": [],
+			"6": [],
+			"7": [],
+			"8": [],
+			"9": [],
+			"10": []
+		},
+		"format-icons": {
+			"1": "I",
+			"2": "II",
+			"3": "III",
+			"4": "IV",
+			"5": "V",
+			"6": "VI",
+			"7": "VII",
+			"8": "VIII",
+			"9": "IX",
+			"10": "X",
+			"urgent": ""
+		}
+	},
+	"xwlr/workspaces": {
+		"all-outputs": true,
+		"on-click": "activate",
+		"format": "{icon}",
+		"format-icons": {
+			"1": "",
+			"2": "",
+			"3": "",
+			"4": "",
+			"5": "",
+			"urgent": "",
+			"active": "",
+			"default": ""
+		}
+	},
+    "temperature": {
+        "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        "format-critical": "{temperatureC}°C ",
+        "format": "{temperatureC}°C "
+    },
+	"tray": {
+		"spacing": 10
+	},
+	"clock": {
+		"format": " 󰥔 {:%H:%M  |   %d.%m.%Y } ",
+		"interval": 60,
+		"tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode"          : "year",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "left",
+            "on-scroll"     : 1,
+            "on-click-right": "mode",
+            "format": {
+                  "months":     "<span color='#ffead3'><b>{}</b></span>",
+                  "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                  "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                  "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                  "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        }
+	},
+	"custom/bruh": {
+		"interval": 60,
+		"format": "{:  %A %d %b}"
+	},
+	"cpu": {
+		"format": "   {usage}%",
+		"tooltip": false
+	},
+	"memory": {
+		"format": " {}%"
+	},
+	"battery": {
+		"states": {
+			"good": 95,
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "{icon}{capacity}%  ",
+		"format-charging": " {capacity}%  ",
+		"format-plugged": " {capacity}%  ",
+		"format-alt": "{icon}{time}  ",
+		"format-icons": [
+			"  ",
+			"  ",
+			"  ",
+			"  ",
+			"  "
+		]
+	},
+	"battery#bat2": {
+		"bat": "BAT2"
+	},
+	"custom/power_profile": {
+		"exec": "sleep 0.3 && /home/adharsh/.scripts/powerprofilecycle.sh -m",
+		"interval": 1,
+		"on-click": "/home/adharsh/.scripts/powerprofilecycle.sh",
+		"exec-on-event": true
+	},
+	"network": {
+		"format-wifi": "  {essid}",
+		"format-ethernet": "  Connected",
+		"format-disconnected": " Disconnected",
+		"tooltip-format-wifi": " {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\n⬆️ {bandwidthUpBits} ⬇️ {bandwidthDownBits}",
+		"tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n⬆️ {bandwidthUpBits} ⬇️ {bandwidthDownBits}",
+		"format-linked": "{ifname} (No IP) ",
+		"on-click-right": "nm-connection-editor",
+		"on-click": "bash './rofi-network-manager.sh'"
+	},
+	"pulseaudio": {
+		"format": "{volume}% {icon} {format_source}",
+		"format-bluetooth": "{volume}%  {format_source}",
+		"format-bluetooth-muted": "   {format_source}",
+		"format-muted": "󰝟 {format_source}",
+		"format-source": "{volume}%  ",
+		"format-source-muted": "  ",
+		"format-icons": {
+			"headphone": "",
+			"hands-free": "",
+			"headset": "",
+			"phone": "",
+			"portable": "",
+			"car": "",
+			"default": [
+				"",
+				"",
+				""
+			]
+		},
+		"on-click": "pavucontrol"
+	}, 
+	"custom/media": {
+		"format": "{icon} {}",
+		"return-type": "json",
+		"max-length": 40,
+		"format-icons": {
+			"spotify": "",
+			"default": "🎜"
+		},
+		"escape": true
+	}
+}
