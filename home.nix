@@ -222,6 +222,8 @@
     '';
   };
 
+  services.ssh-agent.enable = true;
+
   xdg.userDirs = let homeDir = config.home.homeDirectory; in {
     enable = true;
     createDirectories = true;
