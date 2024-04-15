@@ -40,6 +40,8 @@
     jq
     fzf
 
+    dolphin
+
     # networking tools
     nmap
 
