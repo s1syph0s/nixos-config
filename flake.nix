@@ -13,11 +13,18 @@
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       pkgs = nixpkgs-unstable.legacyPackages.${system};
+
+      overlay-unstable = final: prev: {
+	unstable = nixpkgs-unstable.legacyPackages.${prev.system};
+      };
     in {
       nixosConfigurations = {
         saturn-vm = lib.nixosSystem {
 	  inherit system;
-	  modules = [ ./configuration.nix ];
+	  modules = [
+	  ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+	  ./configuration.nix
+	  ];
 	};
       };
       homeConfigurations = {
