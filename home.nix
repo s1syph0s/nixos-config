@@ -222,7 +222,10 @@
     '';
   };
 
-  services.ssh-agent.enable = true;
+  services.ssh-agent = {
+    enable = true;
+    addKeysToAgent = "yes";
+  };
 
   xdg.userDirs = let homeDir = config.home.homeDirectory; in {
     enable = true;
