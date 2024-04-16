@@ -63,9 +63,11 @@
     pciutils
     usbutils
 
+    # desktop utils
     swaybg
     grim
     slurp
+    hyprpicker
 
     btop
 
