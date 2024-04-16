@@ -223,6 +223,10 @@
   };
 
   services.ssh-agent.enable = true;
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";
+  };
 
   xdg.userDirs = let homeDir = config.home.homeDirectory; in {
     enable = true;
