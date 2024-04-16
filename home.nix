@@ -222,21 +222,9 @@
     '';
   };
 
-  services.ssh-agent.enable = true;
-  programs.ssh = {
+  services.ssh-agent = {
     enable = true;
     addKeysToAgent = "yes";
-    matchBlocks = {
-      "proxy.lab.sra" = {
-	hostname = "lab.sra.uni-hannover.de";
-	user = "pas.fistanto";
-      };
-      "lab.sra" = {
-	hostname = "lab-pc32";
-	proxyJump = "proxy.lab.sra";
-	user = "pas.fistanto";
-      };
-    };
   };
 
   xdg.userDirs = let homeDir = config.home.homeDirectory; in {
