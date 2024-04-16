@@ -16,7 +16,7 @@
       nixosConfigurations = {
         saturn-vm = lib.nixosSystem {
 	  inherit system;
-	  modules = [ ./configuration.nix ];
+	  modules = [ ./host/saturn-vm/configuration.nix ];
 	};
       };
       homeConfigurations = {
