@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 {
-  programs.neovim = {
+  programs.neovim = let
+    toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
+  in
+  {
     # Essentials
     extraPackages = with pkgs; [
       lua-language-server
