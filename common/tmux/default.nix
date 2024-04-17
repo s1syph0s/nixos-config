@@ -13,6 +13,7 @@
       vim-tmux-navigator
     ];
     extraConfig = ''
+      set -ga terminal-overrides ",alacritty:Tc"
       set -s escape-time 0
       bind-key C-Space send-prefix
       set -g status-style 'bg=#333333 fg=#5eacd3'
