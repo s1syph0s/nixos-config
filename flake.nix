@@ -28,6 +28,10 @@
 	  inherit pkgs;
 	  modules = [ ./home.nix ];
 	};
+        "sisyph0s@greenbox" = home-manager.lib.homeManagerConfiguration {
+	  inherit pkgs;
+	  modules = [ ./host/greenbox/home.nix ];
+	};
       };
     };
 }
