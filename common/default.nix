@@ -152,6 +152,9 @@
 
   programs.fish = {
     enable = true;
+    shellAbbrs = {
+      lg = "lazygit";
+    };
   };
 
   programs.fuzzel = {
