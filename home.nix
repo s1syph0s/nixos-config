@@ -18,9 +18,9 @@
   fonts.fontconfig.enable = true;
 
   imports = [
-    ./home/neovim
-    ./home/tmux
-    ./home/hyprland
+    ./common/neovim
+    ./common/tmux
+    ./common/hyprland
   ];
 
   # The home.packages option allows you to install Nix packages into your

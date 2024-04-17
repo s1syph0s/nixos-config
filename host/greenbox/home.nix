@@ -18,9 +18,10 @@
   fonts.fontconfig.enable = true;
 
   imports = [
-    ../../home/neovim
-    ../../home/tmux
-    ../../home/hyprland
+    ../../common/neovim
+    ../../common/tmux
+    ../../common/hyprland
+    ./app/hyprland
   ];
 
   # The home.packages option allows you to install Nix packages into your
@@ -106,7 +107,7 @@
     # };
     # waybar config TODO: Migrate to better solution
     ".config/waybar" = {
-      source = ./config/waybar;
+      source = ../../config/waybar;
       recursive = true;
     };
 
