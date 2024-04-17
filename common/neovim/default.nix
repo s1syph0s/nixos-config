@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./module/lsp.nix
+  ];
+
   programs.neovim = let
     toLua = str: "lua << EOF\n${str}\nEOF\n";
     toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
@@ -12,10 +16,6 @@
     vimAlias = true;
 
     extraPackages = with pkgs; [
-      # LSP
-      lua-language-server
-      nil
-
       wl-clipboard
       ripgrep
       fzf
@@ -31,12 +31,6 @@
 
       vim-sleuth
 
-      neodev-nvim
-      {
-       plugin = nvim-lspconfig;
-       config = toLuaFile ./lua/lsp.lua;
-      }
-
       {
         plugin = comment-nvim;
 	    config = toLua ''require('Comment').setup()'';
@@ -46,15 +40,6 @@
 	    config = toLua ''require('which-key').setup()'';
       }
 
-      # Lsp stuff
-      luasnip
-      cmp_luasnip
-      cmp-nvim-lsp
-      friendly-snippets
-      {
-        plugin = nvim-cmp;
-	config = toLuaFile ./lua/cmp.lua;
-      }
       {
         plugin = fidget-nvim;
         config = toLua ''require('fidget').setup()'';
