@@ -1,8 +1,6 @@
-{ config, pkgs, ... }:
+{ config, pkgs, util, ... }:
 {
-  programs.neovim = let
-    toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-  in
+  programs.neovim =
   {
     # Essentials
     extraPackages = with pkgs; [
@@ -14,7 +12,7 @@
       neodev-nvim
       {
        plugin = nvim-lspconfig;
-       config = toLuaFile ../lua/lsp.lua;
+       config = util.toLuaFile ../lua/lsp.lua;
       }
 
       luasnip
@@ -23,7 +21,7 @@
       friendly-snippets
       {
         plugin = nvim-cmp;
-	config = toLuaFile ../lua/cmp.lua;
+	config = util.toLuaFile ../lua/cmp.lua;
       }
     ];
   };

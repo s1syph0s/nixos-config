@@ -1,15 +1,15 @@
 { config, pkgs, ... }:
 
+let
+  util = import ./util.nix {};
+in 
 {
   imports = [
     ./module/lsp.nix
   ];
+  _module.args.util = util;
 
-  programs.neovim = let
-    toLua = str: "lua << EOF\n${str}\nEOF\n";
-    toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-  in
-  {
+  programs.neovim = {
     enable = true;
     defaultEditor = true;
     viAlias = true;
@@ -24,7 +24,7 @@
     plugins = with pkgs.vimPlugins; [
       {
           plugin = kanagawa-nvim;
-          config = toLua "vim.cmd.colorscheme 'kanagawa'";
+          config = util.toLua "vim.cmd.colorscheme 'kanagawa'";
       }
 
       vim-tmux-navigator
@@ -33,21 +33,21 @@
 
       {
         plugin = comment-nvim;
-	    config = toLua ''require('Comment').setup()'';
+	    config = util.toLua ''require('Comment').setup()'';
       }
       {
         plugin = which-key-nvim;
-	    config = toLua ''require('which-key').setup()'';
+	    config = util.toLua ''require('which-key').setup()'';
       }
 
       {
         plugin = fidget-nvim;
-        config = toLua ''require('fidget').setup()'';
+        config = util.toLua ''require('fidget').setup()'';
       }
 
       {
         plugin = gitsigns-nvim;
-        config = toLua ''
+        config = util.toLua ''
           local gitsigns = require('gitsigns')
           gitsigns.setup({
             on_attach = function(bufnr)
@@ -63,7 +63,7 @@
       nvim-web-devicons
       {
         plugin = lualine-nvim;
-        config = toLua ''
+        config = util.toLua ''
           require('lualine').setup {
             options = {
               icons_enabled = true,
@@ -75,7 +75,7 @@
 
       {
         plugin = indent-blankline-nvim;
-        config = toLua ''
+        config = util.toLua ''
           require('ibl').setup({
             indent = { char = '┊' },
             whitespace = { remove_blankline_trail = true },
@@ -88,7 +88,7 @@
       telescope-ui-select-nvim
       {
         plugin = telescope-nvim;
-        config = toLuaFile ./lua/telescope.lua;
+        config = util.toLuaFile ./lua/telescope.lua;
       }
 
       nvim-treesitter-textobjects
@@ -98,7 +98,7 @@
           nix
           lua
         ]));
-        config = toLuaFile ./lua/treesitter.lua;
+        config = util.toLuaFile ./lua/treesitter.lua;
       }
     ];
 
