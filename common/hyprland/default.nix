@@ -17,10 +17,6 @@
       kb_options = "grp:alt_shift_toggle,ctrl:nocaps";
       numlock_by_default = true;
       follow_mouse = 1;
-      touchpad = {
-          natural_scroll = "no";
-      };
-
       sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
     };
     general = {
