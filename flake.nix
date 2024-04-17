@@ -18,6 +18,10 @@
 	  inherit system;
 	  modules = [ ./host/saturn-vm/configuration.nix ];
 	};
+        greenbox = lib.nixosSystem {
+	  inherit system;
+	  modules = [ ./host/greenbox/configuration.nix ];
+	};
       };
       homeConfigurations = {
         sisyph0s = home-manager.lib.homeManagerConfiguration {
