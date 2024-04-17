@@ -34,7 +34,7 @@
       neodev-nvim
       {
        plugin = nvim-lspconfig;
-       config = toLuaFile ./plugin/lsp.lua;
+       config = toLuaFile ./lua/lsp.lua;
       }
 
       {
@@ -53,7 +53,7 @@
       friendly-snippets
       {
         plugin = nvim-cmp;
-	config = toLuaFile ./plugin/cmp.lua;
+	config = toLuaFile ./lua/cmp.lua;
       }
       {
         plugin = fidget-nvim;
@@ -103,7 +103,7 @@
       telescope-ui-select-nvim
       {
         plugin = telescope-nvim;
-        config = toLuaFile ./plugin/telescope.lua;
+        config = toLuaFile ./lua/telescope.lua;
       }
 
       nvim-treesitter-textobjects
@@ -113,7 +113,7 @@
           nix
           lua
         ]));
-        config = toLuaFile ./plugin/treesitter.lua;
+        config = toLuaFile ./lua/treesitter.lua;
       }
     ];
 
