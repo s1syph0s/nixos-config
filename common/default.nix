@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ../../common/neovim
-    ../../common/tmux
-    ../../common/hyprland
+    ./neovim
+    ./tmux
+    ./hyprland
   ];
   # The home.packages option allows you to install Nix packages into your
   # environment.
