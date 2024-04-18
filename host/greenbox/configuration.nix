@@ -66,12 +66,15 @@
     intelBusId = "PCI:0:2:0";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the XFCE Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.xfce.enable = true;
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland --user-menu --asterisks";
+        user = "greeter";
+      };
+    };
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
