@@ -100,6 +100,24 @@ in
         ]));
         config = util.toLuaFile ./lua/treesitter.lua;
       }
+      {
+        plugin = oil-nvim;
+        config = util.toLua ''
+          require('oil').setup()
+          vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open oil' })
+        '';
+      }
+      {
+        plugin = neo-tree-nvim;
+        config = util.toLua ''
+          vim.keymap.set('n', '\\', '<CMD>Neotree toggle<CR>', { desc = 'Toggle tree' })
+          require('neo-tree').setup({
+            window = {
+              position = 'right'
+            }
+          })
+        '';
+      }
     ];
 
     extraLuaConfig = ''
