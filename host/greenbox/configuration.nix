@@ -140,7 +140,19 @@
     home-manager
     pulseaudio
     lshw
+    networkmanagerapplet
+
+    # nixos utils
+    nix-output-monitor
+    nvd
   ];
+
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/home/sisyph0s/.dotfiles";
+  };
 
   programs.hyprland = {
     enable = true;
