@@ -119,6 +119,8 @@
   };
   security.pam.services.swaylock = {};
 
+  services.udisks2.enable = true;
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
@@ -145,6 +147,8 @@
     # nixos utils
     nix-output-monitor
     nvd
+
+    sshfs
   ];
 
   programs.nh = {
