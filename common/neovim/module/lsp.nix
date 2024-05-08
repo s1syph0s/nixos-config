@@ -10,11 +10,15 @@
 
     plugins = with pkgs.vimPlugins; [
       neodev-nvim
+
+      # LSP
       {
        plugin = nvim-lspconfig;
        config = util.toLuaFile ../lua/lsp.lua;
       }
+      rustaceanvim
 
+      # Cmp
       luasnip
       cmp_luasnip
       cmp-nvim-lsp
