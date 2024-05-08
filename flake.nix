@@ -18,15 +18,23 @@
 	  inherit system;
 	  modules = [ ./host/saturn-vm/configuration.nix ];
 	};
+        saturn = lib.nixosSystem {
+	  inherit system;
+	  modules = [ ./host/saturn/configuration.nix ];
+	};
         greenbox = lib.nixosSystem {
 	  inherit system;
 	  modules = [ ./host/greenbox/configuration.nix ];
 	};
       };
       homeConfigurations = {
-        sisyph0s = home-manager.lib.homeManagerConfiguration {
+        "sisyph0s@saturn-vm" = home-manager.lib.homeManagerConfiguration {
 	  inherit pkgs;
 	  modules = [ ./home.nix ];
+	};
+        "sisyph0s@saturn" = home-manager.lib.homeManagerConfiguration {
+	  inherit pkgs;
+	  modules = [ ./host/saturn/home.nix ];
 	};
         "sisyph0s@greenbox" = home-manager.lib.homeManagerConfiguration {
 	  inherit pkgs;
