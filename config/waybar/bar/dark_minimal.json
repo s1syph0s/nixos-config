@@ -36,7 +36,7 @@
     "custom/layout": {
         "format": "{}",
         "tooltip": false,
-        "exec": "~/.config/waybar/scripts/hypr-kblayout hp,-inc-hyperx-alloy-origins",
+        "exec": "hypr-kblayout hp,-inc-hyperx-alloy-origins",
         "return-type": "json",
     },
 	"hyprland/window": {
