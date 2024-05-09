@@ -11,7 +11,15 @@
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      overlays = [
+	(self: super: {
+	  hypr-kblayout = super.callPackage ./pkgs/hypr-kblayout { };
+	})
+      ];
+      # pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs {
+	inherit system overlays;
+      };
     in {
       nixosConfigurations = {
         saturn-vm = lib.nixosSystem {
