@@ -10,7 +10,12 @@
       "mako"
       "swayidle -w timeout 300 'swaylock -f -c 000000' timeout 600 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock -f -c 000000' & disown"
     ];
-    env = "XCURSOR_SIZE,24";
+    env = [
+      "HYPRCURSOR_TYPE,Capitaine Cursors (Nord)"
+      "HYPRCURSOR_SIZE,32"
+      "XCURSOR_TYPE,Capitaine Cursors (Nord)"
+      "XCURSOR_SIZE,32"
+    ];
     input = {
       kb_layout = "us,de";
       kb_variant = ",nodeadkeys";

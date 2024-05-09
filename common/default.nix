@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -9,12 +9,26 @@
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
+  home.pointerCursor = {
+    name = "Capitaine Cursors (Nord)";
+    package = pkgs.capitaine-cursors-themed;
+    size = 48;
+  };
+  gtk.cursorTheme = {
+    name = "Capitaine Cursors (Nord)";
+    package = pkgs.capitaine-cursors-themed;
+    size = 48;
+  };
   fonts.fontconfig.enable = true;
 
   imports = [
     ./neovim
     ./tmux
     ./hyprland
+    ./zellij
+  ];
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "discord"
   ];
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -71,6 +85,7 @@
     pavucontrol
 
     okular
+    discord
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
