@@ -12,4 +12,7 @@
     ../../common
     ./app/hyprland
   ];
+  home.packages = with pkgs; [
+    drawio
+  ];
 }
