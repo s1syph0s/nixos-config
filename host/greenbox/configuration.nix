@@ -114,7 +114,6 @@
       firefox
       swayidle
       swaylock
-    #  thunderbird
     ];
   };
   security.pam.services.swaylock = {};
@@ -147,6 +146,8 @@
     # nixos utils
     nix-output-monitor
     nvd
+
+    gnumake
 
     sshfs
   ];

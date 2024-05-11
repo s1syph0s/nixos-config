@@ -96,7 +96,6 @@
       firefox
       swayidle
       swaylock
-    #  thunderbird
     ];
   };
   security.pam.services.swaylock = {};
