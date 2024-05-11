@@ -90,6 +90,8 @@
     rustup
     espup
 
+    thunderbird
+
     # custom packages
     hypr-kblayout
 
@@ -223,8 +225,6 @@
   # };
 
   programs.waybar.enable = true;
-
-  programs.thunderbird.enable = true;
 
   services.mako = {
     enable = true;
