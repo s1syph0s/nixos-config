@@ -224,6 +224,8 @@
 
   programs.waybar.enable = true;
 
+  programs.thunderbird.enable = true;
+
   services.mako = {
     enable = true;
     font = "JetBrainsMono 8";
