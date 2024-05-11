@@ -87,6 +87,9 @@
     okular
     discord
 
+    rustup
+    espup
+
     # custom packages
     hypr-kblayout
 
