@@ -89,6 +89,7 @@
 
     rustup
     espup
+    cargo-generate
 
     thunderbird
 
