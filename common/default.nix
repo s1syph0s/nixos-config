@@ -92,6 +92,7 @@
     cargo-generate
 
     thunderbird
+    qbittorrent
 
     # custom packages
     hypr-kblayout
