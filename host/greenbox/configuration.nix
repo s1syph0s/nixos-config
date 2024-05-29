@@ -109,7 +109,7 @@
   users.users.sisyph0s = {
     isNormalUser = true;
     description = "sisyph0s";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "dialout" "tty" ];
     packages = with pkgs; [
       firefox
       swayidle
