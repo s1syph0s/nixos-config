@@ -150,6 +150,8 @@
     gnumake
 
     sshfs
+
+    brillo
   ];
 
   programs.nh = {
