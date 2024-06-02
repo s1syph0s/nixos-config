@@ -109,7 +109,7 @@
   users.users.sisyph0s = {
     isNormalUser = true;
     description = "sisyph0s";
-    extraGroups = [ "networkmanager" "wheel" "dialout" "tty" ];
+    extraGroups = [ "networkmanager" "wheel" "dialout" "tty" "docker" ];
     packages = with pkgs; [
       firefox
       swayidle
@@ -186,6 +186,15 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  # docker
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
 
   # enable wireguard
   networking.firewall = {
