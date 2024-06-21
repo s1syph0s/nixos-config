@@ -75,7 +75,7 @@
       "format": "{}",
       "tooltip": false,
       "exec": "hypr-kblayout hp,-inc-hyperx-alloy-origins",
-      "return-type": "json",
+      "return-type": "json"
   },
   "pulseaudio#mic": {
     "format": "{format_source}",

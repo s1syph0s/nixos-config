@@ -84,7 +84,10 @@
 
     pavucontrol
 
+    # pdf
     okular
+    pdftk
+
     discord
 
     rustup
