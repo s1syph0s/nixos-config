@@ -83,12 +83,18 @@
     papirus-icon-theme
 
     pavucontrol
+    coppwr
 
     # pdf
     okular
     pdftk
 
     discord
+    telegram-desktop
+
+    mangohud
+    gamemode
+    goverlay
 
     rustup
     espup

@@ -67,8 +67,8 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  #sound.enable = true;
+  #hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -82,6 +82,26 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+  services.pipewire.extraConfig.pipewire-pulse."92-baldurs-gate" = {
+    context.modules = [
+      {
+        name = "libpipewire-module-protocol-pulse";
+        args = {
+          pulse.min.req = "32/44100";
+          pulse.default.req = "32/44100";
+          pulse.max.req = "32/44100";
+          pulse.min.quantum = "32/44100";
+          pulse.max.quantum = "32/44100";
+          audio.format = "S24LE";  # 24-bit audio
+        };
+      }
+    ];
+    stream.properties = {
+      node.latency = "32/44100";
+      resample.quality = 1;
+    };
+  };
+
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
