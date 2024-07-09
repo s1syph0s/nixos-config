@@ -37,7 +37,7 @@
     # # "Hello, world!" when run.
     # pkgs.hello
 
-    neofetch
+    fastfetch
 
     # archives
     zip
