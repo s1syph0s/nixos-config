@@ -47,6 +47,7 @@
     ripgrep
     jq
     fzf
+    tealdeer
 
     dolphin
 
