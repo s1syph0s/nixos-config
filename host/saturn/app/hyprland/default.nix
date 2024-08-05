@@ -2,7 +2,7 @@
 {
   wayland.windowManager.hyprland.settings = {
     monitor = [
-      "DP-1,2560x1440@144,0x180,1"
+      "DP-1,2560x1440@144,0x180,1,bitdepth,10"
       "HDMI-A-1,1920x1080@60,2560x0,1,transform,3"
     ];
     workspace = [

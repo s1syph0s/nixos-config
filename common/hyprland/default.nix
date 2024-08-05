@@ -4,6 +4,8 @@
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
     exec-once = [
+      #"dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+      "dbus-update-activation-environment --systemd --all"
       "waybar" 
       "nm-applet --indicator"
       "swaybg -m fill -i ~/media/img/wallpaper-moebius.png"
@@ -86,6 +88,7 @@
       disable_splash_rendering = true;
       mouse_move_enables_dpms = true;
       enable_swallow = true;
+      vrr = 2;
       swallow_regex = "^(alacritty)$";
     };
 
