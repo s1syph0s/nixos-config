@@ -58,6 +58,11 @@ vim.keymap.set( 'n', '<leader>sw', require('telescope.builtin').grep_string, { d
 vim.keymap.set( 'n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set( 'n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
+-- Formatter
+vim.keymap.set('n', '<leader>f', function()
+  require('conform').format({ async = true, lsp_fallback = true })
+end, { desc = "Formatter: [F]ormat" })
+
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
