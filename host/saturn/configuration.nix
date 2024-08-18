@@ -155,6 +155,8 @@
     gnumake
 
     sshfs
+
+    virt-manager
   ];
 
   programs.nh = {
@@ -194,6 +196,9 @@
   virtualisation.docker = {
     enable = true;
   };
+
+  # virt manager
+  virtualisation.libvirtd.enable = true;
   
   # enable wireguard
   networking.firewall = {

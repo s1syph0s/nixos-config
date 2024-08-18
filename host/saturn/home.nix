@@ -15,4 +15,11 @@
   home.packages = with pkgs; [
     drawio
   ];
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
+  };
+
 }
