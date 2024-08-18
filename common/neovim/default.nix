@@ -146,6 +146,7 @@ in
           })
         '';
       }
+      diffview-nvim
     ];
 
     extraLuaConfig = ''
