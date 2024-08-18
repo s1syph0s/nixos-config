@@ -58,21 +58,6 @@ in
         config = util.toLua ''require('fidget').setup()'';
       }
 
-      {
-        plugin = gitsigns-nvim;
-        config = util.toLua ''
-          local gitsigns = require('gitsigns')
-          gitsigns.setup({
-            on_attach = function(bufnr)
-              vim.keymap.set('n', '<leader>gp', gitsigns.prev_hunk,
-                { buffer = bufnr, desc = '[G]o to [P]revious Hunk'})
-              vim.keymap.set('n', '<leader>gn', gitsigns.next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk'})
-              vim.keymap.set('n', '<leader>ph', gitsigns.preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk'})
-            end,
-          })
-        '';
-      }
-
       nvim-web-devicons
       {
         plugin = lualine-nvim;
@@ -139,10 +124,26 @@ in
         '';
       }
 
+      # Git integration
       {
         plugin = neogit;
         config = util.toLua ''
           require('neogit').setup()
+        '';
+      }
+
+      {
+        plugin = gitsigns-nvim;
+        config = util.toLua ''
+          local gitsigns = require('gitsigns')
+          gitsigns.setup({
+            on_attach = function(bufnr)
+              vim.keymap.set('n', '<leader>gp', gitsigns.prev_hunk,
+                { buffer = bufnr, desc = '[G]o to [P]revious Hunk'})
+              vim.keymap.set('n', '<leader>gn', gitsigns.next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk'})
+              vim.keymap.set('n', '<leader>ph', gitsigns.preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk'})
+            end,
+          })
         '';
       }
     ];
