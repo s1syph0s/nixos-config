@@ -104,6 +104,13 @@ in
         config = util.toLuaFile ./lua/telescope.lua;
       }
 
+      {
+        plugin = todo-comments-nvim;
+        config = util.toLua ''
+          require('todo-comments').setup()
+        '';
+      }
+
       nvim-treesitter-textobjects
       nvim-treesitter-context
       {
