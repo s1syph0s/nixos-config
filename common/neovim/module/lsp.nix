@@ -1,7 +1,6 @@
 { config, pkgs, util, ... }:
 {
-  programs.neovim =
-  {
+  programs.neovim = {
     # Essentials
     extraPackages = with pkgs; [
       clang-tools
