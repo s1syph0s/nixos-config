@@ -32,8 +32,6 @@ in
       vim-sleuth
 
       {
-        plugin = comment-nvim;
-	    config = util.toLua ''require('Comment').setup()'';
       }
       {
         plugin = which-key-nvim;
