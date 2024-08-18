@@ -1,5 +1,5 @@
 require('conform').setup({
-  format_on_save = function (bufnr)
+  format_on_save = function(bufnr)
     local disable_ft = { c = true, cpp = true }
     return {
       timeout_ms = 500,
