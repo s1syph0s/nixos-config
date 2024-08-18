@@ -129,11 +129,6 @@
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
 
-    # hyprland config TODO: Migrate to better solution
-    # ".config/hypr" = {
-    #   source = ./config/hypr;
-    #   recursive = true;
-    # };
     # waybar config TODO: Migrate to better solution
     ".config/waybar" = {
       source = ../config/waybar;
