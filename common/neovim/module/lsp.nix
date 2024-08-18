@@ -27,6 +27,12 @@
         plugin = nvim-cmp;
 	config = util.toLuaFile ../lua/cmp.lua;
       }
+
+      # Formatter
+      { 
+        plugin = conform-nvim;
+        config = util.toLuaFile ../lua/formatter.lua;
+      }
     ];
   };
 }
