@@ -4,6 +4,7 @@
   {
     # Essentials
     extraPackages = with pkgs; [
+      clang-tools
       lua-language-server
       nil
     ];
