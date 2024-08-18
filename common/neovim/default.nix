@@ -138,6 +138,13 @@ in
           })
         '';
       }
+
+      {
+        plugin = neogit;
+        config = util.toLua ''
+          require('neogit').setup()
+        '';
+      }
     ];
 
     extraLuaConfig = ''
