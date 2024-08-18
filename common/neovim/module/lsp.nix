@@ -9,7 +9,7 @@
     ];
 
     plugins = with pkgs.vimPlugins; [
-      neodev-nvim
+      lazydev-nvim
 
       # LSP
       {

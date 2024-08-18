@@ -49,7 +49,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-require('neodev').setup()
+require('lazydev').setup()
 local lspconfig = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
