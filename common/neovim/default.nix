@@ -129,6 +129,15 @@ in
         plugin = neogit;
         config = util.toLua ''
           require('neogit').setup()
+            vim.api.nvim_create_autocmd("User", {
+              pattern = {
+                "NeogitBranchCheckout",
+                "NeogitStatusRefreshed",
+              },
+              callback = function()
+                vim.cmd('checkt')
+              end
+            })
         '';
       }
 
