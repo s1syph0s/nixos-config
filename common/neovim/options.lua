@@ -65,6 +65,10 @@ vim.keymap.set('n', '<leader>f', function()
   require('conform').format({ async = true, lsp_fallback = true })
 end, { desc = "Formatter: [F]ormat" })
 
+-- Neogit
+vim.keymap.set('n', '<leader>gs', require('neogit').open, { desc = "Neo[G]it status" })
+
+
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
