@@ -95,4 +95,5 @@ lspconfig.nil_ls.setup {
 }
 lspconfig.clangd.setup {
   capabilities = capabilities,
+  cmd = { "clangd", "--query-driver=**", "--log=verbose" },
 }
