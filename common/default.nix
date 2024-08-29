@@ -23,6 +23,7 @@
 
   imports = [
     ./neovim
+    ./emacs
     ./tmux
     ./hyprland
     ./zellij
