@@ -78,8 +78,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 require('lazydev').setup()
+
 local lspconfig = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+vim.diagnostic.config {
+  virtual_text = false,
+  float = {
+    header = false,
+    border = 'rounded',
+    focusable = true,
+  },
+}
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 lspconfig.lua_ls.setup {
   capabilities = capabilities,

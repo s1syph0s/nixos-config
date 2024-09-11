@@ -14,9 +14,9 @@ vim.api.nvim_create_autocmd('ModeChanged', {
   desc = 'Forget the current snippet when leaving the insert mode',
   callback = function(evt)
     if
-      luasnip.session
-      and luasnip.session.current_nodes[evt.buf]
-      and not luasnip.session.jump_active
+        luasnip.session
+        and luasnip.session.current_nodes[evt.buf]
+        and not luasnip.session.jump_active
     then
       luasnip.unlink_current()
     end
@@ -44,7 +44,7 @@ cmp.setup {
       else
         fallback()
       end
-    end, {'i'}),
+    end, { 'i' }),
     ['<Tab>'] = cmp.mapping.select_next_item(),
     ['<S-Tab>'] = cmp.mapping.select_prev_item(),
     ['<C-l>'] = cmp.mapping(function()
