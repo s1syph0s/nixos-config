@@ -46,6 +46,8 @@
 
     # utils
     ripgrep
+    fd
+    coreutils
     jq
     fzf
     tealdeer
@@ -101,6 +103,8 @@
     rustup
     espup
     cargo-generate
+
+    fishPlugins.tide
 
     thunderbird
     qbittorrent
@@ -192,7 +196,11 @@
     enable = true;
     shellAbbrs = {
       lg = "lazygit";
+      lal = "ls -al";
     };
+    interactiveShellInit = ''
+      set -U fish_user_paths ~/.emacs.d/bin $fish_user_paths
+    '';
   };
 
   programs.fuzzel = {
