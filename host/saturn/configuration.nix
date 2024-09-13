@@ -185,7 +185,15 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+  services.udev.extraRules = ''
+    # CMSIS-DAP for microbit
 
+    ACTION!="add|change", GOTO="microbit_rules_end"
+
+    SUBSYSTEM=="usb", ATTR{idVendor}=="0d28", ATTR{idProduct}=="0204", TAG+="uaccess"
+
+    LABEL="microbit_rules_end"
+  '';
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
