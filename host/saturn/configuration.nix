@@ -42,9 +42,9 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   services.greetd = {
