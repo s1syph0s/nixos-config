@@ -104,7 +104,7 @@
       "$mainMod + Shift, E, exit, "
       "$mainMod, E, exec, dolphin"
       "$mainMod, V, togglefloating, "
-      "$mainMod, D, exec, pkill fuzzel || fuzzel"
+      "$mainMod, SPACE, exec, pkill anyrun || anyrun"
       "$mainMod, P, pseudo," # dwindle
       "$mainMod, B, togglesplit," # dwindle
 

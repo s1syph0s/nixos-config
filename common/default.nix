@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 {
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -202,6 +202,118 @@
       set -U fish_user_paths ~/.emacs.d/bin $fish_user_paths
     '';
   };
+
+  programs.anyrun = {
+    enable = true;
+    config = {
+      plugins = [
+	# An array of all the plugins you want, which either can be paths to the .so files, or their packages
+	inputs.anyrun.packages.${pkgs.system}.applications
+      ];
+      x = { fraction = 0.5; };
+      y = { fraction = 0.3; };
+      width = { fraction = 0.3; };
+      hideIcons = false;
+      ignoreExclusiveZones = false;
+      layer = "overlay";
+      hidePluginInfo = true;
+      closeOnClick = false;
+      showResultsImmediately = false;
+      maxEntries = null;
+    };
+    extraCss = ''
+      /* GTK Vars */
+      @define-color bg-color #313244;
+      @define-color fg-color #cdd6f4;
+      @define-color primary-color #89b4fa;
+      @define-color secondary-color #cba6f7;
+      @define-color border-color @primary-color;
+      @define-color selected-bg-color @primary-color;
+      @define-color selected-fg-color @bg-color;
+
+      * {
+	all: unset;
+	font-family: JetBrainsMono Nerd Font;
+      }
+
+      #window {
+	background: transparent;
+      }
+
+      box#main {
+	border-radius: 16px;
+	background-color: alpha(@bg-color, 0.6);
+	border: 0.5px solid alpha(@fg-color, 0.25);
+      }
+
+      entry#entry {
+	font-size: 1.25rem;
+	background: transparent;
+	box-shadow: none;
+	border: none;
+	border-radius: 16px;
+	padding: 16px 24px;
+	min-height: 40px;
+	caret-color: @primary-color;
+      }
+
+      list#main {
+	background-color: transparent;
+      }
+
+      #plugin {
+	background-color: transparent;
+	padding-bottom: 4px;
+      }
+
+      #match {
+	font-size: 1.1rem;
+	padding: 2px 4px;
+      }
+
+      #match:selected,
+      #match:hover {
+	background-color: @selected-bg-color;
+	color: @selected-fg-color;
+      }
+
+      #match:selected label#info,
+      #match:hover label#info {
+	color: @selected-fg-color;
+      }
+
+      #match:selected label#match-desc,
+      #match:hover label#match-desc {
+	color: alpha(@selected-fg-color, 0.9);
+      }
+
+      #match label#info {
+	color: transparent;
+	color: @fg-color;
+      }
+
+      label#match-desc {
+	font-size: 1rem;
+	color: @fg-color;
+      }
+
+      label#plugin {
+	font-size: 16px;
+      }
+    '';
+
+    extraConfigFiles."applications.ron".text = ''
+      Config(
+	// Also show the Desktop Actions defined in the desktop files, e.g. "New Window" from LibreWolf
+	desktop_actions: true,
+	max_entries: 5, 
+	// The terminal used for running terminal based desktop entries, if left as `None` a static list of terminals is used
+	// to determine what terminal to use.
+	terminal: Some("alacritty"),
+      )
+    '';
+  };
+
 
   programs.fuzzel = {
     enable = true;

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -12,6 +12,7 @@
     ../../common
     ./app/hyprland
   ];
+  _module.args = { inherit inputs; };
   home.packages = with pkgs; [
     drawio
   ];

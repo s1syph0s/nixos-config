@@ -3,11 +3,15 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    anyrun.url = "github:anyrun-org/anyrun";
+    anyrun.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -42,11 +46,23 @@
 	};
         "sisyph0s@saturn" = home-manager.lib.homeManagerConfiguration {
 	  inherit pkgs;
-	  modules = [ ./host/saturn/home.nix ];
+	  extraSpecialArgs = {
+              inherit inputs;
+          };
+	  modules = [ 
+	    ./host/saturn/home.nix 
+	    inputs.anyrun.homeManagerModules.anyrun
+	  ];
 	};
         "sisyph0s@greenbox" = home-manager.lib.homeManagerConfiguration {
 	  inherit pkgs;
-	  modules = [ ./host/greenbox/home.nix ];
+	  extraSpecialArgs = {
+              inherit inputs;
+          };
+	  modules = [ 
+	    ./host/greenbox/home.nix
+	    inputs.anyrun.homeManagerModules.anyrun
+	  ];
 	};
       };
     };
