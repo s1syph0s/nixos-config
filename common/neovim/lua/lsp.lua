@@ -91,6 +91,7 @@ vim.diagnostic.config {
   },
 }
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
 lspconfig.lua_ls.setup {
   capabilities = capabilities,
   settings = {
@@ -100,10 +101,16 @@ lspconfig.lua_ls.setup {
     }
   },
 }
+
 lspconfig.nil_ls.setup {
   capabilities = capabilities,
 }
+
 lspconfig.clangd.setup {
   capabilities = capabilities,
   cmd = { "clangd", "--query-driver=**", "--log=verbose" },
+}
+
+lspconfig.typst_lsp.setup {
+  capabilities = capabilities,
 }

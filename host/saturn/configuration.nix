@@ -110,7 +110,7 @@
   users.users.sisyph0s = {
     isNormalUser = true;
     description = "sisyph0s";
-    extraGroups = [ "networkmanager" "wheel" "dialout" "tty" "docker" ];
+    extraGroups = [ "libvirtd" "networkmanager" "wheel" "dialout" "tty" "docker" ];
     packages = with pkgs; [
       firefox
       swayidle
@@ -130,6 +130,7 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "steam"
+    "steam-unwrapped"
     "steam-original"
     "steam-run"
   ];
@@ -155,10 +156,9 @@
     gnumake
 
     sshfs
-
-    virt-manager
   ];
 
+  programs.virt-manager.enable = true;
   programs.nh = {
     enable = true;
     clean.enable = true;
