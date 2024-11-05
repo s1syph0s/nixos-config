@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -13,6 +13,10 @@
     ./app/hyprland
   ];
   _module.args = { inherit inputs; };
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "drawio"
+    "discord"
+  ];
   home.packages = with pkgs; [
     drawio
   ];
