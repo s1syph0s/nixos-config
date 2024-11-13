@@ -160,7 +160,7 @@
     settings = {
       env.TERM = "alacritty";
 
-      shell = "${pkgs.fish}/bin/fish";
+      terminal.shell = "${pkgs.fish}/bin/fish";
 
       font = {
         size = 11;
