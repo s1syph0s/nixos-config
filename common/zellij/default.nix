@@ -5,8 +5,21 @@
     settings = {
       default_shell = "fish";
       copy_command = "wl-copy";
-      keybinds.shared_except = {
-        _args = [ "locked" ];
+      keybinds = {
+        unbind = [ "Ctrl g" ];
+        shared_except = {
+          _args = [ "locked" ];
+          bind = {
+            _args = [ "Ctrl m" ];
+            SwitchToMode = "locked";
+          };
+        };
+        locked = {
+          bind = {
+            _args = [ "Ctrl m" ];
+            SwitchToMode = "normal";
+          };
+        };
       };
     };
   };
