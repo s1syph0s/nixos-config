@@ -5,7 +5,7 @@
     extraPackages = with pkgs; [
       clang-tools
       lua-language-server
-      nil
+      nixd
     ];
 
     plugins = with pkgs.vimPlugins; [

@@ -102,6 +102,9 @@ vim.diagnostic.config {
   },
 }
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+local hostname = vim.fn.hostname()
+local usrname = os.getenv("USER")
+local usr_host = usrname .. '@' .. hostname
 
 lspconfig.lua_ls.setup {
   capabilities = capabilities,
@@ -113,8 +116,26 @@ lspconfig.lua_ls.setup {
   },
 }
 
-lspconfig.nil_ls.setup {
+lspconfig.nixd.setup {
   capabilities = capabilities,
+  settings = {
+    nixd = {
+      nixpkgs = {
+        expr = "import <nixpkgs> { }",
+      },
+      formatting = {
+        command = { "nixfmt" },
+      },
+      options = {
+        nixos = {
+          expr = '(builtins.getFlake "github:s1syph0s/nixos-config").nixosConfigurations.' .. hostname .. '.options',
+        },
+        home_manager = {
+          expr = '(builtins.getFlake "github:s1syph0s/nixos-config").homeConfigurations."' .. usr_host .. '".options',
+        },
+      },
+    },
+  },
 }
 
 lspconfig.clangd.setup {

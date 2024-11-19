@@ -37,6 +37,9 @@
 	};
         saturn = lib.nixosSystem {
 	  inherit system;
+	  specialArgs = {
+	    inherit inputs;
+	  };
 	  modules = [ ./host/saturn/configuration.nix ];
 	};
         greenbox = lib.nixosSystem {

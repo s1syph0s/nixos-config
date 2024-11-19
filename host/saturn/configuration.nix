@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
   imports =
@@ -170,6 +170,9 @@
     enable = true;
     xwayland.enable = true;
   };
+
+  # nix LSP
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   environment.variables.EDITOR = "neovim";
 
