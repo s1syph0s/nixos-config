@@ -53,10 +53,10 @@
           ignore_opacity = true;
       };
 
-      drop_shadow = true;
-      shadow_range = 2;
-      shadow_render_power = 3;
-      "col.shadow" = "rgba(1a1a1aee)";
+      shadow = {
+        enabled = true;
+        color = "rgba(1a1a1aee)";
+      };
     };
     animations = {
       enabled = true;
