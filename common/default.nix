@@ -108,6 +108,7 @@
 
     thunderbird
     qbittorrent
+    irssi
 
     # custom packages
     hypr-kblayout
