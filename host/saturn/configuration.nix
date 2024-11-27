@@ -47,6 +47,12 @@
     enable32Bit = true;
   };
 
+  services.protonmail-bridge = {
+    enable = true;
+    logLevel = "info";
+  };
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.greetd.enableGnomeKeyring = true;
   services.greetd = {
     enable = true;
     settings = {
@@ -156,7 +162,10 @@
     gnumake
 
     sshfs
+    libsecret
   ];
+
+  programs.seahorse.enable = true;
 
   programs.virt-manager.enable = true;
   programs.nh = {
