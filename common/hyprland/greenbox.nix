@@ -5,24 +5,30 @@
   wayland.windowManager.hyprland.settings = {
     monitor = "eDP-1,1920x1080@60,0x0,1";
     exec-once = [
+      #"dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+      "dbus-update-activation-environment --systemd --all"
       "waybar" 
       "nm-applet --indicator"
       "swaybg -m fill -i ~/media/img/wallpaper-moebius.png"
       "mako"
       "swayidle -w timeout 300 'swaylock -f -c 000000' timeout 600 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock -f -c 000000' & disown"
     ];
-    env = "XCURSOR_SIZE,24";
+    env = [
+      "HYPRCURSOR_TYPE,Capitaine Cursors (Nord)"
+      "HYPRCURSOR_SIZE,24"
+      "XCURSOR_TYPE,Capitaine Cursors (Nord)"
+      "XCURSOR_SIZE,24"
+    ];
     input = {
       kb_layout = "us,de";
       kb_variant = ",nodeadkeys";
       kb_options = "grp:alt_shift_toggle,ctrl:nocaps";
       numlock_by_default = true;
       follow_mouse = 1;
-      touchpad = {
-          natural_scroll = "no";
-      };
-
       sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
+      touchpad = {
+        natural_scroll = "no";
+      };
     };
     general = {
       # See https://wiki.hyprland.org/Configuring/Variables/ for more
@@ -86,6 +92,7 @@
       disable_splash_rendering = true;
       mouse_move_enables_dpms = true;
       enable_swallow = true;
+      vrr = 2;
       swallow_regex = "^(alacritty)$";
     };
 
@@ -101,7 +108,7 @@
       "$mainMod + Shift, E, exit, "
       "$mainMod, E, exec, dolphin"
       "$mainMod, V, togglefloating, "
-      "$mainMod, D, exec, pkill fuzzel || fuzzel"
+      "$mainMod, SPACE, exec, pkill anyrun || anyrun"
       "$mainMod, P, pseudo," # dwindle
       "$mainMod, B, togglesplit," # dwindle
 
