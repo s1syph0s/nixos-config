@@ -69,6 +69,13 @@
     intelBusId = "PCI:0:2:0";
   };
 
+  services.protonmail-bridge = {
+    enable = true;
+    logLevel = "info";
+    path = with pkgs; [ gnome-keyring ];
+  };
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.greetd.enableGnomeKeyring = true;
   services.greetd = {
     enable = true;
     settings = {
@@ -154,8 +161,10 @@
     sshfs
 
     brillo
+    libsecret
   ];
 
+  programs.seahorse.enable = true;
   programs.nh = {
     enable = true;
     clean.enable = true;
