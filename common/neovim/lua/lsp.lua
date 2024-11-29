@@ -146,3 +146,7 @@ lspconfig.clangd.setup {
 lspconfig.typst_lsp.setup {
   capabilities = capabilities,
 }
+
+lspconfig.gopls.setup {
+  capabilities = capabilities,
+}
