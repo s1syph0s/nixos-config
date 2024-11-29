@@ -51,7 +51,6 @@
     enable = true;
     logLevel = "info";
   };
-  services.gnome.gnome-keyring.enable = true;
   security.pam.services.greetd.enableGnomeKeyring = true;
   services.greetd = {
     enable = true;
