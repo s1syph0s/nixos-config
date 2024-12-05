@@ -10,9 +10,12 @@
 
     anyrun.url = "github:anyrun-org/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-ld.url = "github:Mic92/nix-ld";
+    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nix-ld, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -40,7 +43,12 @@
 	  specialArgs = {
 	    inherit inputs;
 	  };
-	  modules = [ ./host/saturn/configuration.nix ];
+	  modules = [ 
+	    ./host/saturn/configuration.nix
+
+	    nix-ld.nixosModules.nix-ld
+	    { programs.nix-ld.dev.enable = true; }
+	  ];
 	};
         greenbox = lib.nixosSystem {
 	  inherit system;
