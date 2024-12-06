@@ -4,8 +4,8 @@
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
     exec-once = [
-      #"dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-      "dbus-update-activation-environment --systemd --all"
+      "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+      #"dbus-update-activation-environment --systemd --all"
       "waybar" 
       "nm-applet --indicator"
       "swaybg -m fill -i ~/media/img/wallpaper-moebius.png"
@@ -17,6 +17,7 @@
       "HYPRCURSOR_SIZE,32"
       "XCURSOR_TYPE,Capitaine Cursors (Nord)"
       "XCURSOR_SIZE,32"
+      "XDG_SESSION_DESKTOP,Hyprland"
     ];
     input = {
       kb_layout = "us,de";
