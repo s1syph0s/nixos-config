@@ -15,7 +15,6 @@
   _module.args = { inherit inputs; };
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "drawio"
-    "discord"
   ];
   home.packages = with pkgs; [
     drawio

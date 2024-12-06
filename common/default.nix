@@ -28,9 +28,6 @@
     ./hyprland
     ./zellij
   ];
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "discord"
-  ];
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
@@ -93,8 +90,8 @@
     okular
     pdftk
 
-    discord
     telegram-desktop
+    vesktop
 
     mangohud
     gamemode
