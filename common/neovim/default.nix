@@ -21,6 +21,7 @@ in
       ${builtins.readFile ./lua/telescope.lua}
       ${builtins.readFile ./lua/treesitter.lua}
       ${builtins.readFile ./lua/session-manager.lua}
+      ${builtins.readFile ./lua/dashboard.lua}
     '';
 
     extraPackages = with pkgs; [
@@ -121,6 +122,11 @@ in
           require('ibl').setup({
             indent = { char = '┊' },
             whitespace = { remove_blankline_trail = true },
+            exclude = {
+              filetypes = {
+                "dashboard",
+              }
+            }
           })
         '';
       }
@@ -200,6 +206,8 @@ in
       diffview-nvim
 
       persistence-nvim
+
+      dashboard-nvim
     ];
   };
 }
