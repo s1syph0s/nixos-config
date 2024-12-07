@@ -6,6 +6,7 @@ in
 {
   imports = [
     ./module/lsp.nix
+    ./module/dap.nix
   ];
   _module.args.util = util;
 
@@ -14,6 +15,13 @@ in
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+
+    extraLuaConfig = ''
+      ${builtins.readFile ./lua/options.lua}
+      ${builtins.readFile ./lua/telescope.lua}
+      ${builtins.readFile ./lua/treesitter.lua}
+      ${builtins.readFile ./lua/session-manager.lua}
+    '';
 
     extraPackages = with pkgs; [
       wl-clipboard
@@ -120,10 +128,7 @@ in
       plenary-nvim
       telescope-fzf-native-nvim
       telescope-ui-select-nvim
-      {
-        plugin = telescope-nvim;
-        config = util.toLuaFile ./lua/telescope.lua;
-      }
+      telescope-nvim
 
       {
         plugin = todo-comments-nvim;
@@ -134,13 +139,14 @@ in
 
       nvim-treesitter-textobjects
       nvim-treesitter-context
-      {
-        plugin = (nvim-treesitter.withPlugins (p: with p; [
-          nix
-          lua
-        ]));
-        config = util.toLuaFile ./lua/treesitter.lua;
-      }
+      (nvim-treesitter.withPlugins (p: with p; [
+        tree-sitter-nix
+        tree-sitter-lua
+        tree-sitter-rust
+        tree-sitter-go
+        tree-sitter-c
+        tree-sitter-cpp
+      ]))
       {
         plugin = oil-nvim;
         config = util.toLua ''
@@ -192,10 +198,8 @@ in
         '';
       }
       diffview-nvim
-    ];
 
-    extraLuaConfig = ''
-      ${builtins.readFile ./options.lua}
-    '';
+      persistence-nvim
+    ];
   };
 }

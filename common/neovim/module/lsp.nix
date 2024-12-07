@@ -8,14 +8,17 @@
       nixd
     ];
 
+    extraLuaConfig = ''
+      ${builtins.readFile ../lua/lsp.lua}
+      ${builtins.readFile ../lua/cmp.lua}
+      ${builtins.readFile ../lua/formatter.lua}
+    '';
+
     plugins = with pkgs.vimPlugins; [
       lazydev-nvim
 
       # LSP
-      {
-       plugin = nvim-lspconfig;
-       config = util.toLuaFile ../lua/lsp.lua;
-      }
+      nvim-lspconfig
       rustaceanvim
 
       # Cmp
@@ -23,16 +26,10 @@
       cmp_luasnip
       cmp-nvim-lsp
       friendly-snippets
-      {
-        plugin = nvim-cmp;
-	config = util.toLuaFile ../lua/cmp.lua;
-      }
+      nvim-cmp
 
       # Formatter
-      { 
-        plugin = conform-nvim;
-        config = util.toLuaFile ../lua/formatter.lua;
-      }
+      conform-nvim
     ];
   };
 }
