@@ -5,8 +5,9 @@ let
 in 
 {
   imports = [
-    ./module/lsp.nix
     ./module/dap.nix
+    ./module/options.nix
+    ./module/lsp.nix
   ];
   _module.args.util = util;
 
@@ -17,7 +18,6 @@ in
     vimAlias = true;
 
     extraLuaConfig = ''
-      ${builtins.readFile ./lua/options.lua}
       ${builtins.readFile ./lua/telescope.lua}
       ${builtins.readFile ./lua/treesitter.lua}
       ${builtins.readFile ./lua/session-manager.lua}
