@@ -5,9 +5,10 @@ let
 in 
 {
   imports = [
+    ./module/bookmarks.nix
     ./module/dap.nix
-    ./module/options.nix
     ./module/lsp.nix
+    ./module/options.nix
   ];
   _module.args.util = util;
 
@@ -104,6 +105,7 @@ in
               theme = 'auto',
             },
             sections = {
+              lualine_b = { "grapple" },
               lualine_x = {
                 {
                   require("noice").api.statusline.mode.get,
