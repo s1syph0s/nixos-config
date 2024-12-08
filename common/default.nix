@@ -209,8 +209,13 @@
       lg = "lazygit";
       lal = "ls -al";
     };
+    shellAliases = {
+      cat = "bat";
+    };
     interactiveShellInit = ''
       set -U fish_user_paths ~/.emacs.d/bin $fish_user_paths
+      set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
+      set -x MANROFFOPT "-c"
     '';
   };
 
@@ -387,6 +392,10 @@
       border-color=#bf616a
       default-timeout=0
     '';
+  };
+
+  programs.bat = {
+    enable = true;
   };
 
   services.ssh-agent.enable = true;
