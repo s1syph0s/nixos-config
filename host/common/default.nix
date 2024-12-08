@@ -23,11 +23,6 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-  services.protonmail-bridge = {
-    enable = true;
-    logLevel = "info";
-    path = with pkgs; [ gnome-keyring ];
-  };
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.greetd.enableGnomeKeyring = true;
   services.greetd = {
@@ -38,6 +33,11 @@
         user = "greeter";
       };
     };
+  };
+  services.protonmail-bridge = {
+    enable = true;
+    logLevel = "info";
+    path = with pkgs; [ gnome-keyring ];
   };
 
   # Configure keymap in X11
