@@ -23,6 +23,7 @@ in
       ${builtins.readFile ./lua/treesitter.lua}
       ${builtins.readFile ./lua/session-manager.lua}
       ${builtins.readFile ./lua/dashboard.lua}
+      ${builtins.readFile ./lua/trouble.lua}
     '';
 
     extraPackages = with pkgs; [
@@ -210,6 +211,8 @@ in
       persistence-nvim
 
       dashboard-nvim
+
+      trouble-nvim
     ];
   };
 }
