@@ -13,9 +13,12 @@
 
     nix-ld.url = "github:Mic92/nix-ld";
     nix-ld.inputs.nixpkgs.follows = "nixpkgs";
+
+    envfs.url = "github:Mic92/envfs";
+    envfs.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-ld, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nix-ld, envfs, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -48,6 +51,8 @@
 
 	    nix-ld.nixosModules.nix-ld
 	    { programs.nix-ld.dev.enable = true; }
+
+	    envfs.nixosModules.envfs
 	  ];
 	};
         greenbox = lib.nixosSystem {
