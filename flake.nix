@@ -60,7 +60,14 @@
 	  specialArgs = {
 	    inherit inputs;
 	  };
-	  modules = [ ./host/greenbox/configuration.nix ];
+	  modules = [ 
+	    ./host/greenbox/configuration.nix 
+
+	    nix-ld.nixosModules.nix-ld
+	    { programs.nix-ld.dev.enable = true; }
+
+	    envfs.nixosModules.envfs
+	  ];
 	};
       };
       homeConfigurations = {

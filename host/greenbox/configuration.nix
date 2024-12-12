@@ -22,9 +22,9 @@
   time.timeZone = "Europe/Berlin";
 
   # nvidia settings
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   # Load nvidia driver for Xorg and Wayland
@@ -55,11 +55,8 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = lib.concatLists [
-    config.environment.systemPackages
-    (with pkgs; [
-      brillo
-    ])
+  environment.systemPackages = with pkgs; [
+    brillo
   ];
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
