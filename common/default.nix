@@ -105,6 +105,9 @@
     thunderbird
     qbittorrent
 
+    # multimedia
+    vlc
+
     # chat
     irssi
     element-desktop
