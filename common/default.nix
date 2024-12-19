@@ -90,7 +90,6 @@
     okular
     pdftk
 
-    telegram-desktop
     vesktop
 
     mangohud
@@ -105,7 +104,11 @@
 
     thunderbird
     qbittorrent
+
+    # chat
     irssi
+    element-desktop
+    telegram-desktop
 
     # utils
     nix-index
