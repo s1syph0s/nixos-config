@@ -64,6 +64,7 @@
   "group/hardware": {
     "orientation": "horizontal",
     "modules": [
+      "battery",
       "network",
       "memory",
       "disk",
@@ -156,18 +157,8 @@
     },
     "format": "{capacity}% {icon}",
     "format-charging": "<b>{icon} </b>",
-    "format-full": "<span color='#00ff00'><b>{icon}</b></span> {capacity}%",
-    "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
+    "format-full": "{icon}  {capacity}%",
+    "format-icons": ["", "", "", "", ""],
     "tooltip-format": "{timeTo}\n{capacity} % | {power} W"
   },
   "custom/batterysaver": {
