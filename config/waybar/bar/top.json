@@ -155,8 +155,8 @@
       "warning": 30,
       "critical": 15
     },
-    "format": "{capacity}% {icon}",
-    "format-charging": "<b>{icon} </b>",
+    "format": "{icon}  {capacity}%",
+    "format-charging": "<b>{icon}  </b>",
     "format-full": "{icon}  {capacity}%",
     "format-icons": ["", "", "", "", ""],
     "tooltip-format": "{timeTo}\n{capacity} % | {power} W"
