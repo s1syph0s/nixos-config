@@ -143,7 +143,7 @@ lspconfig.clangd.setup {
   cmd = { "clangd", "--query-driver=**", "--log=verbose" },
 }
 
-lspconfig.typst_lsp.setup {
+lspconfig.tinymist.setup {
   capabilities = capabilities,
 }
 
