@@ -24,6 +24,7 @@ in
       ${builtins.readFile ./lua/session-manager.lua}
       ${builtins.readFile ./lua/dashboard.lua}
       ${builtins.readFile ./lua/trouble.lua}
+      ${builtins.readFile ./lua/zellij-nav.lua}
     '';
 
     extraPackages = with pkgs; [
@@ -38,7 +39,8 @@ in
           config = util.toLua "vim.cmd.colorscheme 'kanagawa'";
       }
 
-      vim-tmux-navigator
+      # vim-tmux-navigator
+      zellij-nav-nvim
 
       vim-sleuth
 
