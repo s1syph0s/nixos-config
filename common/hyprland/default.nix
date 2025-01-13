@@ -38,6 +38,12 @@
 
       layout = "dwindle";
     };
+    group.groupbar = {
+      text_color = "rgba(fefefeff)";
+      font_family = "JetBrainsMono Nerd Font";
+      "col.active" = "rgba(313a4fee)";
+      "col.inactive" = "rgba(151922ee)";
+    };
     decoration = {
       # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
@@ -122,6 +128,11 @@
 
       # Fullscreen
       ", F11, fullscreen, 0"
+
+      # Tab
+      "$mainMod, t, togglegroup"
+      "$mainMod, b, changegroupactive, b"
+      "$mainMod, f, changegroupactive, f"
 
       # Switch workspaces with mainMod + [0-9]
       "$mainMod, 1, workspace, 1"
