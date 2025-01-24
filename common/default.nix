@@ -101,6 +101,7 @@
     cargo-generate
 
     fishPlugins.tide
+    fishPlugins.done
 
     thunderbird
     qbittorrent
@@ -222,6 +223,8 @@
       set -U fish_user_paths ~/.emacs.d/bin $fish_user_paths
       set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
       set -x MANROFFOPT "-c"
+
+      set -U __done_notify_sound 1
     '';
   };
 
