@@ -11,12 +11,13 @@
       "swaybg -m fill -i ~/media/img/wallpaper-moebius.png"
       "mako"
       "swayidle -w timeout 300 'swaylock -f -c 000000' timeout 600 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock -f -c 000000' & disown"
+      "hyprctl setcursor 'Capitaine Cursors (Nord)' 24"
+      "dconf write /org/gnome/desktop/interface/cursor-theme \"'Capitaine Cursors (Nord)'\""
+      "dconf write /org/gnome/desktop/interface/cursor-size 24"
     ];
     env = [
-      "HYPRCURSOR_TYPE,Capitaine Cursors (Nord)"
-      "HYPRCURSOR_SIZE,32"
       "XCURSOR_TYPE,Capitaine Cursors (Nord)"
-      "XCURSOR_SIZE,32"
+      "XCURSOR_SIZE,24"
       "XDG_SESSION_DESKTOP,Hyprland"
     ];
     input = {
@@ -94,9 +95,9 @@
       disable_hyprland_logo = true;
       disable_splash_rendering = true;
       mouse_move_enables_dpms = true;
-      enable_swallow = true;
       vrr = 2;
-      swallow_regex = "^(alacritty)$";
+      enable_swallow = true;
+      swallow_regex = "^(Alacritty|ghostty)$";
     };
 
     windowrulev2 = [
@@ -106,7 +107,7 @@
     "$mainMod" = "SUPER";
 
     bind = [
-      "$mainMod, RETURN, exec, alacritty"
+      "$mainMod, RETURN, exec, ghostty"
       "$mainMod + Shift, Q, killactive, "
       "$mainMod + Shift, E, exit, "
       "$mainMod, E, exec, dolphin"

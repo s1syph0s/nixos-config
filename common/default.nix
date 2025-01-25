@@ -173,6 +173,31 @@
 
   programs.lazygit.enable = true;
 
+  programs.ghostty = {
+    enable = true;
+    enableFishIntegration = true;
+    settings = {
+      command = "${pkgs.fish}/bin/fish";
+
+      font-family = "SauceCodePro NF Medium";
+      theme = "kanagawabones";
+      font-style = "Regular";
+      font-family-bold = "SauceCodePro NF";
+      font-style-bold = "Bold";
+      font-family-italic =  "SauceCodePro NF";
+      font-style-italic = "Italic";
+      font-family-bold-italic = "SauceCodePro NF";
+      font-style-bold-italic = "Bold Italic";
+      font-size = 11;
+
+      background-opacity = 0.95;
+      window-decoration = false;
+      confirm-close-surface = false;
+
+      shell-integration-features = "no-cursor";
+    };
+  };
+
   programs.alacritty = {
     enable = true;
     settings = {
@@ -226,6 +251,11 @@
 
       set -U __done_notify_sound 1
     '';
+  };
+
+  programs.yazi = {
+    enable = true;
+    enableFishIntegration = true;
   };
 
   programs.anyrun = {
@@ -334,7 +364,7 @@
 	max_entries: 5, 
 	// The terminal used for running terminal based desktop entries, if left as `None` a static list of terminals is used
 	// to determine what terminal to use.
-	terminal: Some("alacritty"),
+	terminal: Some("ghostty"),
       )
     '';
   };
