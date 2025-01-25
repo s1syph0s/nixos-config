@@ -12,12 +12,12 @@
   home.pointerCursor = {
     name = "Capitaine Cursors (Nord)";
     package = pkgs.capitaine-cursors-themed;
-    size = 48;
+    size = 24;
   };
   gtk.cursorTheme = {
     name = "Capitaine Cursors (Nord)";
     package = pkgs.capitaine-cursors-themed;
-    size = 48;
+    size = 24;
   };
   fonts.fontconfig.enable = true;
 
