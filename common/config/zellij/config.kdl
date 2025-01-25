@@ -89,7 +89,7 @@ keybinds {
 copy_command "wl-copy"
 default_shell "fish"
 
-theme "catppuccin-mocha"
+theme "kanagawa"
 mirror_session true
 pane_frames false
 
