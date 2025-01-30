@@ -15,9 +15,13 @@
 
     envfs.url = "github:Mic92/envfs";
     envfs.inputs.nixpkgs.follows = "nixpkgs";
+
+    zjstatus = {
+      url = "github:dj95/zjstatus";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-ld, envfs, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nix-ld, envfs, zjstatus, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -28,6 +32,7 @@
 	    patches = (old.patches or [ ]) ++ [ ./patch/openssh.patch ];
 	    doCheck = false;
 	  });
+	  zjstatus = zjstatus.packages.${self.system}.default;
 	})
       ];
       # pkgs = nixpkgs.legacyPackages.${system};
