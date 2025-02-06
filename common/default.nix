@@ -120,6 +120,8 @@
 
     # utils
     nix-index
+    nixd
+    nixfmt
 
     # custom packages
     hypr-kblayout

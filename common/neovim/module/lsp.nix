@@ -5,7 +5,6 @@
     extraPackages = with pkgs; [
       clang-tools
       lua-language-server
-      nixd
     ];
 
     extraLuaConfig = ''
