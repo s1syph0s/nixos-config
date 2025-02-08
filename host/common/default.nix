@@ -1,6 +1,10 @@
-{ config, pkgs, lib, inputs, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -16,11 +20,11 @@
     LC_IDENTIFICATION = "de_DE.UTF-8";
     LC_MEASUREMENT = "de_DE.UTF-8";
     LC_MONETARY = "de_DE.UTF-8";
-    LC_NAME = "de_DE.UTF-8";
-    LC_NUMERIC = "de_DE.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
     LC_PAPER = "de_DE.UTF-8";
     LC_TELEPHONE = "de_DE.UTF-8";
-    LC_TIME = "de_DE.UTF-8";
+    LC_TIME = "en_US.UTF-8";
   };
 
   services.gnome.gnome-keyring.enable = true;
@@ -37,7 +41,7 @@
   services.protonmail-bridge = {
     enable = true;
     logLevel = "info";
-    path = with pkgs; [ gnome-keyring ];
+    path = with pkgs; [gnome-keyring];
   };
 
   # Configure keymap in X11
@@ -72,7 +76,7 @@
   users.users.sisyph0s = {
     isNormalUser = true;
     description = "sisyph0s";
-    extraGroups = [ "libvirtd" "networkmanager" "wheel" "dialout" "tty" "docker" ];
+    extraGroups = ["libvirtd" "networkmanager" "wheel" "dialout" "tty" "docker"];
     packages = with pkgs; [
       firefox
       swayidle
@@ -125,7 +129,7 @@
   };
 
   #nix LSP
-  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   environment.variables.EDITOR = "neovim";
 
@@ -174,7 +178,7 @@
 
   # virt manager
   virtualisation.libvirtd.enable = true;
-  
+
   # enable wireguard
   networking.firewall = {
     # if packets are still dropped, they will show up in dmesg

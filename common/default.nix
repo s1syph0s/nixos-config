@@ -1,5 +1,10 @@
-{ config, pkgs, lib, inputs, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -121,7 +126,7 @@
     # utils
     nix-index
     nixd
-    nixfmt
+    alejandra
 
     # custom packages
     hypr-kblayout
@@ -169,11 +174,11 @@
     userEmail = "pasha@fstn.top";
     extraConfig = {
       sendemail = {
-	smtpServer = "127.0.0.1";
-	smtpUser = "pasha@fstn.top";
-	smtpEncryption = "tls";
-	smtpServerPort = 1025;
-	smtpSSLCertPath = "";
+        smtpServer = "127.0.0.1";
+        smtpUser = "pasha@fstn.top";
+        smtpEncryption = "tls";
+        smtpServerPort = 1025;
+        smtpSSLCertPath = "";
       };
     };
   };
@@ -191,7 +196,7 @@
       font-style = "Regular";
       font-family-bold = "SauceCodePro NF";
       font-style-bold = "Bold";
-      font-family-italic =  "SauceCodePro NF";
+      font-family-italic = "SauceCodePro NF";
       font-style-italic = "Italic";
       font-family-bold-italic = "SauceCodePro NF";
       font-style-bold-italic = "Bold Italic";
@@ -215,22 +220,22 @@
       font = {
         size = 11;
 
-	bold = {
-	  family = "SauceCodePro NF";
-	  style = "Bold";
-	};
-	bold_italic = {
-	  family = "SauceCodePro NF";
-	  style = "Bold Italic";
-	};
-	italic = {
-	  family = "SauceCodePro NF";
-	  style = "Italic";
-	};
-	normal = {
-	  family = "SauceCodePro NF Medium";
-	  style = "Regular";
-	};
+        bold = {
+          family = "SauceCodePro NF";
+          style = "Bold";
+        };
+        bold_italic = {
+          family = "SauceCodePro NF";
+          style = "Bold Italic";
+        };
+        italic = {
+          family = "SauceCodePro NF";
+          style = "Italic";
+        };
+        normal = {
+          family = "SauceCodePro NF Medium";
+          style = "Regular";
+        };
       };
 
       window.opacity = 0.9;
@@ -248,9 +253,7 @@
       lg = "lazygit";
       lal = "ls -al";
     };
-    shellAliases = {
-      cat = "bat";
-    };
+    shellAliases = {cat = "bat";};
     interactiveShellInit = ''
       set -U fish_user_paths ~/.emacs.d/bin $fish_user_paths
       set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
@@ -269,12 +272,12 @@
     enable = true;
     config = {
       plugins = [
-	# An array of all the plugins you want, which either can be paths to the .so files, or their packages
-	inputs.anyrun.packages.${pkgs.system}.applications
+        # An array of all the plugins you want, which either can be paths to the .so files, or their packages
+        inputs.anyrun.packages.${pkgs.system}.applications
       ];
-      x = { fraction = 0.5; };
-      y = { fraction = 0.3; };
-      width = { fraction = 0.3; };
+      x = {fraction = 0.5;};
+      y = {fraction = 0.3;};
+      width = {fraction = 0.3;};
       hideIcons = false;
       ignoreExclusiveZones = false;
       layer = "overlay";
@@ -294,103 +297,102 @@
       @define-color selected-fg-color @bg-color;
 
       * {
-	all: unset;
-	font-family: JetBrainsMono Nerd Font;
+        all: unset;
+        font-family: JetBrainsMono Nerd Font;
       }
 
       #window {
-	background: transparent;
+        background: transparent;
       }
 
       box#main {
-	border-radius: 16px;
-	background-color: alpha(@bg-color, 0.6);
-	border: 0.5px solid alpha(@fg-color, 0.25);
+        border-radius: 16px;
+        background-color: alpha(@bg-color, 0.6);
+        border: 0.5px solid alpha(@fg-color, 0.25);
       }
 
       entry#entry {
-	font-size: 1.25rem;
-	background: transparent;
-	box-shadow: none;
-	border: none;
-	border-radius: 16px;
-	padding: 16px 24px;
-	min-height: 40px;
-	caret-color: @primary-color;
+        font-size: 1.25rem;
+        background: transparent;
+        box-shadow: none;
+        border: none;
+        border-radius: 16px;
+        padding: 16px 24px;
+        min-height: 40px;
+        caret-color: @primary-color;
       }
 
       list#main {
-	background-color: transparent;
+        background-color: transparent;
       }
 
       #plugin {
-	background-color: transparent;
-	padding-bottom: 4px;
+        background-color: transparent;
+        padding-bottom: 4px;
       }
 
       #match {
-	font-size: 1.1rem;
-	padding: 2px 4px;
+        font-size: 1.1rem;
+        padding: 2px 4px;
       }
 
       #match:selected,
       #match:hover {
-	background-color: @selected-bg-color;
-	color: @selected-fg-color;
+        background-color: @selected-bg-color;
+        color: @selected-fg-color;
       }
 
       #match:selected label#info,
       #match:hover label#info {
-	color: @selected-fg-color;
+        color: @selected-fg-color;
       }
 
       #match:selected label#match-desc,
       #match:hover label#match-desc {
-	color: alpha(@selected-fg-color, 0.9);
+        color: alpha(@selected-fg-color, 0.9);
       }
 
       #match label#info {
-	color: transparent;
-	color: @fg-color;
+        color: transparent;
+        color: @fg-color;
       }
 
       label#match-desc {
-	font-size: 1rem;
-	color: @fg-color;
+        font-size: 1rem;
+        color: @fg-color;
       }
 
       label#plugin {
-	font-size: 16px;
+        font-size: 16px;
       }
     '';
 
     extraConfigFiles."applications.ron".text = ''
       Config(
-	// Also show the Desktop Actions defined in the desktop files, e.g. "New Window" from LibreWolf
-	desktop_actions: true,
-	max_entries: 5, 
-	// The terminal used for running terminal based desktop entries, if left as `None` a static list of terminals is used
-	// to determine what terminal to use.
-	terminal: Some("ghostty"),
+        // Also show the Desktop Actions defined in the desktop files, e.g. "New Window" from LibreWolf
+        desktop_actions: true,
+        max_entries: 5,
+        // The terminal used for running terminal based desktop entries, if left as `None` a static list of terminals is used
+        // to determine what terminal to use.
+        terminal: Some("ghostty"),
       )
     '';
   };
-
 
   programs.fuzzel = {
     enable = true;
     settings = {
       main = {
         font = "JetBrainsMono NF:size=12";
-	icon-theme = "Papirus-Dark";
-	fuzzy = true;
-	lines = 8;
-	image-size-ratio=0.0;
+        icon-theme = "Papirus-Dark";
+        fuzzy = true;
+        lines = 8;
+        image-size-ratio = 0.0;
       };
       colors = {
         background = "080808aa";
         text = "dddddddd";
-	match = "8db678dd";
+        match = "8db678dd";
       };
     };
   };
@@ -406,9 +408,7 @@
   #
   #  /etc/profiles/per-user/sisyph0s/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
+  home.sessionVariables = {EDITOR = "nvim";};
 
   # wayland.windowManager.hyprland = {
   #   enable = true;
@@ -440,9 +440,7 @@
     '';
   };
 
-  programs.bat = {
-    enable = true;
-  };
+  programs.bat = {enable = true;};
 
   services.ssh-agent.enable = true;
   programs.ssh = {
@@ -450,18 +448,20 @@
     addKeysToAgent = "yes";
     matchBlocks = {
       "proxy.lab.sra" = {
-	hostname = "lab.sra.uni-hannover.de";
-	user = "pas.fistanto";
+        hostname = "lab.sra.uni-hannover.de";
+        user = "pas.fistanto";
       };
       "lab.sra" = {
-	hostname = "lab-pc32";
-	proxyJump = "proxy.lab.sra";
-	user = "pas.fistanto";
+        hostname = "lab-pc32";
+        proxyJump = "proxy.lab.sra";
+        user = "pas.fistanto";
       };
     };
   };
 
-  xdg.userDirs = let homeDir = config.home.homeDirectory; in {
+  xdg.userDirs = let
+    homeDir = config.home.homeDirectory;
+  in {
     enable = true;
     createDirectories = true;
 
