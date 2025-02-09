@@ -63,7 +63,6 @@
     file
     which
     tree
-    gnupg
 
     # system call monitoring
     strace
@@ -261,11 +260,6 @@
 
       set -U __done_notify_sound 1
     '';
-  };
-
-  programs.yazi = {
-    enable = true;
-    enableFishIntegration = true;
   };
 
   programs.anyrun = {
