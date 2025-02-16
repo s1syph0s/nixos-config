@@ -100,7 +100,6 @@
     gamemode
     goverlay
 
-    rustup
     espup
     cargo-generate
 
@@ -124,8 +123,6 @@
 
     # utils
     nix-index
-    nixd
-    alejandra
 
     # custom packages
     hypr-kblayout
@@ -137,6 +134,16 @@
     nerd-fonts.jetbrains-mono
     nerd-fonts.sauce-code-pro
     nerd-fonts.symbols-only
+
+    # LSP
+    gopls
+    rust-analyzer
+    clang-tools
+    lua-language-server
+    nixd
+
+    # Formatter
+    alejandra
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
