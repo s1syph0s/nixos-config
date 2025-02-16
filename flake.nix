@@ -13,9 +13,6 @@
     nix-ld.url = "github:Mic92/nix-ld";
     nix-ld.inputs.nixpkgs.follows = "nixpkgs";
 
-    envfs.url = "github:Mic92/envfs";
-    envfs.inputs.nixpkgs.follows = "nixpkgs";
-
     zjstatus = {url = "github:dj95/zjstatus";};
   };
 
@@ -24,7 +21,6 @@
     nixpkgs,
     home-manager,
     nix-ld,
-    envfs,
     zjstatus,
     ...
   } @ inputs: let
@@ -56,8 +52,6 @@
 
           nix-ld.nixosModules.nix-ld
           {programs.nix-ld.dev.enable = true;}
-
-          envfs.nixosModules.envfs
         ];
       };
       greenbox = lib.nixosSystem {
@@ -68,8 +62,6 @@
 
           nix-ld.nixosModules.nix-ld
           {programs.nix-ld.dev.enable = true;}
-
-          envfs.nixosModules.envfs
         ];
       };
     };

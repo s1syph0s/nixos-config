@@ -87,6 +87,8 @@
 
   services.udisks2.enable = true;
 
+  services.envfs.enable = true;
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
