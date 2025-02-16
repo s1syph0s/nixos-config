@@ -254,6 +254,8 @@
   };
 
   programs.zsh.enable = true;
+  programs.nushell.enable = true;
+
   programs.fish = {
     enable = true;
     shellAbbrs = {
