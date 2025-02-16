@@ -125,6 +125,8 @@
     flake = "/home/sisyph0s/.dotfiles";
   };
 
+  programs.command-not-found.enable = false;
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
