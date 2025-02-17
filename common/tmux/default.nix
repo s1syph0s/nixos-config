@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs.tmux = {
     enable = true;
     mouse = true;
@@ -8,7 +10,7 @@
     keyMode = "vi";
     terminal = "tmux-256color";
     baseIndex = 1;
-    shell = "${pkgs.fish}/bin/fish";
+    shell = "${pkgs.zsh}/bin/zsh";
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
     ];

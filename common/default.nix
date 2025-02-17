@@ -191,8 +191,9 @@
   programs.ghostty = {
     enable = true;
     enableFishIntegration = true;
+    enableZshIntegration = true;
     settings = {
-      command = "${pkgs.fish}/bin/fish";
+      command = "${pkgs.zsh}/bin/zsh";
 
       font-family = "SauceCodePro NF Medium";
       theme = "kanagawabones";
@@ -218,7 +219,7 @@
     settings = {
       env.TERM = "alacritty";
 
-      terminal.shell = "${pkgs.fish}/bin/fish";
+      terminal.shell = "${pkgs.zsh}/bin/zsh";
 
       font = {
         size = 11;
@@ -257,7 +258,42 @@
     '';
   };
 
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    initExtra = ''
+      source ~/.p10k.zsh
+      bindkey '^F' forward-char
+      bindkey '^B' backward-char
+    '';
+    shellAliases = {
+      ls = "ls --color";
+      ll = "ls -l";
+      lal = "ls -al";
+      ".." = "cd ..";
+    };
+    zplug = {
+      enable = true;
+      plugins = [
+        {
+          name = "zsh-users/zsh-autosuggestions";
+          tags = ["depth:1"];
+        } # Simple plugin installation
+        {
+          name = "marlonrichert/zsh-autocomplete";
+          tags = ["depth:1"];
+        }
+        {
+          name = "zsh-users/zsh-syntax-highlighting";
+          tags = ["depth:1"];
+        }
+        {
+          name = "romkatv/powerlevel10k";
+          tags = ["as:theme" "depth:1"];
+        } # Installations with additional options. For the list of options, please refer to Zplug README.
+      ];
+    };
+  };
+
   programs.nushell.enable = true;
 
   programs.fish = {

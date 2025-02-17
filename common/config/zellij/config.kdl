@@ -87,7 +87,7 @@ keybinds {
 }
 
 copy_command "wl-copy"
-default_shell "fish"
+default_shell "zsh"
 
 theme "kanagawa"
 mirror_session true
