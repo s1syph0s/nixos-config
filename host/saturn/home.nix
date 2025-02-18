@@ -1,6 +1,10 @@
-{ config, pkgs, inputs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "sisyph0s";
@@ -9,13 +13,14 @@
   fonts.fontconfig.enable = true;
 
   imports = [
-    ../../common
+    ../../home
     ./app/hyprland
   ];
-  _module.args = { inherit inputs; };
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "drawio"
-  ];
+  _module.args = {inherit inputs;};
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "drawio"
+    ];
   home.packages = with pkgs; [
     drawio
     brave
@@ -26,5 +31,4 @@
       uris = ["qemu:///system"];
     };
   };
-
 }

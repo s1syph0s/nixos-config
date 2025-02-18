@@ -1,15 +1,18 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, lib, inputs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../common
-    ];
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../common
+  ];
 
   networking.hostName = "saturn"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -36,7 +39,7 @@
           pulse.max.req = "32/44100";
           pulse.min.quantum = "32/44100";
           pulse.max.quantum = "32/44100";
-          audio.format = "S24LE";  # 24-bit audio
+          audio.format = "S24LE"; # 24-bit audio
         };
       }
     ];
@@ -47,14 +50,15 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "steam"
-    "steam-unwrapped"
-    "steam-original"
-    "steam-run"
-  ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "steam"
+      "steam-unwrapped"
+      "steam-original"
+      "steam-run"
+    ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
