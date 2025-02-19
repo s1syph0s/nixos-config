@@ -10,9 +10,6 @@
     anyrun.url = "github:anyrun-org/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
 
-    nix-ld.url = "github:Mic92/nix-ld";
-    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
-
     zjstatus = {url = "github:dj95/zjstatus";};
   };
 
@@ -20,7 +17,6 @@
     self,
     nixpkgs,
     home-manager,
-    nix-ld,
     zjstatus,
     ...
   } @ inputs: let
@@ -49,9 +45,6 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./host/saturn/configuration.nix
-
-          nix-ld.nixosModules.nix-ld
-          {programs.nix-ld.dev.enable = true;}
         ];
       };
       greenbox = lib.nixosSystem {
@@ -59,9 +52,6 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./host/greenbox/configuration.nix
-
-          nix-ld.nixosModules.nix-ld
-          {programs.nix-ld.dev.enable = true;}
         ];
       };
     };

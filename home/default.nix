@@ -264,11 +264,15 @@
       source ~/.p10k.zsh
       bindkey '^F' forward-char
       bindkey '^B' backward-char
+
+      export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+      export MANROFFOPT="-c"
     '';
     shellAliases = {
       ls = "ls --color";
       ll = "ls -l";
       lal = "ls -al";
+      cat = "bat";
       ".." = "cd ..";
     };
     zplug = {
@@ -293,6 +297,7 @@
       ];
     };
   };
+  home.file.".p10k.zsh".source = ./bin/.p10k.zsh;
 
   programs.nushell.enable = true;
 

@@ -115,6 +115,8 @@
     libsecret
   ];
 
+  programs.nix-ld.enable = true;
+
   programs.seahorse.enable = true;
 
   programs.virt-manager.enable = true;
