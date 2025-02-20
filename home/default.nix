@@ -261,7 +261,6 @@
   programs.zsh = {
     enable = true;
     initExtra = ''
-      source ~/.p10k.zsh
       bindkey '^F' forward-char
       bindkey '^B' backward-char
 
@@ -275,25 +274,44 @@
       cat = "bat";
       ".." = "cd ..";
     };
-    zplug = {
+    # zplug = {
+    #   enable = true;
+    #   plugins = [
+    #     {
+    #       name = "zsh-users/zsh-autosuggestions";
+    #       tags = ["depth:1"];
+    #     } # Simple plugin installation
+    #     {
+    #       name = "marlonrichert/zsh-autocomplete";
+    #       tags = ["depth:1"];
+    #     }
+    #     {
+    #       name = "zsh-users/zsh-syntax-highlighting";
+    #       tags = ["depth:1"];
+    #     }
+    #     {
+    #       name = "romkatv/powerlevel10k";
+    #       tags = ["as:theme" "depth:1"];
+    #     } # Installations with additional options. For the list of options, please refer to Zplug README.
+    #   ];
+    # };
+    prezto = {
       enable = true;
-      plugins = [
-        {
-          name = "zsh-users/zsh-autosuggestions";
-          tags = ["depth:1"];
-        } # Simple plugin installation
-        {
-          name = "marlonrichert/zsh-autocomplete";
-          tags = ["depth:1"];
-        }
-        {
-          name = "zsh-users/zsh-syntax-highlighting";
-          tags = ["depth:1"];
-        }
-        {
-          name = "romkatv/powerlevel10k";
-          tags = ["as:theme" "depth:1"];
-        } # Installations with additional options. For the list of options, please refer to Zplug README.
+      caseSensitive = false;
+      prompt.theme = "pure";
+      syntaxHighlighting.highlighters = ["main"];
+      pmodules = [
+        "environment"
+        "terminal"
+        "editor"
+        "history"
+        "directory"
+        "spectrum"
+        "utility"
+        "completion"
+        "autosuggestions"
+        "syntax-highlighting"
+        "prompt"
       ];
     };
   };
