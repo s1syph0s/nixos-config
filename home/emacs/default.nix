@@ -1,9 +1,10 @@
-{ config, pkgs, ... }:
-
-let
-  util = import ./util.nix {};
-in 
 {
+  config,
+  pkgs,
+  ...
+}: let
+  util = import ./util.nix {};
+in {
   programs.emacs = {
     enable = true;
     package = pkgs.emacs29-pgtk;
@@ -12,5 +13,7 @@ in
   services.emacs = {
     enable = true;
     package = pkgs.emacs29-pgtk;
+    client.enable = true;
+    startWithUserSession = "graphical";
   };
 }
