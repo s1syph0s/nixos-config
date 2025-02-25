@@ -1,12 +1,14 @@
-{ config, nixpkgs, ... }:
-
 {
+  config,
+  nixpkgs,
+  ...
+}: {
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
     exec-once = [
       "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       #"dbus-update-activation-environment --systemd --all"
-      "waybar" 
+      "waybar"
       "nm-applet --indicator"
       "swaybg -m fill -i ~/media/img/wallpaper-moebius.png"
       "mako"
@@ -49,16 +51,16 @@
       # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
       rounding = 8;
-      
+
       active_opacity = 1.0;
       inactive_opacity = 1.0;
-      
+
       blur = {
-          enabled = true;
-          size = 3;
-          passes = 3;
-          new_optimizations = true;
-          ignore_opacity = true;
+        enabled = true;
+        size = 3;
+        passes = 3;
+        new_optimizations = true;
+        ignore_opacity = true;
       };
 
       shadow = {
@@ -97,11 +99,20 @@
       mouse_move_enables_dpms = true;
       vrr = 2;
       enable_swallow = true;
-      swallow_regex = "^(Alacritty|ghostty)$";
+      swallow_regex = "^(com.mitchellh.ghostty|ghostty)$";
     };
+
+    workspace = [
+      "w[tv1], gapsout:0, gapsin:0"
+      "f[1], gapsout:0, gapsin:0"
+    ];
 
     windowrulev2 = [
       "float,class:^(steam)$,title:^(Friends List)$"
+      "bordersize 0, floating:0, onworkspace:w[tv1]"
+      "rounding 0, floating:0, onworkspace:w[tv1]"
+      "bordersize 0, floating:0, onworkspace:f[1]"
+      "rounding 0, floating:0, onworkspace:f[1]"
     ];
 
     "$mainMod" = "SUPER";
