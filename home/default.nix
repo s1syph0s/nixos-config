@@ -54,7 +54,7 @@
     fzf
     tealdeer
 
-    dolphin
+    kdePackages.dolphin
 
     # networking tools
     nmap
@@ -91,7 +91,7 @@
     coppwr
 
     # pdf
-    okular
+    kdePackages.okular
     pdftk
 
     vesktop
