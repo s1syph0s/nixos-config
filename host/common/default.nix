@@ -178,6 +178,9 @@
     ];
   };
 
+  services.locate.enable = true;
+  services.locate.package = pkgs.mlocate;
+
   virtualisation.containers.enable = true;
   # docker
   # virtualisation.docker = {
