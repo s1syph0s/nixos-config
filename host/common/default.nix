@@ -181,6 +181,20 @@
   services.locate.enable = true;
   services.locate.package = pkgs.mlocate;
 
+  services.keyd = {
+    enable = true;
+    keyboards = {
+      default = {
+        ids = ["*"];
+        settings = {
+          main = {
+            capslock = "overload(control, esc)";
+          };
+        };
+      };
+    };
+  };
+
   virtualisation.containers.enable = true;
   # docker
   # virtualisation.docker = {
