@@ -97,7 +97,6 @@
     vesktop
 
     mangohud
-    gamemode
     goverlay
 
     espup
