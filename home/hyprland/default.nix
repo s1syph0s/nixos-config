@@ -36,16 +36,24 @@
       gaps_in = 5;
       gaps_out = 20;
       border_size = 2;
-      "col.active_border" = "rgba(dfcacbee) rgba(6a7997ee) 45deg";
-      "col.inactive_border" = "rgba(595959aa)";
+      "col.active_border" = "rgba(313a4fee)";
+      "col.inactive_border" = "rgba(151922ee)";
+      # "col.active_border" = "rgba(dfcacbee) rgba(6a7997ee) 45deg";
+      # "col.inactive_border" = "rgba(595959aa)";
 
       layout = "dwindle";
     };
-    group.groupbar = {
-      text_color = "rgba(fefefeff)";
-      font_family = "JetBrainsMono Nerd Font";
-      "col.active" = "rgba(313a4fee)";
-      "col.inactive" = "rgba(151922ee)";
+    group = {
+      "col.border_active" = "rgba(313a4fee)";
+      "col.border_inactive" = "rgba(151922ee)";
+      groupbar = {
+        text_color = "rgba(fefefeff)";
+        font_family = "JetBrainsMono Nerd Font";
+        gradients = true;
+        "col.active" = "rgba(313a4fee)";
+        "col.inactive" = "rgba(151922ee)";
+        gaps_in = 0;
+      };
     };
     decoration = {
       # See https://wiki.hyprland.org/Configuring/Variables/ for more
