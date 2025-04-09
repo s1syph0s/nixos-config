@@ -114,6 +114,8 @@
 
     sshfs
     libsecret
+
+    dmidecode
   ];
 
   programs.nix-ld.enable = true;
