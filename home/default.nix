@@ -489,7 +489,7 @@
   services.mako = {
     enable = true;
     font = "JetBrainsMono 8";
-    output = "DP-1";
+    output = "DP-3";
     anchor = "top-center";
     backgroundColor = "#2e3440";
     height = 50;
