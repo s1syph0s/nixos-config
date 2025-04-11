@@ -62,7 +62,7 @@
       "sisyph0s@saturn" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {inherit inputs;};
-        modules = [./host/saturn/home.nix inputs.anyrun.homeManagerModules.anyrun];
+        modules = [./host/saturn/home.nix];
       };
       "sisyph0s@greenbox" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
