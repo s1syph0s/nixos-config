@@ -34,7 +34,7 @@
       # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
       gaps_in = 5;
-      gaps_out = 20;
+      gaps_out = 0;
       border_size = 2;
       "col.active_border" = "rgba(313a4fee)";
       "col.inactive_border" = "rgba(151922ee)";
@@ -42,6 +42,7 @@
       # "col.inactive_border" = "rgba(595959aa)";
 
       layout = "dwindle";
+      allow_tearing = true;
     };
     group = {
       "col.border_active" = "rgba(313a4fee)";
@@ -53,12 +54,13 @@
         "col.active" = "rgba(313a4fee)";
         "col.inactive" = "rgba(151922ee)";
         gaps_in = 0;
+        gaps_out = 0;
       };
     };
     decoration = {
       # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-      rounding = 8;
+      rounding = 0;
 
       active_opacity = 1.0;
       inactive_opacity = 1.0;
@@ -81,16 +83,14 @@
 
       # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
 
-      bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+      bezier = "myBezier, 0.1, 0.9, 0.1, 1.05";
 
       animation = [
-        "windows, 1, 5, myBezier"
-        "windowsOut, 1, 5, default, popin 80%"
+        "windows, 1, 5, myBezier, slide"
+        "windowsOut, 1, 5, myBezier, slide"
         "border, 1, 10, default"
-        "borderangle, 1, 8, default"
         "fade, 1, 7, default"
-        "workspaces, 1, 5, default"
-        "specialWorkspace, 1, 5, myBezier, slidevert"
+        "workspaces, 1, 6, default"
       ];
     };
 
@@ -147,7 +147,7 @@
       "$mainMod, H, movefocus, l"
       "$mainMod, J, movefocus, d"
       "$mainMod, K, movefocus, u"
-      "$mainMod, L, movefocus, l"
+      "$mainMod, L, movefocus, r"
 
       # Fullscreen
       ", F11, fullscreen, 0"
@@ -156,6 +156,8 @@
       "$mainMod, t, togglegroup"
       "$mainMod, b, changegroupactive, b"
       "$mainMod, f, changegroupactive, f"
+      "$mainMod CTRL, H, changegroupactive, b"
+      "$mainMod CTRL, L, changegroupactive, f"
 
       # Switch workspaces with mainMod + [0-9]
       "$mainMod, 1, workspace, 1"
@@ -180,6 +182,10 @@
       "$mainMod SHIFT, 8, movetoworkspace, 8"
       "$mainMod SHIFT, 9, movetoworkspace, 9"
       "$mainMod SHIFT, 0, movetoworkspace, 10"
+
+      # Move focus to monitor
+      "$mainMod SHIFT, H, focusmonitor, -1"
+      "$mainMod SHIFT, L, focusmonitor, +1"
 
       # Scroll through existing workspaces with mainMod + scroll
       "$mainMod, mouse_down, workspace, e+1"
