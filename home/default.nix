@@ -140,6 +140,7 @@
     lua-language-server
     nixd
     tinymist
+    hledger
 
     # Formatter
     alejandra
