@@ -137,6 +137,7 @@
       "$mainMod, SPACE, exec, pkill anyrun || anyrun"
       "$mainMod, P, pseudo," # dwindle
       "$mainMod, B, togglesplit," # dwindle
+      "$mainMod, code:49, exec, hyprlock" # WIN + `
 
       # Focus
       "$mainMod, left, movefocus, l"

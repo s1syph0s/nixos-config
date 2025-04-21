@@ -90,6 +90,7 @@
     ];
   };
   security.pam.services.swaylock = {};
+  security.pam.services.hyprlock = {};
 
   services.udisks2.enable = true;
 
