@@ -94,7 +94,22 @@
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
   };
-  programs.gamemode.enable = true;
+  programs.gamemode = {
+    enable = true;
+    settings = {
+      general = {
+        reaper_freq = 5;
+      };
+      cpu = {
+        park_cores = "no";
+        pin_cores = "no";
+      };
+      custom = {
+        start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
+        end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
+      };
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -116,6 +131,7 @@
     libsecret
 
     dmidecode
+    amdgpu_top
   ];
 
   programs.nix-ld.enable = true;
