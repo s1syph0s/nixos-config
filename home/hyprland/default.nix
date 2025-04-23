@@ -132,7 +132,7 @@
       "$mainMod, RETURN, exec, ghostty"
       "$mainMod + Shift, Q, killactive, "
       "$mainMod + Shift, E, exit, "
-      "$mainMod, E, exec, dolphin"
+      "$mainMod, E, exec, thunar"
       "$mainMod, V, togglefloating, "
       "$mainMod, SPACE, exec, pkill anyrun || anyrun"
       "$mainMod, P, pseudo," # dwindle

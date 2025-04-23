@@ -54,7 +54,7 @@
     fzf
     tealdeer
 
-    kdePackages.dolphin
+    xfce.thunar
 
     # networking tools
     nmap
@@ -278,27 +278,8 @@
       cat = "bat";
       ".." = "cd ..";
     };
-    # zplug = {
-    #   enable = true;
-    #   plugins = [
-    #     {
-    #       name = "zsh-users/zsh-autosuggestions";
-    #       tags = ["depth:1"];
-    #     } # Simple plugin installation
-    #     {
-    #       name = "marlonrichert/zsh-autocomplete";
-    #       tags = ["depth:1"];
-    #     }
-    #     {
-    #       name = "zsh-users/zsh-syntax-highlighting";
-    #       tags = ["depth:1"];
-    #     }
-    #     {
-    #       name = "romkatv/powerlevel10k";
-    #       tags = ["as:theme" "depth:1"];
-    #     } # Installations with additional options. For the list of options, please refer to Zplug README.
-    #   ];
-    # };
+
+    # prezto adds $HOME/bin to path
     prezto = {
       enable = true;
       caseSensitive = false;
@@ -593,6 +574,10 @@
     };
   };
 
+  services.syncthing = {
+    enable = true;
+  };
+
   xdg.userDirs = let
     homeDir = config.home.homeDirectory;
   in {
@@ -624,6 +609,9 @@
       "application/xhtml+xml" = ["firefox.desktop"];
       "application/x-extension-xhtml" = ["firefox.desktop"];
       "application/x-extension-xht" = ["firefox.desktop"];
+    };
+    associations.added = {
+      "application/pdf" = ["okularApplication_pdf.desktop"];
     };
   };
 
