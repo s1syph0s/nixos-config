@@ -57,6 +57,10 @@
     enable = true;
     nssmdns4 = true;
     openFirewall = true;
+    publish = {
+      enable = true;
+      addresses = true;
+    };
   };
 
   # Enable sound with pipewire.
@@ -89,7 +93,6 @@
       swaylock
     ];
   };
-  security.pam.services.swaylock = {};
   security.pam.services.hyprlock = {};
 
   services.udisks2.enable = true;
