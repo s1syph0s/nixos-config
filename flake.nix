@@ -31,7 +31,6 @@
         zjstatus = zjstatus.packages.${self.system}.default;
       })
     ];
-    # pkgs = nixpkgs.legacyPackages.${system};
     pkgs = import nixpkgs {inherit system overlays;};
   in {
     nixosConfigurations = {
@@ -44,6 +43,7 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./host/saturn/configuration.nix
+          {nixpkgs.overlays = overlays;}
         ];
       };
       greenbox = lib.nixosSystem {
@@ -61,13 +61,13 @@
           ./host/saturn-vm/home.nix
         ];
       };
-      "sisyph0s@saturn" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {inherit inputs;};
-        modules = [
-          ./host/saturn/home.nix
-        ];
-      };
+      # "sisyph0s@saturn" = home-manager.lib.homeManagerConfiguration {
+      #   inherit pkgs;
+      #   extraSpecialArgs = {inherit inputs;};
+      #   modules = [
+      #     ./host/saturn/home.nix
+      #   ];
+      # };
       "sisyph0s@greenbox" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {inherit inputs;};

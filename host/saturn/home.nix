@@ -17,10 +17,6 @@
     ./app/hyprland
   ];
   _module.args = {inherit inputs;};
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "drawio"
-    ];
   home.packages = with pkgs; [
     drawio
     brave
