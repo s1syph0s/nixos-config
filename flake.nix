@@ -57,19 +57,22 @@
     homeConfigurations = {
       "sisyph0s@saturn-vm" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [./host/saturn-vm/home.nix];
+        modules = [
+          ./host/saturn-vm/home.nix
+        ];
       };
       "sisyph0s@saturn" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {inherit inputs;};
-        modules = [./host/saturn/home.nix];
+        modules = [
+          ./host/saturn/home.nix
+        ];
       };
       "sisyph0s@greenbox" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {inherit inputs;};
         modules = [
           ./host/greenbox/home.nix
-          inputs.anyrun.homeManagerModules.anyrun
         ];
       };
     };
