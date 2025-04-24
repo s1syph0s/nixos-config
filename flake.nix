@@ -32,6 +32,9 @@
       })
     ];
     pkgs = import nixpkgs {inherit system overlays;};
+    pkgs-overlay = {
+      nixpkgs.overlays = overlays;
+    };
   in {
     nixosConfigurations = {
       saturn-vm = lib.nixosSystem {
@@ -51,6 +54,7 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./host/greenbox/configuration.nix
+          pkgs-overlay
         ];
       };
     };
@@ -68,13 +72,13 @@
       #     ./host/saturn/home.nix
       #   ];
       # };
-      "sisyph0s@greenbox" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {inherit inputs;};
-        modules = [
-          ./host/greenbox/home.nix
-        ];
-      };
+      # "sisyph0s@greenbox" = home-manager.lib.homeManagerConfiguration {
+      #   inherit pkgs;
+      #   extraSpecialArgs = {inherit inputs;};
+      #   modules = [
+      #     ./host/greenbox/home.nix
+      #   ];
+      # };
     };
   };
 }

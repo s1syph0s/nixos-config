@@ -12,6 +12,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../common
+    inputs.home-manager.nixosModules.home-manager
   ];
 
   networking.hostName = "greenbox"; # Define your hostname.
@@ -56,6 +57,13 @@
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+  home-manager = {
+    useGlobalPkgs = true;
+    extraSpecialArgs = {inherit inputs;};
+    users = {
+      sisyph0s = import ./home.nix;
+    };
+  };
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
