@@ -19,7 +19,6 @@
   _module.args = {inherit inputs;};
   home.packages = with pkgs; [
     drawio
-    brave
   ];
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
