@@ -264,7 +264,7 @@
 
   programs.zsh = {
     enable = true;
-    initExtra = ''
+    initContent = ''
       bindkey '^F' forward-char
       bindkey '^B' backward-char
 
