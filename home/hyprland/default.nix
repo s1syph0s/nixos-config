@@ -105,7 +105,7 @@
       mouse_move_enables_dpms = true;
       vrr = 2;
       enable_swallow = true;
-      swallow_regex = "^(com.mitchellh.ghostty|ghostty)$";
+      swallow_regex = "^(com.mitchellh.ghostty|alacritty)$";
     };
 
     workspace = [
@@ -119,6 +119,7 @@
       "workspace 1, class:^(emacs)$"
       "workspace 2, class:^(firefox)$"
       "workspace 3, class:^(steam)$"
+      "workspace 8, class:^(vesktop)$"
       "rounding 8, floating:1"
 
       # smart window
