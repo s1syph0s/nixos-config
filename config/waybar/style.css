@@ -1,14 +1,14 @@
 @import "./colors.css";
 
 * {
-  background: transparent;
   font-family: "JetBrainsMono Nerd Font";
   font-size: 14px;
-  margin: 0.5px 0px 0.5px 0px;
+  margin: 0px;
+  border: none;
 }
 
-#waybar {
-  background: alpha(shade(@foreground, 0.4), 0.1);
+window#waybar {
+  background: @background;
   min-height: 20px;
   color: @foreground;
 }
@@ -17,21 +17,20 @@
 tooltip {
   background: @background;
   color: @active;
-  border: 1px solid shade(@active, 0.6);
+  border: 1px solid shade(@active, 0.8);
 }
 
-#scroll,
+#scripts {
+  margin: 0px 10px;
+}
+
 #clock,
-#hardware,
-#scripts,
 #custom-weather,
 #batteries,
 #workspaces,
 #tray {
-  background: alpha(@background, 0.8);
-  border-radius: 8px;
-  padding: 2px;
-  margin-right: 4px;
+  padding: 0px 2px;
+  margin-right: 5px;
   color: @foreground;
 
   /* border: 1px solid alpha(shade(@active, 0.6),0.6); */
@@ -42,10 +41,9 @@ tooltip {
 }
 
 #workspaces button {
-  padding: 0px 5px;
-  margin: 0px 2px;
-  border-radius: 8px;
-  /* color: shade(@background, 0.8); */
+  padding: 0px 7.5px 0px 2.5px;
+  margin: 0px;
+  border-radius: 0px;
   color: @foreground;
 }
 
@@ -55,18 +53,19 @@ tooltip {
 }
 
 #workspaces button:hover {
-  transition-duration: 0.4s;
-  border-radius: 8px;
+  transition-duration: 0.2s;
   text-shadow: none;
   box-shadow: none;
-  background: shade(alpha(@foreground, 0.2), 1.2);
+  background: shade(alpha(@foreground, 1.0), 0.6);
   color: @foreground;
 }
 #workspaces button.active {
-  background: shade(alpha(@foreground, 0.2), 0.8);
   /* color: shade(@foreground, 0.9); */
-  border-radius: 8px;
   color: @foreground;
+}
+#workspaces button.visible {
+  background: shade(alpha(@foreground, 1.0), 0.4);
+  /* color: shade(@foreground, 0.9); */
 }
 
 #workspaces button.urgent {
@@ -229,6 +228,9 @@ tooltip {
 }
 #clock {
   margin-left: 0px;
-  border-radius: 0px 8px 8px 0px;
   background: alpha(@background, 0.6);
+  border: none;
+}
+#custom-weather {
+  border: none;
 }

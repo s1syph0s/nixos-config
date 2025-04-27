@@ -101,13 +101,6 @@
     "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
     "smooth-scrolling-threshold": 1
   },
-  "custom/vpn": {
-    "format": "󰖂 ",
-    "exec": "echo '{\"class\": \"connected\"}'",
-    "exec-if": "test -d /proc/sys/net/ipv4/conf/tun0",
-    "return-type": "json",
-    "interval": 5
-  },
   "network": {
     "format-wifi": "  {bandwidthDownBits}",
     "format-ethernet": "󰌘 {bandwidthDownBits}",
@@ -155,16 +148,8 @@
     "format-icons": ["", "", "", "", ""],
     "tooltip-format": "{timeTo}\n{capacity} % | {power} W"
   },
-  "custom/batterysaver": {
-    "format": " {}",
-    "exec": "~/.config/waybar/bin/battsaver-toggle getdata",
-    "on-click": "~/.config/waybar/bin/battsaver-toggle menu",
-    "interval": "once",
-    "return-type": "json",
-    "signal": 5
-  },
   "memory": {
-    "format": "{}% "
+    "format": "{}% 󰍛"
   },
   "disk": {
     "interval": 600,
@@ -174,12 +159,6 @@
   "cpu": {
     "format": "{usage}% ",
     "on-click": "foot btop"
-  },
-  "custom/cputemp": {
-    "format": "{}",
-    "exec": "~/.config/waybar/bin/cputemp",
-    "interval": 10,
-    "return-type": "json"
   },
   "temperature": {
       "thermal-zone": 2,
@@ -196,7 +175,7 @@
     "return-type": "json"
   },
   "custom/colorpicker": {
-    "format": "{} 󰴱",
+    "format": "󰴱",
     "tooltip": false,
     "on-click": "hyprpicker | wl-copy"
   },
