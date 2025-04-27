@@ -16,8 +16,8 @@ window#waybar {
 #tray menu,
 tooltip {
   background: @background;
-  color: @active;
-  border: 1px solid shade(@active, 0.8);
+  color: @foreground;
+  border: 1px solid shade(@foreground, 0.8);
 }
 
 #scripts {
@@ -32,8 +32,6 @@ tooltip {
   padding: 0px 2px;
   margin-right: 5px;
   color: @foreground;
-
-  /* border: 1px solid alpha(shade(@active, 0.6),0.6); */
 }
 
 #tray {
@@ -64,7 +62,7 @@ tooltip {
   color: @foreground;
 }
 #workspaces button.visible {
-  background: shade(alpha(@foreground, 1.0), 0.4);
+  background: @active;
   /* color: shade(@foreground, 0.9); */
 }
 

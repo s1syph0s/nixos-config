@@ -33,11 +33,9 @@
     general = {
       # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-      gaps_in = 5;
+      gaps_in = 0;
       gaps_out = 0;
       border_size = 2;
-      "col.active_border" = "rgba(313a4fee)";
-      "col.inactive_border" = "rgba(151922ee)";
       # "col.active_border" = "rgba(dfcacbee) rgba(6a7997ee) 45deg";
       # "col.inactive_border" = "rgba(595959aa)";
 
@@ -51,8 +49,8 @@
         text_color = "rgba(fefefeff)";
         font_family = "JetBrainsMono Nerd Font";
         gradients = true;
-        "col.active" = "rgba(313a4fee)";
-        "col.inactive" = "rgba(151922ee)";
+        "col.active" = "rgba(7e869eff)";
+        "col.inactive" = "rgba(1e1d20ff)";
         gaps_in = 0;
         gaps_out = 0;
       };
@@ -116,8 +114,14 @@
       "f[1], gapsout:0, gapsin:0"
     ];
 
-    windowrulev2 = [
-      "float,class:^(steam)$,title:^(Friends List)$"
+    windowrule = [
+      "float, class:^(steam)$, title:^(Friends List)$"
+      "workspace 1, class:^(emacs)$"
+      "workspace 2, class:^(firefox)$"
+      "workspace 3, class:^(steam)$"
+      "rounding 8, floating:1"
+
+      # smart window
       "bordersize 0, floating:0, onworkspace:w[tv1]"
       "rounding 0, floating:0, onworkspace:w[tv1]"
       "bordersize 0, floating:0, onworkspace:w[tgv1]"
