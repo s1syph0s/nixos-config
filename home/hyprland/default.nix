@@ -7,12 +7,10 @@
   wayland.windowManager.hyprland.settings = {
     exec-once = [
       "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-      #"dbus-update-activation-environment --systemd --all"
       "waybar"
       "nm-applet --indicator"
       "swaybg -m fill -i ~/media/img/wallpaper-moebius.png"
       "mako"
-      #"swayidle -w timeout 300 'swaylock -f -c 000000' timeout 600 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock -f -c 000000' & disown"
       "hyprctl setcursor 'Capitaine Cursors (Nord)' 24"
       "dconf write /org/gnome/desktop/interface/cursor-theme \"'Capitaine Cursors (Nord)'\""
       "dconf write /org/gnome/desktop/interface/cursor-size 24"
@@ -134,7 +132,7 @@
     "$mainMod" = "SUPER";
 
     bind = [
-      "$mainMod, RETURN, exec, ghostty"
+      "$mainMod, RETURN, exec, alacritty"
       "$mainMod + Shift, Q, killactive, "
       "$mainMod + Shift, E, exit, "
       "$mainMod, E, exec, thunar"
