@@ -41,6 +41,7 @@
     # pkgs.hello
 
     fastfetch
+    btop
 
     # archives
     zip
@@ -81,8 +82,7 @@
     slurp
     hyprpicker
 
-    btop
-
+    gimp3
     wl-clipboard
 
     papirus-icon-theme
@@ -119,6 +119,7 @@
     irssi
     element-desktop
     telegram-desktop
+    signal-desktop
 
     # custom packages
     hypr-kblayout

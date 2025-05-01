@@ -65,6 +65,7 @@
   home-manager = {
     useGlobalPkgs = true;
     extraSpecialArgs = {inherit inputs;};
+    backupFileExtension = "backup";
     users = {
       sisyph0s = import ./home.nix;
     };
