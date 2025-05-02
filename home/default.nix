@@ -286,6 +286,7 @@
       caseSensitive = false;
       prompt.theme = "pure";
       syntaxHighlighting.highlighters = ["main"];
+      utility.safeOps = false;
       pmodules = [
         "environment"
         "terminal"
