@@ -19,6 +19,7 @@
       "XCURSOR_TYPE,Capitaine Cursors (Nord)"
       "XCURSOR_SIZE,24"
       "XDG_SESSION_DESKTOP,Hyprland"
+      "XDG_MENU_PREFIX,plasma-"
     ];
     input = {
       kb_layout = "us,de";
@@ -103,7 +104,7 @@
       mouse_move_enables_dpms = true;
       vrr = 2;
       enable_swallow = true;
-      swallow_regex = "^(com.mitchellh.ghostty|alacritty)$";
+      swallow_regex = "^(com.mitchellh.ghostty|Alacritty)$";
     };
 
     workspace = [
@@ -136,7 +137,7 @@
       "$mainMod, RETURN, exec, alacritty"
       "$mainMod + Shift, Q, killactive, "
       "$mainMod + Shift, E, exit, "
-      "$mainMod, E, exec, thunar"
+      "$mainMod, E, exec, dolphin"
       "$mainMod, V, togglefloating, "
       "$mainMod, SPACE, exec, pkill anyrun || anyrun"
       "$mainMod, P, pseudo," # dwindle
