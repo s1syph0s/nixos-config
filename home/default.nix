@@ -537,26 +537,29 @@
 
   services.mako = {
     enable = true;
-    font = "JetBrainsMono 8";
-    output = "DP-3";
-    anchor = "top-center";
-    backgroundColor = "#2e3440";
-    height = 50;
-    margin = "5";
-    padding = "0,5,10";
-    borderSize = 2;
-    borderColor = "#88c0d0";
-    borderRadius = 15;
-    maxIconSize = 32;
-    defaultTimeout = 5000;
-    extraConfig = ''
-      [urgency=normal]
-      border-color=#d08770
-
-      [urgency=high]
-      border-color=#bf616a
-      default-timeout=0
-    '';
+    settings = {
+      font = "JetBrainsMono 8";
+      output = "DP-3";
+      anchor = "top-center";
+      backgroundColor = "#2e3440";
+      height = 50;
+      margin = "5";
+      padding = "0,5,10";
+      borderSize = 2;
+      borderColor = "#88c0d0";
+      borderRadius = 15;
+      maxIconSize = 32;
+      defaultTimeout = 5000;
+    };
+    criteria = {
+      "urgency=normal" = {
+        border-color = "#d08770";
+      };
+      "urgency=high" = {
+        border-color = "#bf616a";
+        default-timeout = 0;
+      };
+    };
   };
 
   programs.bat = {enable = true;};
