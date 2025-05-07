@@ -149,6 +149,9 @@
     alejandra
     rustfmt
 
+    # Resesarch
+    zotero
+
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
@@ -541,15 +544,15 @@
       font = "JetBrainsMono 8";
       output = "DP-3";
       anchor = "top-center";
-      backgroundColor = "#2e3440";
+      background-color = "#2e3440";
       height = 50;
       margin = "5";
       padding = "0,5,10";
-      borderSize = 2;
-      borderColor = "#88c0d0";
-      borderRadius = 15;
-      maxIconSize = 32;
-      defaultTimeout = 5000;
+      border-size = 2;
+      border-color = "#88c0d0";
+      border-radius = 15;
+      max-icon-size = 32;
+      default-timeout = 5000;
     };
     criteria = {
       "urgency=normal" = {

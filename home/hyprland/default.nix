@@ -164,6 +164,8 @@
       "$mainMod, f, changegroupactive, f"
       "$mainMod CTRL, H, changegroupactive, b"
       "$mainMod CTRL, L, changegroupactive, f"
+      "$mainMod CTRL, left, changegroupactive, b"
+      "$mainMod CTRL, right, changegroupactive, f"
 
       # Switch workspaces with mainMod + [0-9]
       "$mainMod, 1, workspace, 1"
@@ -189,13 +191,20 @@
       "$mainMod SHIFT, 9, movetoworkspace, 9"
       "$mainMod SHIFT, 0, movetoworkspace, 10"
 
+      # Move workspace to other monitor
+      "$mainMod, M, movecurrentworkspacetomonitor, +1"
+
       # Move focus to monitor
       "$mainMod SHIFT, H, focusmonitor, -1"
       "$mainMod SHIFT, L, focusmonitor, +1"
+      "$mainMod SHIFT, left, focusmonitor, -1"
+      "$mainMod SHIFT, right, focusmonitor, +1"
 
-      # Scroll through existing workspaces with mainMod + scroll
+      # Scroll through existing workspaces
       "$mainMod, mouse_down, workspace, e+1"
       "$mainMod, mouse_up, workspace, e-1"
+      "$mainMod, TAB, workspace, e+1"
+      "$mainMod SHIFT, TAB, workspace, e-1"
 
       # Screenshot
       '', Print, exec, grim -g "$(slurp -d)" ~/media/img/screenshots/$(date +'screenshot_%d-%m-%Y-%H%M%S.png')''
