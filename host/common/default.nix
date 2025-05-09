@@ -82,17 +82,6 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.sisyph0s = {
-    isNormalUser = true;
-    description = "sisyph0s";
-    extraGroups = ["libvirtd" "networkmanager" "wheel" "dialout" "tty" "docker" "gamemode"];
-    packages = with pkgs; [
-      firefox
-      swayidle
-      swaylock
-    ];
-  };
   security.pam.services.hyprlock = {};
 
   services.udisks2.enable = true;
@@ -149,12 +138,6 @@
   programs.seahorse.enable = true;
 
   programs.virt-manager.enable = true;
-  programs.nh = {
-    enable = true;
-    clean.enable = true;
-    clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "/home/sisyph0s/.dotfiles";
-  };
 
   programs.command-not-found.enable = false;
 

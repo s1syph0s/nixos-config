@@ -15,6 +15,17 @@
     inputs.home-manager.nixosModules.home-manager
   ];
 
+  users.users.sisyph0s = {
+    isNormalUser = true;
+    description = "sisyph0s";
+    extraGroups = ["libvirtd" "networkmanager" "wheel" "dialout" "tty" "docker" "gamemode"];
+    packages = with pkgs; [
+      firefox
+      swayidle
+      swaylock
+    ];
+  };
+
   networking.hostName = "saturn"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 

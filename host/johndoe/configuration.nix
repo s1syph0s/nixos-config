@@ -15,9 +15,9 @@
     inputs.home-manager.nixosModules.home-manager
   ];
 
-  users.users.sisyph0s = {
+  users.users.fistanto = {
     isNormalUser = true;
-    description = "sisyph0s";
+    description = "fistanto";
     extraGroups = ["libvirtd" "networkmanager" "wheel" "dialout" "tty" "docker" "gamemode"];
     packages = with pkgs; [
       firefox
@@ -26,7 +26,7 @@
     ];
   };
 
-  networking.hostName = "greenbox"; # Define your hostname.
+  networking.hostName = "johndoe"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -36,32 +36,6 @@
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
-  # nvidia settings
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
-
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
-  services.blueman.enable = true;
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-  hardware.nvidia.prime = {
-    sync.enable = true;
-    nvidiaBusId = "PCI:1:0:0";
-    intelBusId = "PCI:0:2:0";
-  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -72,7 +46,7 @@
     useGlobalPkgs = true;
     extraSpecialArgs = {inherit inputs;};
     users = {
-      sisyph0s = import ./home.nix;
+      fistanto = import ./home.nix;
     };
   };
   # List packages installed in system profile. To search, run:
@@ -86,5 +60,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 }

@@ -6,8 +6,8 @@
 }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "sisyph0s";
-  home.homeDirectory = "/home/sisyph0s";
+  home.username = "fistanto";
+  home.homeDirectory = "/home/fistanto";
 
   fonts.fontconfig.enable = true;
 
@@ -26,6 +26,6 @@
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "/home/sisyph0s/.dotfiles";
+    flake = "/home/fistanto/.dotfiles";
   };
 }

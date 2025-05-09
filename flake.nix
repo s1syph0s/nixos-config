@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -15,6 +16,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixos-hardware,
     home-manager,
     zjstatus,
     ...
@@ -55,6 +57,15 @@
         modules = [
           ./host/greenbox/configuration.nix
           pkgs-overlay
+        ];
+      };
+      johndoe = lib.nixosSystem {
+        inherit system;
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./host/johndoe/configuration.nix
+          pkgs-overlay
+          nixos-hardware.nixosModules.dell-precision-3490
         ];
       };
     };
