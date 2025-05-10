@@ -10,7 +10,9 @@
 
     anyrun.url = "github:anyrun-org/anyrun";
 
-    zjstatus = {url = "github:dj95/zjstatus";};
+    zjstatus = {
+      url = "github:dj95/zjstatus";
+    };
   };
 
   outputs = {
@@ -33,7 +35,9 @@
         zjstatus = zjstatus.packages.${self.system}.default;
       })
     ];
-    pkgs = import nixpkgs {inherit system overlays;};
+    pkgs = import nixpkgs {
+      inherit system overlays;
+    };
     pkgs-overlay = {
       nixpkgs.overlays = overlays;
     };
@@ -45,15 +49,19 @@
       };
       saturn = lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit inputs;};
+        specialArgs = {
+          inherit inputs;
+        };
         modules = [
           ./host/saturn/configuration.nix
-          {nixpkgs.overlays = overlays;}
+          pkgs-overlay
         ];
       };
       greenbox = lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit inputs;};
+        specialArgs = {
+          inherit inputs;
+        };
         modules = [
           ./host/greenbox/configuration.nix
           pkgs-overlay
@@ -61,7 +69,9 @@
       };
       johndoe = lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit inputs;};
+        specialArgs = {
+          inherit inputs;
+        };
         modules = [
           ./host/johndoe/configuration.nix
           pkgs-overlay
