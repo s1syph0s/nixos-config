@@ -32,6 +32,7 @@
     ./tmux
     ./hyprland
     ./zellij
+    ./email
   ];
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -566,6 +567,14 @@
   };
 
   programs.bat = {enable = true;};
+
+  programs.rbw = {
+    enable = true;
+    settings = {
+      email = "p.fistanto@pm.me";
+      pinentry = pkgs.pinentry-tty;
+    };
+  };
 
   services.ssh-agent.enable = true;
   programs.ssh = {
