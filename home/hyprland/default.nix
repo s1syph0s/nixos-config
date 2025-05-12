@@ -166,6 +166,7 @@
       "$mainMod CTRL, L, changegroupactive, f"
       "$mainMod CTRL, left, changegroupactive, b"
       "$mainMod CTRL, right, changegroupactive, f"
+      "$mainMod CTRL, TAB, changegroupactive, f"
 
       # Switch workspaces with mainMod + [0-9]
       "$mainMod, 1, workspace, 1"
