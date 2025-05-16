@@ -41,6 +41,7 @@
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+  services.blueman.enable = true;
   services.printing.clientConf = ''
     ServerName cups.ibr.cs.tu-bs.de
   '';
