@@ -131,6 +131,10 @@
 
     dmidecode
     amdgpu_top
+
+    linux-manual
+    man-pages
+    man-pages-posix
   ];
 
   programs.nix-ld.enable = true;
