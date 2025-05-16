@@ -36,11 +36,14 @@
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  services.printing.clientConf = ''
+    ServerName cups.ibr.cs.tu-bs.de
+  '';
 
   home-manager = {
     useGlobalPkgs = true;
