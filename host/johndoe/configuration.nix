@@ -18,7 +18,7 @@
   users.users.fistanto = {
     isNormalUser = true;
     description = "fistanto";
-    extraGroups = ["libvirtd" "networkmanager" "wheel" "dialout" "tty" "docker" "gamemode"];
+    extraGroups = ["libvirtd" "networkmanager" "wheel" "dialout" "tty" "docker" "gamemode" "brillo"];
     packages = with pkgs; [
       firefox
       swayidle
