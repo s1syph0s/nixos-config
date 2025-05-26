@@ -57,4 +57,6 @@
   # bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
+
+  services.hardware.bolt.enable = true;
 }
