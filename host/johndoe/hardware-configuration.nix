@@ -4,7 +4,6 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }: {
@@ -59,4 +58,10 @@
   hardware.bluetooth.powerOnBoot = true;
 
   services.hardware.bolt.enable = true;
+
+  # turn off nvidia from nixos-hardware
+  hardware.nvidia.prime = lib.mkForce {
+    intelBusId = "";
+    nvidiaBusId = "";
+  };
 }
