@@ -4,15 +4,11 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     anyrun.url = "github:anyrun-org/anyrun";
-
-    zjstatus = {
-      url = "github:dj95/zjstatus";
-    };
+    zjstatus.url = "github:dj95/zjstatus";
   };
 
   outputs = {
@@ -20,7 +16,6 @@
     nixpkgs,
     nixos-hardware,
     home-manager,
-    zjstatus,
     ...
   } @ inputs: let
     lib = nixpkgs.lib;
@@ -32,11 +27,11 @@
           patches = (old.patches or []) ++ [./patch/openssh.patch];
           doCheck = false;
         });
-        zjstatus = zjstatus.packages.${self.system}.default;
+        zjstatus = inputs.zjstatus.packages.${self.system}.default;
       })
     ];
     pkgs = import nixpkgs {
-      inherit system overlays;
+      inherit system;
     };
     pkgs-overlay = {
       nixpkgs.overlays = overlays;
