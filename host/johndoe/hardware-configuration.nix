@@ -57,7 +57,7 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 
-  services.hardware.bolt.enable = true;
+  hardware.brillo.enable = true;
 
   # turn off nvidia from nixos-hardware
   hardware.nvidia.prime = lib.mkForce {

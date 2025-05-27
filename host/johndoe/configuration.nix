@@ -18,7 +18,7 @@
   users.users.fistanto = {
     isNormalUser = true;
     description = "fistanto";
-    extraGroups = ["libvirtd" "networkmanager" "wheel" "dialout" "tty" "docker" "gamemode" "brillo"];
+    extraGroups = ["libvirtd" "networkmanager" "wheel" "dialout" "tty" "docker" "gamemode" "video"];
     packages = with pkgs; [
       firefox
       swayidle
@@ -48,6 +48,8 @@
     ServerName cups.ibr.cs.tu-bs.de
   '';
 
+  services.hardware.bolt.enable = true;
+
   home-manager = {
     useGlobalPkgs = true;
     extraSpecialArgs = {inherit inputs;};
@@ -58,8 +60,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    brillo
   ];
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
