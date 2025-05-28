@@ -28,4 +28,5 @@
     clean.extraArgs = "--keep-since 4d --keep 3";
     flake = "/home/fistanto/.dotfiles";
   };
+  services.blueman-applet.enable = true;
 }
