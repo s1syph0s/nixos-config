@@ -554,8 +554,6 @@
       border-radius = 15;
       max-icon-size = 32;
       default-timeout = 5000;
-    };
-    criteria = {
       "urgency=normal" = {
         border-color = "#d08770";
       };
