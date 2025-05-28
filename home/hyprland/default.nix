@@ -196,16 +196,13 @@
       "$mainMod, M, movecurrentworkspacetomonitor, +1"
 
       # Move focus to monitor
-      "$mainMod SHIFT, H, focusmonitor, -1"
-      "$mainMod SHIFT, L, focusmonitor, +1"
-      "$mainMod SHIFT, left, focusmonitor, -1"
-      "$mainMod SHIFT, right, focusmonitor, +1"
+      "$mainMod, TAB, focusmonitor, +1"
 
       # Scroll through existing workspaces
       "$mainMod, mouse_down, workspace, e+1"
       "$mainMod, mouse_up, workspace, e-1"
-      "$mainMod, TAB, workspace, e+1"
-      "$mainMod SHIFT, TAB, workspace, e-1"
+      "$mainMod SHIFT, H, workspace, e-1"
+      "$mainMod SHIFT, L, workspace, e+1"
 
       # Screenshot
       '', Print, exec, grim -g "$(slurp -d)" ~/media/img/screenshots/$(date +'screenshot_%d-%m-%Y-%H%M%S.png')''
@@ -221,6 +218,8 @@
       '', XF86AudioRaiseVolume, exec, wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2*100)}' > $WOBSOCK''
       '', XF86AudioLowerVolume, exec, wpctl set-volume -l "1.0" @DEFAULT_AUDIO_SINK@ 5%-''
       '', XF86AudioLowerVolume, exec, wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2*100)}' > $WOBSOCK''
+      '', XF86MonBrightnessUp, exec, brillo -A 5''
+      '', XF86MonBrightnessDown, exec, brillo -U 5''
     ];
 
     bindl = [
