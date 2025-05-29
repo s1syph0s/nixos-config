@@ -148,6 +148,7 @@
 
     # Formatter
     alejandra
+    nixfmt-rfc-style
     rustfmt
 
     # Resesarch
