@@ -58,10 +58,4 @@
   hardware.bluetooth.powerOnBoot = true;
 
   hardware.brillo.enable = true;
-
-  # turn off nvidia from nixos-hardware
-  hardware.nvidia.prime = lib.mkForce {
-    intelBusId = "";
-    nvidiaBusId = "";
-  };
 }

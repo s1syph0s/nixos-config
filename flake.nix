@@ -3,7 +3,8 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    # nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixos-hardware.url = "github:s1syph0s/nixos-hardware/pr-3490";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -48,7 +49,7 @@
         modules = [
           ./host/johndoe/configuration.nix
           ./pkgs/overlay.nix
-          inputs.nixos-hardware.nixosModules.dell-precision-3490
+          inputs.nixos-hardware.nixosModules.dell-precision-3490-intel
         ];
       };
     };
