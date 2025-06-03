@@ -137,6 +137,8 @@
     nerd-fonts.sauce-code-pro
     nerd-fonts.symbols-only
 
+    just
+
     # LSP
     gopls
     rust-analyzer
