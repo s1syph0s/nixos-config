@@ -103,8 +103,8 @@
       disable_splash_rendering = true;
       mouse_move_enables_dpms = true;
       vrr = 2;
-      enable_swallow = true;
-      swallow_regex = "^(com.mitchellh.ghostty|Alacritty)$";
+      # enable_swallow = true;
+      # swallow_regex = "^(com.mitchellh.ghostty|Alacritty)$";
     };
 
     workspace = [
