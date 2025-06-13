@@ -285,6 +285,7 @@
       ll = "ls -l";
       lal = "ls -al";
       cat = "bat";
+      lg = "lazygit";
       ".." = "cd ..";
     };
 
