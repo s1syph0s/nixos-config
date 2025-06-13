@@ -29,4 +29,10 @@
     flake = "/home/fistanto/.dotfiles";
   };
   services.blueman-applet.enable = true;
+
+  sops = {
+    age.keyFile = "/home/fistanto/.config/sops/age/keys.txt";
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    secrets."email/ibr" = {};
+  };
 }

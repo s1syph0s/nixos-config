@@ -51,6 +51,7 @@
   home-manager = {
     useGlobalPkgs = true;
     extraSpecialArgs = {inherit inputs;};
+    sharedModules = [inputs.sops-nix.homeManagerModules.sops];
     users = {
       fistanto = import ./home.nix;
     };

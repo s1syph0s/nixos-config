@@ -33,7 +33,7 @@
 
       realName = "Pasha Alghifari Fistanto";
       userName = "fistanto";
-      passwordCommand = "rbw get 'ibr'";
+      passwordCommand = "cat ~/.config/sops-nix/secrets/email/ibr";
       smtp = {
         host = "mail.ibr.cs.tu-bs.de";
         port = 587;
