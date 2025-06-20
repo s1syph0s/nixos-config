@@ -124,6 +124,8 @@
     telegram-desktop
     signal-desktop
 
+    spotify
+
     # custom packages
     hypr-kblayout
 
