@@ -35,4 +35,26 @@
     defaultSopsFile = ../../secrets/secrets.yaml;
     secrets."email/ibr" = {};
   };
+
+  programs.ssh = {
+    matchBlocks = {
+      "proxy.lab.sra" = {
+        hostname = "lab.sra.uni-hannover.de";
+        user = "pas.fistanto";
+        identityFile = "~/.ssh/sra-labor";
+      };
+      "lab.sra" = {
+        hostname = "lab-pc32";
+        proxyJump = "proxy.lab.sra";
+        user = "pas.fistanto";
+        identityFile = "~/.ssh/sra-labor";
+      };
+      "verliernix.sra" = {
+        hostname = "verliernix";
+        proxyJump = "proxy.lab.sra";
+        user = "pas.fistanto";
+        identityFile = "~/.ssh/sra-labor";
+      };
+    };
+  };
 }
