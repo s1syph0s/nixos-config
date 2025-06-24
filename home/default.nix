@@ -105,9 +105,6 @@
     espup
     cargo-generate
 
-    fishPlugins.tide
-    fishPlugins.done
-
     thunderbird
     qbittorrent
 
@@ -235,7 +232,7 @@
     settings = {
       env.TERM = "alacritty";
 
-      terminal.shell = "${pkgs.zsh}/bin/zsh";
+      terminal.shell = "${pkgs.fish}/bin/fish";
 
       font = {
         size = 11;
@@ -260,6 +257,7 @@
 
       window.opacity = 0.9;
     };
+    theme = "ayu_dark";
   };
 
   programs.direnv = {
@@ -271,6 +269,13 @@
     enable = true;
     initExtra = ''
       source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
+
+      # launch fish
+      if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+      then
+        shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+      fi
     '';
   };
 
@@ -324,10 +329,23 @@
       lal = "ls -al";
     };
     shellAliases = {cat = "bat";};
+    plugins = [
+      {
+        name = "tide";
+        src = pkgs.fishPlugins.tide.src;
+      }
+      {
+        name = "done";
+        src = pkgs.fishPlugins.done.src;
+      }
+      {
+        name = "fzf";
+        src = pkgs.fishPlugins.fzf.src;
+      }
+    ];
     interactiveShellInit = ''
       set -U fish_user_paths ~/.emacs.d/bin $fish_user_paths
-      set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
-      set -x MANROFFOPT "-c"
+      export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
 
       set -U __done_notify_sound 1
     '';
@@ -583,17 +601,6 @@
   programs.ssh = {
     enable = true;
     addKeysToAgent = "yes";
-    matchBlocks = {
-      "proxy.lab.sra" = {
-        hostname = "lab.sra.uni-hannover.de";
-        user = "pas.fistanto";
-      };
-      "lab.sra" = {
-        hostname = "lab-pc32";
-        proxyJump = "proxy.lab.sra";
-        user = "pas.fistanto";
-      };
-    };
   };
 
   services.syncthing = {

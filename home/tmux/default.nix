@@ -10,7 +10,7 @@
     keyMode = "vi";
     terminal = "tmux-256color";
     baseIndex = 1;
-    shell = "${pkgs.zsh}/bin/zsh";
+    shell = "${pkgs.fish}/bin/fish";
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
     ];
