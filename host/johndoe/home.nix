@@ -55,6 +55,12 @@
         user = "pas.fistanto";
         identityFile = "~/.ssh/sra-labor";
       };
+      "llzero-vm" = {
+        hostname = "localhost";
+        port = 5555;
+        user = "root";
+        identityFile = "~/.ssh/debian-vm";
+      };
     };
   };
 }
