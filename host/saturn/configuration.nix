@@ -69,6 +69,7 @@
       "steam-original"
       "steam-run"
       "drawio"
+      "spotify"
     ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
