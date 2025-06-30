@@ -61,6 +61,11 @@
         user = "root";
         identityFile = "~/.ssh/debian-vm";
       };
+      "debian-local" = {
+        hostname = "debian.local";
+        user = "root";
+        identityFile = "~/src/asynczero-dev/bare-metal/deb-green";
+      };
     };
   };
 }
