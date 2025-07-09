@@ -91,11 +91,11 @@ default_shell "fish"
 
 theme "kanagawa"
 mirror_session true
-pane_frames false
+pane_frames true
+session_serialization false
 
-// ui {
-//     pane_frames {
-//         hide_session_name true
-//         rounded_corners true
-//     }
-// }
+ui {
+    pane_frames {
+        rounded_corners false
+    }
+}
