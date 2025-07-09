@@ -87,15 +87,15 @@ keybinds {
 }
 
 copy_command "wl-copy"
-default_shell "zsh"
+default_shell "fish"
 
 theme "kanagawa"
 mirror_session true
 pane_frames false
 
-ui {
-    pane_frames {
-        hide_session_name true
-        rounded_corners true
-    }
-}
+// ui {
+//     pane_frames {
+//         hide_session_name true
+//         rounded_corners true
+//     }
+// }
