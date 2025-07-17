@@ -66,6 +66,17 @@
         user = "root";
         identityFile = "~/src/asynczero-dev/bare-metal/deb-green";
       };
+      "x1.ibr" = {
+        hostname = "x1.ibr.cs.tu-bs.de";
+        user = "fistanto";
+        identityFile = "~/.ssh/fistanto-x1";
+      };
+      "orwa.ibr" = {
+        hostname = "orwa";
+        proxyJump = "x1";
+        user = "fistanto";
+        identityFile = "~/.ssh/fistanto-orwa";
+      };
     };
   };
 }

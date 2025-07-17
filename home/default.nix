@@ -111,6 +111,8 @@
     # multimedia
     vlc
 
+    hello
+
     cmake
     gcc
     libtool
@@ -188,15 +190,15 @@
     enable = true;
     userName = "Pasha Fistanto";
     userEmail = "pasha@fstn.top";
-    extraConfig = {
-      sendemail = {
-        smtpServer = "127.0.0.1";
-        smtpUser = "pasha@fstn.top";
-        smtpEncryption = "tls";
-        smtpServerPort = 1025;
-        smtpSSLCertPath = "";
-      };
-    };
+    # extraConfig = {
+    #   sendemail = {
+    #     smtpServer = "127.0.0.1";
+    #     smtpUser = "pasha@fstn.top";
+    #     smtpEncryption = "tls";
+    #     smtpServerPort = 1025;
+    #     smtpSSLCertPath = "";
+    #   };
+    # };
   };
 
   programs.lazygit.enable = true;
