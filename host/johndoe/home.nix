@@ -30,6 +30,10 @@
   };
   services.blueman-applet.enable = true;
 
+  programs.git = {
+    userEmail = "fistanto@ibr.cs.tu-bs.de";
+  };
+
   sops = {
     age.keyFile = "/home/fistanto/.config/sops/age/keys.txt";
     defaultSopsFile = ../../secrets/secrets.yaml;
@@ -73,7 +77,7 @@
       };
       "orwa.ibr" = {
         hostname = "orwa";
-        proxyJump = "x1";
+        proxyJump = "x1.ibr";
         user = "fistanto";
         identityFile = "~/.ssh/fistanto-orwa";
       };

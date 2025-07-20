@@ -189,7 +189,7 @@
   programs.git = {
     enable = true;
     userName = "Pasha Fistanto";
-    userEmail = "pasha@fstn.top";
+    userEmail = lib.mkDefault "pasha@fstn.top";
     # extraConfig = {
     #   sendemail = {
     #     smtpServer = "127.0.0.1";
