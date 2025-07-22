@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: let
   util = import ./util.nix {};
@@ -16,4 +17,8 @@ in {
     client.enable = true;
     startWithUserSession = "graphical";
   };
+  xdg.configFile."systemd/user/emacs.service.d/override.conf".text = ''
+    [Service]
+    Environment=XDG_SESSION_TYPE=wayland
+  '';
 }

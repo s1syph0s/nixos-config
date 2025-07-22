@@ -205,7 +205,8 @@
       "$mainMod SHIFT, L, workspace, e+1"
 
       # Screenshot
-      '', Print, exec, grim -g "$(slurp -d)" ~/media/img/screenshots/$(date +'screenshot_%d-%m-%Y-%H%M%S.png')''
+      '', Print, exec, grim -g "$(slurp -d)" - | wl-copy''
+      ''CTRL, Print, exec, grim -g "$(slurp -d)" ~/media/img/screenshots/$(date +'screenshot_%d-%m-%Y-%H%M%S.png')''
     ];
 
     bindm = [
