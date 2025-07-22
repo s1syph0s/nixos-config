@@ -65,6 +65,7 @@
     file
     which
     tree
+    ausweisapp
 
     # system call monitoring
     strace
