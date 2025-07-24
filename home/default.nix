@@ -322,6 +322,7 @@
     };
   };
   home.file.".p10k.zsh".source = ./bin/.p10k.zsh;
+  home.file."bin/hledger.sh".source = ./bin/hledger.sh;
 
   programs.nushell.enable = true;
 
@@ -351,6 +352,8 @@
       export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
 
       set -U __done_notify_sound 1
+
+      fish_add_path ~/bin
     '';
   };
 
