@@ -155,6 +155,9 @@
     nixfmt-rfc-style
     rustfmt
 
+    # Debugger
+    gdb
+
     # Resesarch
     zotero
 
