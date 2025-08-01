@@ -53,6 +53,16 @@
           inputs.nixos-hardware.nixosModules.dell-precision-3490-intel
         ];
       };
+      hal = lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs;
+        };
+        modules = [
+          ./host/hal/configuration.nix
+          ./pkgs/overlay.nix
+        ];
+      };
     };
   };
 }
