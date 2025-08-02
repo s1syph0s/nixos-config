@@ -32,4 +32,13 @@
     clean.extraArgs = "--keep-since 4d --keep 3";
     flake = "/home/sisyph0s/.dotfiles";
   };
+  programs.ssh = {
+    matchBlocks = {
+      "hal" = {
+        hostname = "hal.local";
+        user = "root";
+        identityFile = "~/.ssh/hal";
+      };
+    };
+  };
 }
