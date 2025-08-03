@@ -106,6 +106,8 @@
     espup
     cargo-generate
 
+    deploy-rs
+
     thunderbird
     qbittorrent
 

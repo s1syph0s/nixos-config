@@ -6,8 +6,10 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    deploy-rs.url = "github:serokell/deploy-rs";
 
     anyrun.url = "github:anyrun-org/anyrun";
     zjstatus.url = "github:dj95/zjstatus";
@@ -16,10 +18,24 @@
   outputs = {
     self,
     nixpkgs,
+    deploy-rs,
     ...
   } @ inputs: let
     lib = nixpkgs.lib;
     system = "x86_64-linux";
+    pkgs = import nixpkgs {inherit system;};
+    deployPkgs = import nixpkgs {
+      inherit system;
+      overlays = [
+        deploy-rs.overlays.default # or deploy-rs.overlays.default
+        (self: super: {
+          deploy-rs = {
+            inherit (pkgs) deploy-rs;
+            lib = super.deploy-rs.lib;
+          };
+        })
+      ];
+    };
   in {
     nixosConfigurations = {
       saturn = lib.nixosSystem {
@@ -64,5 +80,17 @@
         ];
       };
     };
+
+    deploy.nodes.hal = {
+      hostname = "hal";
+      profiles.system = {
+        sshUser = "root";
+        user = "root";
+        path = deployPkgs.deploy-rs.lib.activate.nixos self.nixosConfigurations.hal;
+      };
+    };
+
+    # This is highly advised, and will prevent many possible mistakes
+    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
   };
 }
