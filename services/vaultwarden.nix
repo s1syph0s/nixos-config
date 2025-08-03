@@ -15,7 +15,7 @@
     dbBackend = "postgresql";
     config = {
       # Refer to https://github.com/dani-garcia/vaultwarden/blob/main/.env.template
-      DOMAIN = "https://vault.hal.local";
+      DOMAIN = "https://vault.hal.com";
       SIGNUPS_ALLOWED = false;
 
       ROCKET_ADDRESS = "127.0.0.1";
@@ -40,9 +40,9 @@
   users.users.nginx.extraGroups = ["acme"];
   services.nginx = {
     enable = true;
-    virtualHosts."vault.hal.local" = {
-      enableACME = true;
-      forceSSL = true;
+    virtualHosts."vault.hal.com" = {
+      enableACME = false;
+      forceSSL = false;
       locations."/" = {
         proxyPass = "http://127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT}";
       };
@@ -53,7 +53,10 @@
     enable = true;
     ensureDatabases = ["vaultwarden"];
     ensureUsers = [
-      {name = "vaultwarden";}
+      {
+        name = "vaultwarden";
+	ensureDBOwnership = true;
+      }
     ];
     authentication = pkgs.lib.mkOverride 10 ''
       #type database  DBuser  auth-method
