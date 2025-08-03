@@ -99,8 +99,42 @@
   };
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [8384];
-  networking.firewall.allowedUDPPorts = [24727];
+  # networking.firewall.allowedTCPPorts = [8384];
+  networking.firewall.allowedUDPPorts = [
+    51820 # wireguard
+  ];
+
+  sops = {
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+    secrets."hal/wg/private" = {};
+  };
+
+  networking.wireguard = {
+    enable = true;
+    interfaces = {
+      wg0 = {
+        # WireGuard interface IP on VPS (server side)
+        ips = ["10.100.0.2/24"];
+        mtu = 1280;
+
+        # Listen port on VPS
+        listenPort = 51820;
+
+        privateKeyFile = config.sops.secrets."hal/wg/private".path;
+
+        peers = [
+          {
+            name = "Terabithia";
+            publicKey = "osE3KSQK8Y7y54CTBzKVgnxT4UYAr3PXeQdpViccRnE=";
+            allowedIPs = ["10.100.0.0/24"]; # home server WireGuard IP
+            endpoint = "185.194.141.148:51820";
+            persistentKeepalive = 25;
+          }
+        ];
+      };
+    };
+  };
 
   virtualisation.containers.enable = true;
   # docker
@@ -122,21 +156,6 @@
   # virt manager
   virtualisation.libvirtd.enable = true;
 
-  # enable wireguard
-  networking.firewall = {
-    # if packets are still dropped, they will show up in dmesg
-    logReversePathDrops = true;
-    # wireguard trips rpfilter up
-    extraCommands = ''
-      ip46tables -t mangle -I nixos-fw-rpfilter -p udp -m udp --sport 1637 -j RETURN
-      ip46tables -t mangle -I nixos-fw-rpfilter -p udp -m udp --dport 1637 -j RETURN
-    '';
-    extraStopCommands = ''
-      ip46tables -t mangle -D nixos-fw-rpfilter -p udp -m udp --sport 1637 -j RETURN || true
-      ip46tables -t mangle -D nixos-fw-rpfilter -p udp -m udp --dport 1637 -j RETURN || true
-    '';
-  };
-
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # List packages installed in system profile. To search, run:
@@ -149,6 +168,7 @@
     gnumake
     man-pages
     man-pages-posix
+    tcpdump
   ];
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

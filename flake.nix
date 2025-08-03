@@ -91,6 +91,7 @@
         modules = [
           ./host/hal/configuration.nix
           ./pkgs/overlay.nix
+          inputs.sops-nix.nixosModules.sops
         ];
       };
 

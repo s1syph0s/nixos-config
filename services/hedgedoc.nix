@@ -5,7 +5,7 @@
   inputs,
   ...
 }: {
-  networking.firewall.allowedTCPPorts = [80 443];
+  networking.firewall.interfaces.wg0.allowedTCPPorts = [80 443];
 
   users.users.hedgedoc = {
     isSystemUser = true;
@@ -20,16 +20,16 @@
         host = "/run/postgresql";
         dialect = "postgresql";
       };
-      domain = "pad.hal.com";
+      domain = "pad.fstn.top";
       port = 8271;
-      allowOrigin = ["pad.hal.com"];
+      allowOrigin = ["pad.fstn.top"];
     };
   };
 
   users.users.nginx.extraGroups = ["acme"];
   services.nginx = {
     enable = true;
-    virtualHosts."pad.hal.com" = {
+    virtualHosts."pad.fstn.top" = {
       enableACME = false;
       forceSSL = false;
       locations."/" = {

@@ -27,66 +27,69 @@
   sops = {
     defaultSopsFile = ../../secrets/secrets.yaml;
     age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
-    secrets."terabithia/wg/public" = {};
     secrets."terabithia/wg/private" = {};
   };
 
-  # networking.nat = {
-  #   enable = true;
-  #   externalInterface = "ens3";
-  #   internalInterfaces = ["wg0"];
-  # };
-  # networking.firewall.allowedUDPPorts = [51820];
+  networking.nat = {
+    enable = true;
+    externalInterface = "ens3";
+    internalInterfaces = ["wg0"];
+    forwardPorts = [
+      {
+        sourcePort = 80;
+        proto = "tcp";
+        destination = "10.100.0.2:80"; # IP of HAL behind wg0
+      }
+      {
+        sourcePort = 443;
+        proto = "tcp";
+        destination = "10.100.0.2:443";
+      }
+    ];
+  };
+  networking.firewall.allowedTCPPorts = [
+    22 #ssh
+    80 #http
+    443 #https
+  ];
+  networking.firewall.allowedUDPPorts = [
+    51820 # wireguard
+  ];
 
-  # networking.wireguard = {
-  #   enable = true;
-  #   interfaces = {
-  #     wg0 = {
-  #       # WireGuard interface IP on VPS (server side)
-  #       ips = ["10.100.0.1/24"];
+  networking.wireguard = {
+    enable = true;
+    interfaces = {
+      wg0 = {
+        # WireGuard interface IP on VPS (server side)
+        ips = ["10.100.0.1/24"];
+        mtu = 1280;
 
-  #       # Listen port on VPS
-  #       listenPort = 51820;
+        # Listen port on VPS
+        listenPort = 51820;
+        postSetup = ''
+          ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -o wg0 -j MASQUERADE
+        '';
+        postShutdown = ''
+          ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -o wg0 -j MASQUERADE
+        '';
 
-  #       # NAT and forwarding rules to send HTTP/HTTPS to home server via WireGuard
-  #       postSetup = ''
-  #         ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o ens3 -j MASQUERADE
+        privateKeyFile = config.sops.secrets."terabithia/wg/private".path;
 
-  #         # Forward ports 80 and 443 to home server (WireGuard client IP)
-  #         ${pkgs.iptables}/bin/iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 10.100.0.2:80
-  #         ${pkgs.iptables}/bin/iptables -t nat -A PREROUTING -p tcp --dport 443 -j DNAT --to-destination 10.100.0.2:443
-
-  #         # Allow forwarding for the incoming packets
-  #         ${pkgs.iptables}/bin/iptables -A FORWARD -p tcp -d 10.100.0.2 --dport 80 -j ACCEPT
-  #         ${pkgs.iptables}/bin/iptables -A FORWARD -p tcp -d 10.100.0.2 --dport 443 -j ACCEPT
-  #       '';
-
-  #       postShutdown = ''
-  #         ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o ens3 -j MASQUERADE
-
-  #         ${pkgs.iptables}/bin/iptables -t nat -D PREROUTING -p tcp --dport 80 -j DNAT --to-destination 10.100.0.2:80
-  #         ${pkgs.iptables}/bin/iptables -t nat -D PREROUTING -p tcp --dport 443 -j DNAT --to-destination 10.100.0.2:443
-
-  #         ${pkgs.iptables}/bin/iptables -D FORWARD -p tcp -d 10.100.0.2 --dport 80 -j ACCEPT
-  #         ${pkgs.iptables}/bin/iptables -D FORWARD -p tcp -d 10.100.0.2 --dport 443 -j ACCEPT
-  #       '';
-
-  #       privateKeyFile = "/path/to/vps/privatekey";
-
-  #       peers = [
-  #         {
-  #           name = "Home Server";
-  #           publicKey = "CLIENT_PUBLIC_KEY_HERE";
-  #           allowedIPs = ["10.100.0.2/32"]; # home server WireGuard IP
-  #         }
-  #       ];
-  #     };
-  #   };
-  # };
+        peers = [
+          {
+            name = "HAL";
+            publicKey = "6SNtOxOdRiNHG16/QcVVM+trc6NvEwp2CbBSrdHw/Tc=";
+            allowedIPs = ["10.100.0.2/32"]; # home server WireGuard IP
+          }
+        ];
+      };
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     wget
     wireguard-tools
+    tcpdump
     curl
     git
     gnumake
