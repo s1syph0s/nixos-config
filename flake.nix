@@ -7,8 +7,10 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     deploy-rs.url = "github:serokell/deploy-rs";
 
     disko = {
@@ -101,16 +103,27 @@
           ./host/terabithia/configuration.nix
           ./pkgs/overlay.nix
           inputs.disko.nixosModules.disko
+          inputs.sops-nix.nixosModules.sops
         ];
       };
     };
 
-    deploy.nodes.hal = {
-      hostname = "hal";
-      profiles.system = {
-        sshUser = "root";
-        user = "root";
-        path = deployPkgs.deploy-rs.lib.activate.nixos self.nixosConfigurations.hal;
+    deploy.nodes = {
+      hal = {
+        hostname = "hal";
+        profiles.system = {
+          sshUser = "root";
+          user = "root";
+          path = deployPkgs.deploy-rs.lib.activate.nixos self.nixosConfigurations.hal;
+        };
+      };
+      terabithia = {
+        hostname = "terabithia";
+        profiles.system = {
+          sshUser = "root";
+          user = "root";
+          path = deployPkgs.deploy-rs.lib.activate.nixos self.nixosConfigurations.terabithia;
+        };
       };
     };
 

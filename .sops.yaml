@@ -4,8 +4,10 @@
 # for a more complex example.
 keys:
   - &fistanto age1lkl7yt0m76fhvunl6mztawjxwq9hrp6hmwuhr2rphxr9lw79uvgsfnyefp
+  - &terabithia age1g328kctvhetezj39gjr5hc78eu2aksavshy6d2f6lptggv65qvgqjk9ycz
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
     - age:
       - *fistanto
+      - *terabithia
