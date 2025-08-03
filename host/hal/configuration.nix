@@ -12,6 +12,8 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../services/vaultwarden.nix
+    ../../services/paperless.nix
+    ../../services/hedgedoc.nix
   ];
 
   # Bootloader
