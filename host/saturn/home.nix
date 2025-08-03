@@ -39,6 +39,11 @@
         user = "root";
         identityFile = "~/.ssh/hal";
       };
+      "terabithia" = {
+        hostname = "v2202508291507368807.luckysrv.de";
+        user = "root";
+        identityFile = "~/.ssh/terabithia";
+      };
     };
   };
 }

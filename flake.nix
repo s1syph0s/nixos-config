@@ -11,6 +11,15 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     deploy-rs.url = "github:serokell/deploy-rs";
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+    };
+
     anyrun.url = "github:anyrun-org/anyrun";
     zjstatus.url = "github:dj95/zjstatus";
   };
@@ -48,6 +57,7 @@
           ./pkgs/overlay.nix
         ];
       };
+
       greenbox = lib.nixosSystem {
         inherit system;
         specialArgs = {
@@ -58,6 +68,7 @@
           ./pkgs/overlay.nix
         ];
       };
+
       johndoe = lib.nixosSystem {
         inherit system;
         specialArgs = {
@@ -69,6 +80,7 @@
           inputs.nixos-hardware.nixosModules.dell-precision-3490-intel
         ];
       };
+
       hal = lib.nixosSystem {
         inherit system;
         specialArgs = {
@@ -77,6 +89,18 @@
         modules = [
           ./host/hal/configuration.nix
           ./pkgs/overlay.nix
+        ];
+      };
+
+      terabithia = lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs;
+        };
+        modules = [
+          ./host/terabithia/configuration.nix
+          ./pkgs/overlay.nix
+          inputs.disko.nixosModules.disko
         ];
       };
     };
