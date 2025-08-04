@@ -125,6 +125,7 @@
     nvd
 
     gnumake
+    openssl
 
     sshfs
     libsecret
