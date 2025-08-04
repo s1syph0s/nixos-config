@@ -7,6 +7,23 @@
 }: {
   networking.firewall.allowedTCPPorts = [80 443];
 
+  sops.secrets = {
+    "vault/admin" = {
+      owner = config.users.users.vaultwarden.name;
+    };
+    "brevo/vault" = {
+      owner = config.users.users.vaultwarden.name;
+    };
+  };
+
+  sops.templates."vault.env" = {
+    content = ''
+      ADMIN_TOKEN="${config.sops.placeholder."vault/admin"}"
+      SMTP_PASSWORD="${config.sops.placeholder."brevo/vault"}"
+    '';
+    owner = config.users.users.vaultwarden.name;
+  };
+
   users.users.vaultwarden = {
     isSystemUser = true;
   };
@@ -28,13 +45,15 @@
       # thus without transport encryption.
       # If you use an external mail server, follow:
       #   https://github.com/dani-garcia/vaultwarden/wiki/SMTP-configuration
-      # SMTP_HOST = "127.0.0.1";
-      # SMTP_PORT = 25;
-      # SMTP_SSL = false;
+      SMTP_HOST = "smtp-relay.brevo.com";
+      SMTP_PORT = 587;
 
-      # SMTP_FROM = "admin@bitwarden.example.com";
-      # SMTP_FROM_NAME = "example.com Bitwarden server";
+      SMTP_FROM = "admin-vault@fistanto.org";
+      SMTP_FROM_NAME = "HAL Vault Admin";
+      SMTP_USERNAME = "93ebc1001@smtp-brevo.com";
+      SMTP_SECURITY = "starttls";
     };
+    environmentFile = "${config.sops.templates."vault.env".path}";
   };
 
   users.users.nginx.extraGroups = ["acme"];
