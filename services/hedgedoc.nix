@@ -9,10 +9,11 @@
 
   sops.templates."hedgedoc.env" = {
     content = ''
-      DEBUG = true
       CMD_EMAIL = false
       CMD_ALLOW_EMAIL_REGISTER = false
-      CMD_LOGLEVEL = debug
+      CMD_ALLOW_FREEURL = true
+      CMD_REQUIRE_FREEURL_AUTHENTICATION = true
+      CMD_ALLOW_ANONYMOUS = false
 
       # LDAP
       CMD_LDAP_URL="ldap://127.0.0.1:3890"
@@ -35,12 +36,13 @@
       host = "127.0.0.1";
       db = {
         username = "hedgedoc";
-        databse = "hedgedoc";
+        database = "hedgedoc";
         host = "/run/postgresql";
         dialect = "postgresql";
       };
       domain = "pad.fstn.top";
       port = 8271;
+      protocolUseSSL = true;
       allowOrigin = ["pad.fstn.top"];
     };
     environmentFile = "${config.sops.templates."hedgedoc.env".path}";
@@ -54,6 +56,11 @@
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://127.0.0.1:${toString config.services.hedgedoc.settings.port}";
+      };
+      locations."/socket.io/" = {
+        proxyPass = "http://127.0.0.1:${toString config.services.hedgedoc.settings.port}";
+        proxyWebsockets = true;
+        extraConfig = "proxy_ssl_server_name on;";
       };
     };
   };

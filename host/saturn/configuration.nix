@@ -28,11 +28,6 @@
 
   networking.hostName = "saturn"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.extraHosts = ''
-    192.168.0.226 vault.hal.com
-    192.168.0.226 paperless.hal.com
-    192.168.0.226 pad.hal.com
-  '';
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
