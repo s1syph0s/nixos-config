@@ -7,6 +7,25 @@
 }: {
   networking.firewall.interfaces.wg0.allowedTCPPorts = [80 443];
 
+  sops.templates."hedgedoc.env" = {
+    content = ''
+      DEBUG = true
+      CMD_EMAIL = false
+      CMD_ALLOW_EMAIL_REGISTER = false
+      CMD_LOGLEVEL = debug
+
+      # LDAP
+      CMD_LDAP_URL="ldap://127.0.0.1:3890"
+      CMD_LDAP_BINDDN="uid=admin,ou=people,dn=fstn,dn=top"
+      CMD_LDAP_BINDCREDENTIALS="${config.sops.placeholder."lldap/admin"}"
+      CMD_LDAP_SEARCHBASE="ou=people,dn=fstn,dn=top"
+      CMD_LDAP_SEARCHFILTER="(&(objectClass=person)(uid={{username}}))"
+      CMD_LDAP_USERIDFIELD="uid"
+      CMD_LDAP_PROVIDERNAME="HAL"
+    '';
+    owner = config.users.users.hedgedoc.name;
+  };
+
   users.users.hedgedoc = {
     isSystemUser = true;
   };
@@ -24,14 +43,15 @@
       port = 8271;
       allowOrigin = ["pad.fstn.top"];
     };
+    environmentFile = "${config.sops.templates."hedgedoc.env".path}";
   };
 
   users.users.nginx.extraGroups = ["acme"];
   services.nginx = {
     enable = true;
     virtualHosts."pad.fstn.top" = {
-      enableACME = false;
-      forceSSL = false;
+      enableACME = true;
+      forceSSL = true;
       locations."/" = {
         proxyPass = "http://127.0.0.1:${toString config.services.hedgedoc.settings.port}";
       };
@@ -48,8 +68,8 @@
       }
     ];
     authentication = pkgs.lib.mkOverride 10 ''
-      #type database  DBuser  auth-method
-      local all       all     peer
+      #type    database    DBuser    auth-method
+      local    hedgedoc    hedgedoc  peer
     '';
   };
 
