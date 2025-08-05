@@ -15,6 +15,7 @@
     ../../services/paperless.nix
     ../../services/hedgedoc.nix
     ../../services/ldap.nix
+    ../../services/immich.nix
   ];
 
   # Bootloader
