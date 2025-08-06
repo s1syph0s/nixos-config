@@ -20,10 +20,10 @@
     "auth/session_secret" = {
       owner = "authelia-main";
     };
-    "auth/oidc/hmac" = {
+    "auth/hmac" = {
       owner = "authelia-main";
     };
-    "auth/oidc/jwk/private" = {
+    "auth/jwk/private" = {
       owner = "authelia-main";
     };
   };
@@ -33,10 +33,11 @@
     extraGroups = ["brevo"];
   };
 
-  sops.templates."authelia.yml" = let
+  sops.templates."auth.yml" = let
     host = config.services.lldap.settings.ldap_host;
     port = config.services.lldap.settings.ldap_port;
   in {
+    owner = "authelia-main";
     content = ''
       theme: "dark"
 
@@ -45,7 +46,6 @@
 
       identity_validation:
         reset_password:
-          jwt_secret: "${config.sops.placeholder."auth/jwt_secret"}"
           jwt_lifespan: "5 minutes"
           jwt_algorithm: "HS256"
 
@@ -54,12 +54,6 @@
           ## The other portions of the mandatory OpenID Connect 1.0 configuration go here.
           ## See: https://www.authelia.com/c/oidc
 
-          hmac_secret: "${config.sops.placeholder."auth/oidc/hmac"}"
-          jwks:
-            - algorithm: "RS256"
-              use: "sig"
-              key: |
-                ${config.sops.placeholder."auth/oidc/jwk/private"}
           enable_client_debug_messages: false
           minimum_parameter_entropy: 8
           enforce_pkce: "public_clients_only"
@@ -79,18 +73,6 @@
             authorize_code: "1m"
             id_token: "1h"
             refresh_token: "90m"
-          claims_policies:
-            policy_name:
-              id_token: []
-              access_token: []
-              id_token_audience_mode: "specification"
-              custom_claims:
-                claim_name:
-                  name: "claim_name"
-                  attribute: "attribute_name"
-          scopes:
-            scope_name:
-              claims: []
           cors:
             endpoints:
               - "authorization"
@@ -115,8 +97,8 @@
                 - "code"
               grant_types:
                 - "authorization_code"
-              access_token_signed_response_alg: "none"
-              userinfo_signed_response_alg: "none"
+              access_token_signed_response_alg: "RS256"
+              userinfo_signed_response_alg: "RS256"
               token_endpoint_auth_method: "client_secret_post"
 
       authentication_backend:
@@ -134,7 +116,6 @@
           password: "${config.sops.placeholder."lldap/admin"}"
 
       storage:
-        encryption_key: "${config.sops.placeholder."auth/storage_key"}"
         postgres:
             address: "/run/postgresql"
             servers: []
@@ -144,7 +125,6 @@
             timeout: "5s"
 
       session:
-        secret: "${config.sops.placeholder."auth/session_secret"}"
         cookies:
           - domain: "fstn.top"
             authelia_url: "https://auth.fstn.top"
@@ -160,17 +140,20 @@
         rules:
         - domain: "auth.fstn.top"
           policy: "bypass"
-        - domain: "*.fstn.top"
-          policy: "one_factor"
     '';
-    owner = "authelia-main";
   };
 
   services.authelia.instances.main = {
     enable = true;
-    secrets.manual = true;
+    secrets = {
+      jwtSecretFile = "${config.sops.secrets."auth/jwt_secret".path}";
+      oidcHmacSecretFile = "${config.sops.secrets."auth/hmac".path}";
+      oidcIssuerPrivateKeyFile = "${config.sops.secrets."auth/jwk/private".path}";
+      sessionSecretFile = "${config.sops.secrets."auth/session_secret".path}";
+      storageEncryptionKeyFile = "${config.sops.secrets."auth/storage_key".path}";
+    };
     settingsFiles = [
-      "${config.sops.templates."authelia.yml".path}"
+      "${config.sops.templates."auth.yml".path}"
     ];
   };
 
