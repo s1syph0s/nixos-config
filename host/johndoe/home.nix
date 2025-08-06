@@ -81,6 +81,23 @@
         user = "fistanto";
         identityFile = "~/.ssh/fistanto-orwa";
       };
+      "terabithia" = {
+        hostname = "v2202508291507368807.luckysrv.de";
+        user = "root";
+        identityFile = "~/.ssh/terabithia";
+      };
+      "hal" = {
+        hostname = "10.100.0.2";
+        user = "root";
+        proxyJump = "terabithia";
+        identityFile = "~/.ssh/hal";
+      };
+      "saturn.remote" = {
+        hostname = "saturn.local";
+        user = "sisyph0s";
+        proxyJump = "hal.remote";
+        identityFile = "~/.ssh/sisyph0s@saturn";
+      };
     };
   };
 }
