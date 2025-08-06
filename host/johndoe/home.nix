@@ -95,7 +95,7 @@
       "saturn.remote" = {
         hostname = "saturn.local";
         user = "sisyph0s";
-        proxyJump = "hal.remote";
+        proxyJump = "hal";
         identityFile = "~/.ssh/sisyph0s@saturn";
       };
     };
