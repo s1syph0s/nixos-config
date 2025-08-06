@@ -16,6 +16,7 @@
     ../../services/hedgedoc.nix
     ../../services/ldap.nix
     ../../services/immich.nix
+    ../../services/authelia.nix
   ];
 
   # Bootloader

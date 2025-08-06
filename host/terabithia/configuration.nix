@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./disko.nix
@@ -16,6 +17,7 @@
     initialHashedPassword = "$y$j9T$TiPYI3DDO0wYPv0jaOGhQ0$/DTwieWqqKA4.xtLKDiKQOTKtYdvzxfyaRLTN2SVeqB";
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHPdOPyuU3TFfLU7fwjjaf3X8peBiTQAaX6pN8XfIkKW terabithia"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIhfLqNUooJYuQaLZdmS+8CRBg5t9TOeNSeBK1Nszjej terabithia"
     ];
   };
 
@@ -26,14 +28,14 @@
 
   sops = {
     defaultSopsFile = ../../secrets/secrets.yaml;
-    age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
-    secrets."terabithia/wg/private" = {};
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    secrets."terabithia/wg/private" = { };
   };
 
   networking.nat = {
     enable = true;
     externalInterface = "ens3";
-    internalInterfaces = ["wg0"];
+    internalInterfaces = [ "wg0" ];
     forwardPorts = [
       {
         sourcePort = 80;
@@ -48,9 +50,9 @@
     ];
   };
   networking.firewall.allowedTCPPorts = [
-    22 #ssh
-    80 #http
-    443 #https
+    22 # ssh
+    80 # http
+    443 # https
   ];
   networking.firewall.allowedUDPPorts = [
     51820 # wireguard
@@ -61,7 +63,7 @@
     interfaces = {
       wg0 = {
         # WireGuard interface IP on VPS (server side)
-        ips = ["10.100.0.1/24"];
+        ips = [ "10.100.0.1/24" ];
         mtu = 1280;
 
         # Listen port on VPS
@@ -79,7 +81,7 @@
           {
             name = "HAL";
             publicKey = "6SNtOxOdRiNHG16/QcVVM+trc6NvEwp2CbBSrdHw/Tc=";
-            allowedIPs = ["10.100.0.2/32"]; # home server WireGuard IP
+            allowedIPs = [ "10.100.0.2/32" ]; # home server WireGuard IP
           }
         ];
       };
@@ -97,6 +99,9 @@
     man-pages-posix
   ];
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   system.stateVersion = "25.05";
 }
