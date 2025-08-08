@@ -117,7 +117,6 @@
       "float, class:^(steam)$, title:^(Friends List)$"
       "float, class:^(firefox)$, title:^(Picture-in-Picture)$"
       "workspace 1, class:^(emacs)$"
-      "workspace 2, class:^(firefox)$"
       "workspace 3, class:^(steam)$"
       "workspace 8, class:^(vesktop)$"
       "rounding 8, floating:1"
