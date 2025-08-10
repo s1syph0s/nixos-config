@@ -61,6 +61,11 @@ in {
       default = "/var/lib/immich";
       description = "Directory used to store media files. If it is not the default, the directory has to be created manually such that the immich user is able to read and write to it.";
     };
+    mlPathLocation = mkOption {
+      type = types.path;
+      default = "/var/lib/immich-ml";
+      description = "Directory used to store machine learning models.";
+    };
     environment = mkOption {
       type = types.submodule {freeformType = types.attrsOf types.str;};
       default = {};
@@ -342,6 +347,7 @@ in {
       MACHINE_LEARNING_CACHE_FOLDER = "/var/cache/immich";
       IMMICH_HOST = "localhost";
       IMMICH_PORT = "3003";
+      HF_HOME = cfg.mlPathLocation;
     };
 
     systemd.slices.system-immich = {
@@ -401,6 +407,13 @@ in {
         # fixes those installs.
         "${cfg.mediaLocation}" = {
           e = {
+            user = cfg.user;
+            group = cfg.group;
+            mode = "0700";
+          };
+        };
+        "${cfg.mlPathLocation}" = {
+          d = {
             user = cfg.user;
             group = cfg.group;
             mode = "0700";

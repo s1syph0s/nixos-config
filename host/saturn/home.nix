@@ -44,6 +44,9 @@
         user = "root";
         identityFile = "~/.ssh/terabithia";
       };
+      "*.sra.uni-hannover.de" = {
+        identityFile = "~/.ssh/sra";
+      };
     };
   };
 }
