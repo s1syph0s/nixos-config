@@ -47,6 +47,9 @@
       "*.sra.uni-hannover.de" = {
         identityFile = "~/.ssh/sra";
       };
+      "gitlab.ibr.cs.tu-bs.de" = {
+        identityFile = "~/.ssh/ibr-gitlab";
+      };
     };
   };
 }
