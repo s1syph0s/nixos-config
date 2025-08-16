@@ -11,6 +11,7 @@
     terminal = "${pkgs.alacritty}/bin/alacritty";
     extraConfig = {
       drun-match-fields = "name";
+      matching = "fuzzy";
     };
   };
   home.packages = with pkgs; [
