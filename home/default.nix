@@ -33,6 +33,7 @@
     ./hyprland
     ./zellij
     ./email
+    ./rofi
   ];
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -469,24 +470,6 @@
         terminal: Some("alacritty"),
       )
     '';
-  };
-
-  programs.fuzzel = {
-    enable = true;
-    settings = {
-      main = {
-        font = "JetBrainsMono NF:size=12";
-        icon-theme = "Papirus-Dark";
-        fuzzy = true;
-        lines = 8;
-        image-size-ratio = 0.0;
-      };
-      colors = {
-        background = "080808aa";
-        text = "dddddddd";
-        match = "8db678dd";
-      };
-    };
   };
 
   # Home Manager can also manage your environment variables through

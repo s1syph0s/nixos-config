@@ -138,7 +138,7 @@
       "$mainMod + Shift, E, exit, "
       "$mainMod, E, exec, dolphin"
       "$mainMod, V, togglefloating, "
-      "$mainMod, SPACE, exec, pkill anyrun || anyrun"
+      "$mainMod, SPACE, exec, pkill rofi || rofi -show drun -show-icons -sidebar-mode"
       "$mainMod, P, pseudo," # dwindle
       "$mainMod, B, togglesplit," # dwindle
       "$mainMod, code:49, exec, hyprlock" # WIN + `
