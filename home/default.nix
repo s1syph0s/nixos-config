@@ -151,7 +151,11 @@
     lua-language-server
     nixd
     tinymist
+
     hledger
+    beancount
+    beanquery
+    fava
 
     # Formatter
     alejandra
