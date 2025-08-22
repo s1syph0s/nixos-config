@@ -139,6 +139,7 @@
       "$mainMod, E, exec, dolphin"
       "$mainMod, V, togglefloating, "
       "$mainMod, SPACE, exec, pkill rofi || rofi -show drun -show-icons -sidebar-mode"
+      "$mainMod, period, exec, rofi-rbw"
       "$mainMod, P, pseudo," # dwindle
       "$mainMod, B, togglesplit," # dwindle
       "$mainMod, code:49, exec, hyprlock" # WIN + `
@@ -159,10 +160,13 @@
 
       # Tab
       "$mainMod, t, togglegroup"
+      "$mainMod SHIFT, t, moveoutofgroup"
       "$mainMod, b, changegroupactive, b"
       "$mainMod, f, changegroupactive, f"
       "$mainMod CTRL, H, changegroupactive, b"
       "$mainMod CTRL, L, changegroupactive, f"
+      "$mainMod CTRL SHIFT, H, movegroupwindow, b"
+      "$mainMod CTRL SHIFT, L, movegroupwindow, f"
       "$mainMod CTRL, left, changegroupactive, b"
       "$mainMod CTRL, right, changegroupactive, f"
       "$mainMod CTRL, TAB, changegroupactive, f"
