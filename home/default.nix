@@ -31,9 +31,11 @@
     ./emacs
     ./tmux
     ./hyprland
+    ./waybar
     ./zellij
     ./email
     ./rofi
+    ./niri
   ];
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -183,12 +185,6 @@
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
-
-    # waybar config TODO: Migrate to better solution
-    ".config/waybar" = {
-      source = ../config/waybar;
-      recursive = true;
-    };
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
@@ -492,8 +488,6 @@
   # wayland.windowManager.hyprland = {
   #   enable = true;
   # };
-
-  programs.waybar.enable = true;
 
   programs.hyprlock = {
     enable = true;

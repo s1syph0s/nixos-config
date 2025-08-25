@@ -138,6 +138,8 @@
     man-pages-posix
   ];
 
+  programs.niri.enable = true;
+
   programs.nix-ld.enable = true;
 
   programs.seahorse.enable = true;
