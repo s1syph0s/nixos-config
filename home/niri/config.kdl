@@ -286,7 +286,7 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "sh" "-c" "waybar --config ~/.config/waybar/niri.jsonc"
 spawn-at-startup "nm-applet" "--indicator"
-spawn-at-startup "mako"
+// spawn-at-startup "mako"
 spawn-at-startup "sh" "-c" "swaybg -m fill -i ~/media/img/wallpaper-moebius.png"
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
 spawn-at-startup "xwayland-satellite"
@@ -393,8 +393,8 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
-    Mod+Space hotkey-overlay-title="Run an Application: Rofi" { spawn "sh" "-c" "pkill rofi || rofi -show drun -show-icons -sidebar-mode"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Mod+Space hotkey-overlay-title="Run an Application: Rofi" { spawn "sh" "-c" "pkill rofi || rofi -modes window,drun -show drun -show-icons -sidebar-mode"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn "sh" "-c" "loginctl lock-session"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
@@ -404,8 +404,8 @@ binds {
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
     // Example brightness key mappings for brightnessctl.
-    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn "brillo" "-A" "10%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brillo" "-U" "10%"; }
 
     F11 { fullscreen-window; }
 

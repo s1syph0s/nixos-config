@@ -558,7 +558,6 @@
     enable = true;
     settings = {
       font = "JetBrainsMono 8";
-      output = "DP-3";
       anchor = "top-center";
       background-color = "#2e3440";
       height = 50;
