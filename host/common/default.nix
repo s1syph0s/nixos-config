@@ -4,7 +4,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -33,7 +34,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland --user-menu --asterisks";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd niri-session --user-menu --asterisks -r --remember-user-session";
         user = "greeter";
       };
     };
@@ -41,7 +42,7 @@
   services.protonmail-bridge = {
     enable = true;
     logLevel = "info";
-    path = with pkgs; [gnome-keyring];
+    path = with pkgs; [ gnome-keyring ];
   };
 
   # Configure keymap in X11
@@ -52,7 +53,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-  services.printing.drivers = [pkgs.hplip];
+  services.printing.drivers = [ pkgs.hplip ];
   services.avahi = {
     enable = true;
     nssmdns4 = true;
@@ -82,7 +83,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
 
   services.udisks2.enable = true;
 
@@ -154,7 +155,7 @@
   };
 
   #nix LSP
-  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   environment.variables.EDITOR = "neovim";
 
@@ -173,8 +174,8 @@
   services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [8384];
-  networking.firewall.allowedUDPPorts = [24727];
+  networking.firewall.allowedTCPPorts = [ 8384 ];
+  networking.firewall.allowedUDPPorts = [ 24727 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
@@ -204,7 +205,7 @@
     enable = true;
     keyboards = {
       default = {
-        ids = ["*"];
+        ids = [ "*" ];
         settings = {
           main = {
             capslock = "overload(control, esc)";

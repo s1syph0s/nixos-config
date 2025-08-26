@@ -164,6 +164,8 @@
     nixfmt-rfc-style
     rustfmt
 
+    xwayland-satellite
+
     # Debugger
     gdb
 
@@ -598,6 +600,11 @@
     guiAddress = "0.0.0.0:8384";
   };
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [xdg-desktop-portal-gnome xdg-desktop-portal-gtk];
+    configPackages = [pkgs.niri];
+  };
   xdg.userDirs = let
     homeDir = config.home.homeDirectory;
   in {
