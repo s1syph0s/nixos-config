@@ -7,7 +7,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -18,7 +19,15 @@
   users.users.sisyph0s = {
     isNormalUser = true;
     description = "sisyph0s";
-    extraGroups = ["libvirtd" "networkmanager" "wheel" "dialout" "tty" "docker" "gamemode"];
+    extraGroups = [
+      "libvirtd"
+      "networkmanager"
+      "wheel"
+      "dialout"
+      "tty"
+      "docker"
+      "gamemode"
+    ];
     packages = with pkgs; [
       firefox
       swayidle
@@ -42,27 +51,25 @@
   };
 
   services.pipewire.extraConfig.pipewire-pulse."92-baldurs-gate" = {
-    context.modules = [
+    context.rules = [
       {
-        name = "libpipewire-module-protocol-pulse";
-        args = {
-          pulse.min.req = "32/44100";
-          pulse.default.req = "32/44100";
-          pulse.max.req = "32/44100";
-          pulse.min.quantum = "32/44100";
-          pulse.max.quantum = "32/44100";
-          audio.format = "S24LE"; # 24-bit audio
+        matches = [
+          { "application.name" = "Baldur's Gate 3"; }
+        ];
+        actions = {
+          update-props = {
+            node.latency = "32/44100";
+            resample.quality = 1;
+            audio.format = "S24LE";
+          };
         };
       }
     ];
-    stream.properties = {
-      node.latency = "32/44100";
-      resample.quality = 1;
-    };
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfreePredicate = pkg:
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
       "steam"
       "steam-unwrapped"
@@ -72,11 +79,14 @@
       "spotify"
     ];
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   home-manager = {
     useGlobalPkgs = true;
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = { inherit inputs; };
     backupFileExtension = "backup";
     users = {
       sisyph0s = import ./home.nix;

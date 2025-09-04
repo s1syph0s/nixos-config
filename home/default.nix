@@ -4,7 +4,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -98,6 +99,9 @@
     # pdf
     kdePackages.okular
     pdftk
+
+    # img viewer
+    qimgv
 
     kdePackages.kservice
 
@@ -312,7 +316,7 @@
       enable = true;
       caseSensitive = false;
       prompt.theme = "pure";
-      syntaxHighlighting.highlighters = ["main"];
+      syntaxHighlighting.highlighters = [ "main" ];
       utility.safeOps = false;
       pmodules = [
         "environment"
@@ -338,7 +342,9 @@
       lg = "lazygit";
       lal = "ls -al";
     };
-    shellAliases = {cat = "bat";};
+    shellAliases = {
+      cat = "bat";
+    };
     plugins = [
       {
         name = "tide";
@@ -485,7 +491,9 @@
   #
   #  /etc/profiles/per-user/sisyph0s/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {EDITOR = "nvim";};
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
 
   # wayland.windowManager.hyprland = {
   #   enable = true;
@@ -578,7 +586,9 @@
     };
   };
 
-  programs.bat = {enable = true;};
+  programs.bat = {
+    enable = true;
+  };
 
   programs.rbw = {
     enable = true;
@@ -601,47 +611,53 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [xdg-desktop-portal-gnome xdg-desktop-portal-gtk];
-    configPackages = [pkgs.niri];
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gnome
+      xdg-desktop-portal-gtk
+    ];
+    configPackages = [ pkgs.niri ];
   };
-  xdg.userDirs = let
-    homeDir = config.home.homeDirectory;
-  in {
-    enable = true;
-    createDirectories = true;
+  xdg.userDirs =
+    let
+      homeDir = config.home.homeDirectory;
+    in
+    {
+      enable = true;
+      createDirectories = true;
 
-    desktop = null;
-    templates = null;
-    publicShare = null;
+      desktop = null;
+      templates = null;
+      publicShare = null;
 
-    documents = "${homeDir}/doc";
-    download = "${homeDir}/tmp";
-    music = "${homeDir}/media/music";
-    pictures = "${homeDir}/media/img";
-    videos = "${homeDir}/media/video";
-  };
+      documents = "${homeDir}/doc";
+      download = "${homeDir}/tmp";
+      music = "${homeDir}/media/music";
+      pictures = "${homeDir}/media/img";
+      videos = "${homeDir}/media/video";
+    };
   xdg.configFile = {
     # HACK: For some reason the `kdePackages.kservice` package doesn't provide `applications.menu`. Take it from somewhere!
-    "menus/applications.menu".text = builtins.readFile "${pkgs.libsForQt5.kservice}/etc/xdg/menus/applications.menu";
+    "menus/applications.menu".text =
+      builtins.readFile "${pkgs.libsForQt5.kservice}/etc/xdg/menus/applications.menu";
   };
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "x-scheme-handler/http" = ["firefox.desktop"];
-      "x-scheme-handler/https" = ["firefox.desktop"];
-      "x-scheme-handler/chrome" = ["firefox.desktop"];
-      "x-scheme-handler/discord" = ["vesktop.desktop"];
-      "text/html" = ["firefox.desktop"];
-      "application/pdf" = ["okularApplication_pdf.desktop"];
-      "application/x-extension-htm" = ["firefox.desktop"];
-      "application/x-extension-html" = ["firefox.desktop"];
-      "application/x-extension-shtml" = ["firefox.desktop"];
-      "application/xhtml+xml" = ["firefox.desktop"];
-      "application/x-extension-xhtml" = ["firefox.desktop"];
-      "application/x-extension-xht" = ["firefox.desktop"];
+      "x-scheme-handler/http" = [ "firefox.desktop" ];
+      "x-scheme-handler/https" = [ "firefox.desktop" ];
+      "x-scheme-handler/chrome" = [ "firefox.desktop" ];
+      "x-scheme-handler/discord" = [ "vesktop.desktop" ];
+      "text/html" = [ "firefox.desktop" ];
+      "application/pdf" = [ "okularApplication_pdf.desktop" ];
+      "application/x-extension-htm" = [ "firefox.desktop" ];
+      "application/x-extension-html" = [ "firefox.desktop" ];
+      "application/x-extension-shtml" = [ "firefox.desktop" ];
+      "application/xhtml+xml" = [ "firefox.desktop" ];
+      "application/x-extension-xhtml" = [ "firefox.desktop" ];
+      "application/x-extension-xht" = [ "firefox.desktop" ];
     };
     associations.added = {
-      "application/pdf" = ["okularApplication_pdf.desktop"];
+      "application/pdf" = [ "okularApplication_pdf.desktop" ];
     };
   };
 
