@@ -161,7 +161,6 @@
     hledger
     beancount
     beanquery
-    fava
 
     # Formatter
     alejandra
