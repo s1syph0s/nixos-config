@@ -3,10 +3,10 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
     theme = ./themes/squared.rasi;
     font = "JetBrainsMono Nerd Font 12";
     terminal = "${pkgs.alacritty}/bin/alacritty";
