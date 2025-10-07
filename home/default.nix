@@ -159,8 +159,6 @@
     tinymist
 
     hledger
-    beancount
-    beanquery
 
     # Formatter
     alejandra
