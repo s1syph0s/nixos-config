@@ -218,6 +218,8 @@
     };
   };
 
+  services.trezord.enable = true;
+
   virtualisation.containers.enable = true;
   # docker
   # virtualisation.docker = {
