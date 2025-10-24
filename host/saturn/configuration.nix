@@ -68,16 +68,7 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "steam"
-      "steam-unwrapped"
-      "steam-original"
-      "steam-run"
-      "drawio"
-      "spotify"
-    ];
+  nixpkgs.config.allowUnfree = true;
 
   nix.settings.experimental-features = [
     "nix-command"

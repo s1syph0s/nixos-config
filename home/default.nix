@@ -127,6 +127,8 @@
     gcc
     libtool
 
+    trezor-suite
+
     # chat
     irssi
     element-desktop
