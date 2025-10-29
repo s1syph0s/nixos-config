@@ -3,7 +3,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "fistanto";
@@ -15,11 +16,11 @@
     ../../home
     ./app/hyprland
   ];
-  _module.args = {inherit inputs;};
+  _module.args = { inherit inputs; };
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
     };
   };
   programs.nh = {
@@ -28,6 +29,11 @@
     clean.extraArgs = "--keep-since 4d --keep 3";
     flake = "/home/fistanto/.dotfiles";
   };
+
+  programs.obs-studio = {
+    enable = true;
+  };
+
   services.blueman-applet.enable = true;
 
   programs.git = {
@@ -37,7 +43,7 @@
   sops = {
     age.keyFile = "/home/fistanto/.config/sops/age/keys.txt";
     defaultSopsFile = ../../secrets/secrets.yaml;
-    secrets."email/ibr" = {};
+    secrets."email/ibr" = { };
   };
 
   programs.ssh = {
