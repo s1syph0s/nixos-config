@@ -149,6 +149,7 @@
     nerd-fonts.jetbrains-mono
     nerd-fonts.sauce-code-pro
     nerd-fonts.symbols-only
+    nerd-fonts.iosevka
 
     just
 
