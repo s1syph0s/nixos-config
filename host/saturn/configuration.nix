@@ -70,6 +70,11 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # FIXME: Temporary allow jitsi meet
+  nixpkgs.config.permittedInsecurePackages = [
+    "jitsi-meet-1.0.8792"
+  ];
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
