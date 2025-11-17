@@ -7,7 +7,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -18,7 +19,16 @@
   users.users.fistanto = {
     isNormalUser = true;
     description = "fistanto";
-    extraGroups = ["libvirtd" "networkmanager" "wheel" "dialout" "tty" "docker" "gamemode" "video"];
+    extraGroups = [
+      "libvirtd"
+      "networkmanager"
+      "wheel"
+      "dialout"
+      "tty"
+      "docker"
+      "gamemode"
+      "video"
+    ];
     packages = with pkgs; [
       firefox
       swayidle
@@ -39,7 +49,15 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  # FIXME: Temporary allow jitsi meet
+  nixpkgs.config.permittedInsecurePackages = [
+    "jitsi-meet-1.0.8792"
+  ];
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   services.blueman.enable = true;
   services.printing.clientConf = ''
@@ -50,8 +68,8 @@
 
   home-manager = {
     useGlobalPkgs = true;
-    extraSpecialArgs = {inherit inputs;};
-    sharedModules = [inputs.sops-nix.homeManagerModules.sops];
+    extraSpecialArgs = { inherit inputs; };
+    sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
     users = {
       fistanto = import ./home.nix;
     };
