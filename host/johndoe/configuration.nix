@@ -66,6 +66,8 @@
 
   services.hardware.bolt.enable = true;
 
+  hardware.opentabletdriver.enable = true;
+
   home-manager = {
     useGlobalPkgs = true;
     extraSpecialArgs = { inherit inputs; };

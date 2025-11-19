@@ -153,6 +153,10 @@
 
     just
 
+    xournalpp
+    wl-mirror
+    opentabletdriver
+
     # LSP
     gopls
     rust-analyzer

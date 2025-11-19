@@ -62,6 +62,14 @@ input {
         // middle-emulation
     }
 
+    tablet {
+        // off
+        // map-to-output "eDP-1"
+        left-handed
+        calibration-matrix 1.0 0.0 0.0 0.0 1.0 0.0
+    }
+
+
     // Uncomment this to make the mouse warp to the center of newly focused windows.
     //warp-mouse-to-focus mode="center-xy"
 
@@ -134,8 +142,14 @@ output "Dell Inc. DELL P2723DE 84C714" {
     mode "2560x1440@60"
     scale 1
     transform "normal"
-    position x=1920 y=0
-    focus-at-startup
+    position x=4480 y=0
+}
+
+output "PNP(UGD) CD120FH 20210617" {
+    mode "1920x1080@60"
+    scale 1
+    transform "180"
+    position x=0 y=1080
 }
 
 // Settings that influence how windows are positioned and sized.
