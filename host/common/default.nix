@@ -140,6 +140,8 @@
     linux-manual
     man-pages
     man-pages-posix
+
+    playerctl
   ];
 
   programs.niri.enable = true;
@@ -185,6 +187,7 @@
   services.udev = {
     enable = true;
     packages = [
+      pkgs.via
       (pkgs.writeTextFile {
         name = "microbit-udev-rules";
         text = ''
@@ -197,6 +200,14 @@
           LABEL="microbit_rules_end"
         '';
         destination = "/etc/udev/rules.d/69-microbit.rules";
+      })
+      (pkgs.writeTextFile {
+        name = "rp2040-udev-rules";
+        text = ''
+          # RP2040 / MicroPython FS mode
+          SUBSYSTEMS=="usb", ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="0005", TAG+="uaccess"
+        '';
+        destination = "/etc/udev/rules.d/69-rp2040.rules";
       })
     ];
   };
@@ -219,6 +230,8 @@
   };
 
   services.trezord.enable = true;
+
+  hardware.keyboard.qmk.enable = true;
 
   virtualisation.containers.enable = true;
   # docker

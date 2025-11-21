@@ -157,6 +157,8 @@
     wl-mirror
     opentabletdriver
 
+    via
+
     # LSP
     gopls
     rust-analyzer
