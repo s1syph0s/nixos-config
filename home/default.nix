@@ -610,6 +610,11 @@
     addKeysToAgent = "yes";
   };
 
+  systemd.user.tmpfiles.rules = [
+    "#Type Path                                     Mode User Group Age         Argument"
+    "d     %h/tmp                                   700  -    -     7d          -"
+  ];
+
   services.syncthing = {
     enable = true;
     guiAddress = "0.0.0.0:8384";
