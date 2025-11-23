@@ -31,7 +31,10 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  services.gnome.gnome-keyring.enable = true;
+  services.gnome = {
+    gnome-keyring.enable = true;
+    gcr-ssh-agent.enable = false;
+  };
   security.pam.services.greetd.enableGnomeKeyring = true;
   services.greetd = {
     enable = true;
