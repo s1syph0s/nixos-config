@@ -31,6 +31,11 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  documentation.man = {
+    enable = true;
+    generateCaches = true;
+  };
+
   services.gnome = {
     gnome-keyring.enable = true;
     gcr-ssh-agent.enable = false;
