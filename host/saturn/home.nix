@@ -4,7 +4,8 @@
   inputs,
   lib,
   ...
-}: {
+}:
+{
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "sisyph0s";
@@ -16,14 +17,14 @@
     ../../home
     ./app/hyprland
   ];
-  _module.args = {inherit inputs;};
+  _module.args = { inherit inputs; };
   home.packages = with pkgs; [
     drawio
   ];
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
     };
   };
   programs.nh = {
@@ -49,6 +50,19 @@
       };
       "gitlab.ibr.cs.tu-bs.de" = {
         identityFile = "~/.ssh/ibr-gitlab";
+      };
+
+      # Work stuff
+      "x1.ibr" = {
+        hostname = "x1.ibr.cs.tu-bs.de";
+        user = "fistanto";
+        identityFile = "~/.ssh/fistanto-x1";
+      };
+      "orwa.ibr" = {
+        hostname = "orwa";
+        proxyJump = "x1.ibr";
+        user = "fistanto";
+        identityFile = "~/.ssh/fistanto-orwa";
       };
     };
   };
