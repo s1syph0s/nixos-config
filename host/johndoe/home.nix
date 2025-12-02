@@ -46,6 +46,10 @@
     secrets."email/ibr" = { };
   };
 
+  me.niri = {
+    profile = ../../home/niri/johndoe.kdl;
+  };
+
   programs.ssh = {
     matchBlocks = {
       "proxy.lab.sra" = {
