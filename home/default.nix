@@ -277,7 +277,7 @@
         };
       };
     };
-    theme = "ayu_dark";
+    theme = "ayu_mirage";
   };
 
   programs.direnv = {
