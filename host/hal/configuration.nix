@@ -7,12 +7,13 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../services/vaultwarden.nix
-    ../../services/paperless.nix
+    # ../../services/paperless.nix
     ../../services/hedgedoc.nix
     ../../services/ldap.nix
     ../../services/immich.nix
@@ -57,7 +58,8 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfreePredicate = pkg:
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
     ];
 
@@ -65,7 +67,7 @@
     enable = true;
     keyboards = {
       default = {
-        ids = ["*"];
+        ids = [ "*" ];
         settings = {
           main = {
             capslock = "overload(control, esc)";
@@ -109,8 +111,8 @@
 
   sops = {
     defaultSopsFile = ../../secrets/secrets.yaml;
-    age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
-    secrets."hal/wg/private" = {};
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    secrets."hal/wg/private" = { };
   };
 
   services.nginx = {
@@ -128,7 +130,7 @@
     interfaces = {
       wg0 = {
         # WireGuard interface IP on VPS (server side)
-        ips = ["10.100.0.2/24"];
+        ips = [ "10.100.0.2/24" ];
         mtu = 1280;
 
         # Listen port on VPS
@@ -140,7 +142,7 @@
           {
             name = "Terabithia";
             publicKey = "osE3KSQK8Y7y54CTBzKVgnxT4UYAr3PXeQdpViccRnE=";
-            allowedIPs = ["10.100.0.0/24"]; # home server WireGuard IP
+            allowedIPs = [ "10.100.0.0/24" ]; # home server WireGuard IP
             endpoint = "185.194.141.148:51820";
             persistentKeepalive = 25;
           }
@@ -169,7 +171,10 @@
   # virt manager
   virtualisation.libvirtd.enable = true;
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
