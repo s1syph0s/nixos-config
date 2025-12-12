@@ -162,7 +162,6 @@
 
     # LSP
     gopls
-    rust-analyzer
     clang-tools
     lua-language-server
     nixd
