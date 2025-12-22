@@ -4,8 +4,12 @@
   pkgs,
   inputs,
   ...
-}: {
-  networking.firewall.allowedTCPPorts = [80 443];
+}:
+{
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 
   sops.secrets = {
     "oidc_clients/immich/id" = {
@@ -216,7 +220,7 @@
     isSystemUser = true;
   };
 
-  users.users.nginx.extraGroups = ["acme"];
+  users.users.nginx.extraGroups = [ "acme" ];
   services.nginx = {
     enable = true;
     virtualHosts."photos.fstn.top" = {
@@ -238,7 +242,7 @@
 
   services.postgresql = {
     enable = true;
-    ensureDatabases = ["immich"];
+    ensureDatabases = [ "immich" ];
     ensureUsers = [
       {
         name = "immich";
@@ -246,8 +250,9 @@
       }
     ];
     authentication = pkgs.lib.mkOverride 10 ''
-      #type  database  DBuser  auth-method
-      local  immich    immich  peer
+      #type  database  DBuser    auth-method
+      local  immich    immich    peer
+      local  immich    postgres  peer
     '';
   };
 
