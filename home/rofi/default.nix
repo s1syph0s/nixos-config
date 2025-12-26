@@ -17,5 +17,6 @@
   };
   home.packages = with pkgs; [
     rofi-rbw-wayland
+    networkmanager_dmenu # TODO: make config reproducible
   ];
 }
