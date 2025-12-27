@@ -76,7 +76,6 @@
     strace
     ltrace
     lsof
-    jujutsu
 
     # system tools
     sysstat
@@ -219,6 +218,7 @@
     fi
   '';
 
+  # VCS
   programs.git = {
     enable = true;
     userName = "Pasha Fistanto";
@@ -232,6 +232,16 @@
     #     smtpSSLCertPath = "";
     #   };
     # };
+  };
+
+  programs.jujutsu = {
+    enable = true;
+    settings = {
+      user = {
+        name = "Pasha Fistanto";
+        email = lib.mkDefault "pasha@fstn.top";
+      };
+    };
   };
 
   programs.lazygit.enable = true;
