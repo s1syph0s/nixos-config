@@ -76,6 +76,7 @@
     strace
     ltrace
     lsof
+    jujutsu
 
     # system tools
     sysstat
