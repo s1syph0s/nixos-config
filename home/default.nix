@@ -522,8 +522,10 @@
   services.ssh-agent.enable = true;
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "yes";
+    matchBlocks."*".addKeysToAgent = "yes";
   };
+
+  programs.man.generateCaches = true;
 
   systemd.user.tmpfiles.rules = [
     "#Type Path                                     Mode User Group Age         Argument"
