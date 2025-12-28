@@ -16,6 +16,8 @@
     plugins = with pkgs; [ networkmanager-openvpn ];
   };
 
+  nix.package = pkgs.lix;
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
