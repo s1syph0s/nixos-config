@@ -74,8 +74,7 @@
     };
   };
 
-  services.postgresql = {
-    enable = true;
+  services.internal.postgresql = {
     ensureDatabases = [ "immich" ];
     ensureUsers = [
       {
@@ -87,7 +86,6 @@
       #type  database  DBuser    auth-method
       local  immich    immich    peer
       local  immich    postgres  peer
-      local  postgres  postgres  peer
     '';
   };
 

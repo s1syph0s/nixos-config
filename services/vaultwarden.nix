@@ -4,8 +4,12 @@
   pkgs,
   inputs,
   ...
-}: {
-  networking.firewall.allowedTCPPorts = [80 443];
+}:
+{
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 
   sops.secrets = {
     "vault/admin" = {
@@ -56,7 +60,7 @@
     environmentFile = "${config.sops.templates."vault.env".path}";
   };
 
-  users.users.nginx.extraGroups = ["acme"];
+  users.users.nginx.extraGroups = [ "acme" ];
   services.nginx = {
     enable = true;
     virtualHosts."vault.fstn.top" = {
@@ -68,9 +72,8 @@
     };
   };
 
-  services.postgresql = {
-    enable = true;
-    ensureDatabases = ["vaultwarden"];
+  services.internal.postgresql = {
+    ensureDatabases = [ "vaultwarden" ];
     ensureUsers = [
       {
         name = "vaultwarden";

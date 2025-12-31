@@ -4,8 +4,12 @@
   pkgs,
   inputs,
   ...
-}: {
-  networking.firewall.interfaces.wg0.allowedTCPPorts = [80 443];
+}:
+{
+  networking.firewall.interfaces.wg0.allowedTCPPorts = [
+    80
+    443
+  ];
 
   sops.templates."hedgedoc.env" = {
     content = ''
@@ -43,12 +47,12 @@
       domain = "pad.fstn.top";
       port = 8271;
       protocolUseSSL = true;
-      allowOrigin = ["pad.fstn.top"];
+      allowOrigin = [ "pad.fstn.top" ];
     };
     environmentFile = "${config.sops.templates."hedgedoc.env".path}";
   };
 
-  users.users.nginx.extraGroups = ["acme"];
+  users.users.nginx.extraGroups = [ "acme" ];
   services.nginx = {
     enable = true;
     virtualHosts."pad.fstn.top" = {
@@ -65,9 +69,8 @@
     };
   };
 
-  services.postgresql = {
-    enable = true;
-    ensureDatabases = ["hedgedoc"];
+  services.internal.postgresql = {
+    ensureDatabases = [ "hedgedoc" ];
     ensureUsers = [
       {
         name = "hedgedoc";

@@ -4,8 +4,12 @@
   pkgs,
   inputs,
   ...
-}: {
-  networking.firewall.allowedTCPPorts = [80 443];
+}:
+{
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 
   users.users.paperless = {
     isSystemUser = true;
@@ -17,7 +21,7 @@
     };
   };
 
-  users.users.nginx.extraGroups = ["acme"];
+  users.users.nginx.extraGroups = [ "acme" ];
   services.nginx = {
     enable = true;
     virtualHosts."paperless.hal.com" = {
@@ -29,9 +33,8 @@
     };
   };
 
-  services.postgresql = {
-    enable = true;
-    ensureDatabases = ["paperless"];
+  services.internal.postgresql = {
+    ensureDatabases = [ "paperless" ];
     ensureUsers = [
       {
         name = "paperless";

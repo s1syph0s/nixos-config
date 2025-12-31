@@ -95,6 +95,7 @@
             ./host/hal/configuration.nix
             ./pkgs/overlay.nix
             ./modules/immich.nix
+            ./modules/postgres.nix
             inputs.sops-nix.nixosModules.sops
           ];
         };
