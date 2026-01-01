@@ -34,6 +34,16 @@
   users.users.hedgedoc = {
     isSystemUser = true;
   };
+
+  services.internal.backup = {
+    serviceNames = [
+      "hedgedoc"
+    ];
+    dbNames = [
+      "hedgedoc"
+    ];
+  };
+
   services.hedgedoc = {
     enable = true;
     settings = {

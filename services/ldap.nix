@@ -4,8 +4,12 @@
   pkgs,
   inputs,
   ...
-}: {
-  networking.firewall.interfaces.wg0.allowedTCPPorts = [80 443];
+}:
+{
+  networking.firewall.interfaces.wg0.allowedTCPPorts = [
+    80
+    443
+  ];
 
   sops.secrets = {
     "lldap/admin" = {
@@ -23,7 +27,16 @@
     group = "lldap";
   };
 
-  users.groups.lldap = {};
+  users.groups.lldap = { };
+
+  services.internal.backup = {
+    serviceNames = [
+      "lldap"
+    ];
+    dbNames = [
+      "lldap"
+    ];
+  };
 
   services.lldap = {
     enable = true;
@@ -47,7 +60,7 @@
     Group = "lldap";
   };
 
-  users.users.nginx.extraGroups = ["acme"];
+  users.users.nginx.extraGroups = [ "acme" ];
   services.nginx = {
     enable = true;
     virtualHosts."accounts.fstn.top" = {

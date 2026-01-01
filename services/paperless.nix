@@ -22,6 +22,16 @@
   };
 
   users.users.nginx.extraGroups = [ "acme" ];
+
+  services.internal.backup = {
+    serviceNames = [
+      "paperless"
+    ];
+    dbNames = [
+      "paperless"
+    ];
+  };
+
   services.nginx = {
     enable = true;
     virtualHosts."paperless.hal.com" = {

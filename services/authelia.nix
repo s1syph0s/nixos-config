@@ -149,6 +149,15 @@
       '';
     };
 
+  services.internal.backup = {
+    serviceNames = [
+      "authelia-main"
+    ];
+    dbNames = [
+      "authelia-main"
+    ];
+  };
+
   services.authelia.instances.main = {
     enable = true;
     secrets = {

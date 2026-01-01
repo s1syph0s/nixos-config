@@ -20,6 +20,16 @@
     };
   };
 
+  services.internal.backup = {
+    serviceNames = [
+      "immich-server"
+      "immich-machine-learning"
+    ];
+    dbNames = [
+      "immich"
+    ];
+  };
+
   services.immich = {
     enable = true;
     host = "127.0.0.1";

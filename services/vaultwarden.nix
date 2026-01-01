@@ -31,6 +31,16 @@
   users.users.vaultwarden = {
     isSystemUser = true;
   };
+
+  services.internal.backup = {
+    serviceNames = [
+      "vaultwarden"
+    ];
+    dbNames = [
+      "vaultwarden"
+    ];
+  };
+
   services.vaultwarden = {
     enable = true;
     dbBackend = "postgresql";
