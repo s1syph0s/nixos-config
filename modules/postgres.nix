@@ -54,7 +54,7 @@ in
     authentication = pkgs.lib.mkOverride 10 ''
       #type    database         DBuser         auth-method
       local    all              root           peer
-      local    postgres         postgres       peer
+      local    all              postgres       peer
 
       ${cfg.authentication}
     '';
