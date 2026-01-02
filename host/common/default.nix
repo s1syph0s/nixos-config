@@ -16,6 +16,10 @@
     plugins = with pkgs; [ networkmanager-openvpn ];
   };
 
+  networking.hosts = {
+    "192.168.0.226" = [ "hal.local" ];
+  };
+
   nix.package = pkgs.lix;
 
   # Select internationalisation properties.
