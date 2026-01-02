@@ -24,6 +24,7 @@
 
     anyrun.url = "github:anyrun-org/anyrun";
     zjstatus.url = "github:dj95/zjstatus";
+    nixarr.url = "github:rasmus-kirk/nixarr";
   };
 
   outputs =
@@ -97,6 +98,7 @@
             ./modules/immich.nix
             ./modules/postgres.nix
             inputs.sops-nix.nixosModules.sops
+            inputs.nixarr.nixosModules.default
           ];
         };
 

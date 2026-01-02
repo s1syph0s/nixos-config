@@ -114,6 +114,9 @@
     defaultSopsFile = ../../secrets/secrets.yaml;
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     secrets."hal/wg/private" = { };
+    secrets."transmission/airvpn-nl.conf" = {
+      owner = config.users.users.transmission.name;
+    };
   };
 
   services.nginx = {
@@ -129,7 +132,7 @@
   networking.wireguard = {
     enable = true;
     interfaces = {
-      wg0 = {
+      wg1 = {
         # WireGuard interface IP on VPS (server side)
         ips = [ "10.100.0.2/24" ];
         mtu = 1280;
@@ -150,6 +153,43 @@
         ];
       };
     };
+  };
+
+  nixarr = {
+    enable = true;
+    # These two values are also the default, but you can set them to whatever
+    # else you want
+    # WARNING: Do _not_ set them to `/home/user/whatever`, it will not work!
+    mediaDir = "/data/media";
+    stateDir = "/data/media/.state/nixarr";
+
+    vpn = {
+      enable = true;
+      # WARNING: This file must _not_ be in the config git directory
+      # You can usually get this wireguard file from your VPN provider
+      wgConf = config.sops.secrets."transmission/airvpn-nl.conf".path;
+    };
+
+    jellyfin = {
+      enable = true;
+    };
+
+    transmission = {
+      enable = true;
+      uiPort = 9090;
+      vpn.enable = true;
+      peerPort = 49517; # Set this to the port forwarded by your VPN
+    };
+
+    # It is possible for this module to run the *Arrs through a VPN, but it
+    # is generally not recommended, as it can cause rate-limiting issues.
+    bazarr.enable = true;
+    lidarr.enable = true;
+    prowlarr.enable = true;
+    radarr.enable = true;
+    readarr.enable = true;
+    sonarr.enable = true;
+    jellyseerr.enable = true;
   };
 
   virtualisation.containers.enable = true;
