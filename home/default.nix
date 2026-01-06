@@ -254,7 +254,7 @@
       command = "${pkgs.zsh}/bin/zsh";
 
       font-family = "SauceCodePro NF Medium";
-      theme = "kanagawabones";
+      # theme = "kanagawabones";
       font-style = "Regular";
       font-family-bold = "SauceCodePro NF";
       font-style-bold = "Bold";
