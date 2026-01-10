@@ -51,6 +51,10 @@
       "gitlab.ibr.cs.tu-bs.de" = {
         identityFile = "~/.ssh/ibr-gitlab";
       };
+      "git.fstn.top" = {
+        hostname = "10.100.0.2";
+        proxyJump = "terabithia";
+      };
 
       # Work stuff
       "x1.ibr" = {

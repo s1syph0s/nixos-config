@@ -19,6 +19,7 @@
     ../../services/ldap.nix
     ../../services/immich.nix
     ../../services/authelia.nix
+    ../../services/git.nix
   ];
 
   # Bootloader
