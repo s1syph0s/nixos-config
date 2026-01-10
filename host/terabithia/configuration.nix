@@ -8,6 +8,8 @@
   imports = [
     ./hardware-configuration.nix
     ./disko.nix
+
+    ../common/server.nix
   ];
 
   boot.loader.grub.enable = true;

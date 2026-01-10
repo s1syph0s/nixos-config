@@ -374,9 +374,13 @@
       cat = "bat";
     };
     plugins = [
+      # {
+      #   name = "tide";
+      #   src = pkgs.fishPlugins.tide.src;
+      # }
       {
-        name = "tide";
-        src = pkgs.fishPlugins.tide.src;
+        name = "pure";
+        src = pkgs.fishPlugins.pure.src;
       }
       {
         name = "done";
@@ -394,6 +398,10 @@
       set -U __done_notify_sound 1
 
       fish_add_path ~/bin
+
+      # pure cfg
+      set -U pure_enable_nixdevshell true
+      set -U pure_show_subsecond_command_duration true
     '';
   };
 

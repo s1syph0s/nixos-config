@@ -11,15 +11,17 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
     ./backup.nix
+    ./hardware-configuration.nix
 
-    ../../services/vaultwarden.nix
-    ../../services/hedgedoc.nix
-    ../../services/ldap.nix
-    ../../services/immich.nix
+    ../common/server.nix
+
     ../../services/authelia.nix
     ../../services/git.nix
+    ../../services/hedgedoc.nix
+    ../../services/immich.nix
+    ../../services/ldap.nix
+    ../../services/vaultwarden.nix
   ];
 
   # Bootloader
