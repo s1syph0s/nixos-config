@@ -34,6 +34,8 @@
     secrets."terabithia/wg/private" = { };
   };
 
+  networking.hostName = "terabithia";
+
   networking.nat = {
     enable = true;
     externalInterface = "ens3";
@@ -100,12 +102,6 @@
     man-pages
     man-pages-posix
   ];
-
-  services.fail2ban = {
-    enable = true;
-    maxretry = 5;
-    bantime = "24h";
-  };
 
   nix.settings.experimental-features = [
     "nix-command"
