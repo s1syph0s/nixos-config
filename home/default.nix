@@ -401,6 +401,7 @@
 
       # pure cfg
       set -U pure_enable_nixdevshell true
+      set -U pure_symbol_nixdevshell_prefix "󱄅 "
       set -U pure_show_subsecond_command_duration true
     '';
   };
