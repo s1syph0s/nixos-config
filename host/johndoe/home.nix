@@ -91,6 +91,11 @@
         user = "fistanto";
         identityFile = "~/.ssh/fistanto-orwa";
       };
+
+      "git.fstn.top" = {
+        hostname = "10.100.0.2";
+        proxyJump = "terabithia";
+      };
       "terabithia" = {
         hostname = "v2202508291507368807.luckysrv.de";
         user = "root";
