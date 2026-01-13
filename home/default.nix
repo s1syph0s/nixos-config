@@ -203,9 +203,10 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+    ".ssh/config".force = true;
   };
 
-  home.activation.fixSshConfigPermissions = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  home.activation.fixSshConfigPermissions = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
     run mkdir -p "$HOME/.ssh"
     run chmod 700 "$HOME/.ssh"
 
