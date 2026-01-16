@@ -91,6 +91,10 @@
         user = "fistanto";
         identityFile = "~/.ssh/fistanto-orwa";
       };
+      "scp*" = {
+        user = "root";
+        identityFile = "~/.ssh/scp";
+      };
 
       "git.fstn.top" = {
         hostname = "10.100.0.2";

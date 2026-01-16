@@ -137,6 +137,8 @@
     nix-output-monitor
     nvd
 
+    perf
+
     gnumake
     openssl
 
