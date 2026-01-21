@@ -162,7 +162,6 @@
 
     # LSP
     gopls
-    clang-tools
     lua-language-server
     nixd
     tinymist
