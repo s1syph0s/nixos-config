@@ -79,7 +79,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 require('lazydev').setup()
 
-local lspconfig = require('lspconfig')
+local lspconfig = vim.lsp.config
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 -- Workaround rust-analyzer
@@ -106,7 +106,7 @@ local hostname = vim.fn.hostname()
 local usrname = os.getenv("USER")
 local usr_host = usrname .. '@' .. hostname
 
-lspconfig.lua_ls.setup {
+lspconfig.lua_ls = {
   capabilities = capabilities,
   settings = {
     Lua = {
@@ -116,7 +116,7 @@ lspconfig.lua_ls.setup {
   },
 }
 
-lspconfig.nixd.setup {
+lspconfig.nixd = {
   capabilities = capabilities,
   settings = {
     nixd = {
@@ -138,15 +138,15 @@ lspconfig.nixd.setup {
   },
 }
 
-lspconfig.clangd.setup {
+lspconfig.clangd = {
   capabilities = capabilities,
   cmd = { "clangd", "--query-driver=**", "--log=verbose" },
 }
 
-lspconfig.tinymist.setup {
+lspconfig.tinymist = {
   capabilities = capabilities,
 }
 
-lspconfig.gopls.setup {
+lspconfig.gopls = {
   capabilities = capabilities,
 }
