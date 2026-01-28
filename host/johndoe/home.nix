@@ -37,7 +37,7 @@
   services.blueman-applet.enable = true;
 
   programs.git = {
-    userEmail = "fistanto@ibr.cs.tu-bs.de";
+    settings.user.email = "fistanto@ibr.cs.tu-bs.de";
   };
 
   sops = {

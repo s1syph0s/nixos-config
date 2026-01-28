@@ -170,7 +170,7 @@
 
     # Formatter
     alejandra
-    nixfmt-rfc-style
+    nixfmt
     rustfmt
 
     xwayland-satellite
@@ -221,8 +221,10 @@
   # VCS
   programs.git = {
     enable = true;
-    userName = "Pasha Fistanto";
-    userEmail = lib.mkDefault "pasha@fstn.top";
+    settings = {
+      user.name = "Pasha Fistanto";
+      user.email = lib.mkDefault "pasha@fstn.top";
+    };
     # extraConfig = {
     #   sendemail = {
     #     smtpServer = "127.0.0.1";
@@ -531,7 +533,19 @@
   services.ssh-agent.enable = true;
   programs.ssh = {
     enable = true;
-    matchBlocks."*".addKeysToAgent = "yes";
+    enableDefaultConfig = false;
+    matchBlocks."*" = {
+      addKeysToAgent = "yes";
+      forwardAgent = false;
+      compression = false;
+      serverAliveInterval = 0;
+      serverAliveCountMax = 3;
+      hashKnownHosts = false;
+      userKnownHostsFile = "~/.ssh/known_hosts";
+      controlMaster = "no";
+      controlPath = "~/.ssh/master-%r@%n:%p";
+      controlPersist = "no";
+    };
   };
 
   programs.man.generateCaches = true;
