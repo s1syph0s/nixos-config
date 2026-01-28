@@ -18,6 +18,7 @@
       CMD_ALLOW_FREEURL = true
       CMD_REQUIRE_FREEURL_AUTHENTICATION = true
       CMD_ALLOW_ANONYMOUS = false
+      CMD_ALLOW_ANONYMOUS_EDITS = true
 
       # LDAP
       CMD_LDAP_URL="ldap://127.0.0.1:3890"
