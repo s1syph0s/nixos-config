@@ -160,6 +160,8 @@
 
     via
 
+    libreoffice-qt
+
     # LSP
     gopls
     lua-language-server
