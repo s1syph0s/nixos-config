@@ -368,6 +368,11 @@
   home.file.".p10k.zsh".source = ./bin/.p10k.zsh;
   home.file."bin/hledger.sh".source = ./bin/hledger.sh;
 
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
   programs.fish = {
     enable = true;
     shellAbbrs = {
