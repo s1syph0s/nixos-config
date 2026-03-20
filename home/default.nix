@@ -122,8 +122,6 @@
     # multimedia
     vlc
 
-    hello
-
     cmake
     gcc
     libtool
