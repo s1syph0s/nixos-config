@@ -2,7 +2,8 @@
   config,
   nixpkgs,
   ...
-}: {
+}:
+{
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
     exec-once = [
@@ -97,7 +98,6 @@
       preserve_split = true; # you probably want this
     };
 
-    gestures.workspace_swipe = false;
     misc = {
       disable_hyprland_logo = true;
       disable_splash_rendering = true;
@@ -111,23 +111,23 @@
       "w[tv1], gapsout:0, gapsin:0"
       "w[tgv1], gapsout:0, gapsin:0"
       "f[1], gapsout:0, gapsin:0"
+      "w[tv1], gapsout:0, gapsin:0"
+      "f[1], gapsout:0, gapsin:0"
     ];
 
     windowrule = [
-      "float, class:^(steam)$, title:^(Friends List)$"
-      "float, class:^(firefox)$, title:^(Picture-in-Picture)$"
-      "workspace 1, class:^(emacs)$"
-      "workspace 3, class:^(steam)$"
-      "workspace 8, class:^(vesktop)$"
-      "rounding 8, floating:1"
+      "match:class ^(steam)$, match:title ^(Friends List)$, float on"
+      "match:class ^(firefox)$, match:title ^(Picture-in-Picture)$, float on"
+      "workspace 1, match:class ^(emacs)$"
+      "workspace 3, match:class ^(steam)$"
+      "workspace 8, match:class ^(vesktop)$"
+      "rounding 8, match:float 1"
 
       # smart window
-      "bordersize 0, floating:0, onworkspace:w[tv1]"
-      "rounding 0, floating:0, onworkspace:w[tv1]"
-      "bordersize 0, floating:0, onworkspace:w[tgv1]"
-      "rounding 0, floating:0, onworkspace:w[tgv1]"
-      "bordersize 0, floating:0, onworkspace:f[1]"
-      "rounding 0, floating:0, onworkspace:f[1]"
+      "border_size 0, match:float 0, match:workspace w[tv1]"
+      "rounding 0, match:float 0, match:workspace w[tv1]"
+      "border_size 0, match:float 0, match:workspace f[1]"
+      "rounding 0, match:float 0, match:workspace f[1]"
     ];
 
     "$mainMod" = "SUPER";
@@ -219,11 +219,11 @@
 
     bindle = [
       '', XF86AudioRaiseVolume, exec, wpctl set-volume -l "1.0" @DEFAULT_AUDIO_SINK@ 5%+''
-      '', XF86AudioRaiseVolume, exec, wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2*100)}' > $WOBSOCK''
+      ", XF86AudioRaiseVolume, exec, wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2*100)}' > $WOBSOCK"
       '', XF86AudioLowerVolume, exec, wpctl set-volume -l "1.0" @DEFAULT_AUDIO_SINK@ 5%-''
-      '', XF86AudioLowerVolume, exec, wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2*100)}' > $WOBSOCK''
-      '', XF86MonBrightnessUp, exec, brillo -A 5''
-      '', XF86MonBrightnessDown, exec, brillo -U 5''
+      ", XF86AudioLowerVolume, exec, wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2*100)}' > $WOBSOCK"
+      ", XF86MonBrightnessUp, exec, brillo -A 5"
+      ", XF86MonBrightnessDown, exec, brillo -U 5"
     ];
 
     bindl = [
