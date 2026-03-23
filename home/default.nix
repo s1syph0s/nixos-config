@@ -160,6 +160,8 @@
 
     libreoffice-qt
 
+    ueberzugpp
+
     # LSP
     gopls
     lua-language-server
@@ -325,6 +327,11 @@
       #   exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
       # fi
     '';
+  };
+
+  programs.yazi = {
+    enable = true;
+    enableFishIntegration = true;
   };
 
   programs.zsh = {
