@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 
 let
-  util = import ./util.nix {};
-in 
+  util = import ./util.nix { };
+in
 {
   imports = [
     ./module/bookmarks.nix
@@ -22,7 +22,6 @@ in
       ${builtins.readFile ./lua/telescope.lua}
       ${builtins.readFile ./lua/treesitter.lua}
       ${builtins.readFile ./lua/session-manager.lua}
-      ${builtins.readFile ./lua/dashboard.lua}
       ${builtins.readFile ./lua/trouble.lua}
       ${builtins.readFile ./lua/zellij-nav.lua}
     '';
@@ -35,8 +34,8 @@ in
 
     plugins = with pkgs.vimPlugins; [
       {
-          plugin = kanagawa-nvim;
-          config = util.toLua "vim.cmd.colorscheme 'kanagawa'";
+        plugin = kanagawa-nvim;
+        config = util.toLua "vim.cmd.colorscheme 'kanagawa'";
       }
 
       # vim-tmux-navigator
@@ -95,7 +94,7 @@ in
 
       {
         plugin = fidget-nvim;
-        config = util.toLua ''require('fidget').setup()'';
+        config = util.toLua "require('fidget').setup()";
       }
 
       nvim-web-devicons
@@ -150,14 +149,16 @@ in
 
       nvim-treesitter-textobjects
       nvim-treesitter-context
-      (nvim-treesitter.withPlugins (p: with p; [
-        tree-sitter-nix
-        tree-sitter-lua
-        tree-sitter-rust
-        tree-sitter-go
-        tree-sitter-c
-        tree-sitter-cpp
-      ]))
+      (nvim-treesitter.withPlugins (
+        p: with p; [
+          tree-sitter-nix
+          tree-sitter-lua
+          tree-sitter-rust
+          tree-sitter-go
+          tree-sitter-c
+          tree-sitter-cpp
+        ]
+      ))
       {
         plugin = oil-nvim;
         config = util.toLua ''
@@ -212,7 +213,7 @@ in
 
       persistence-nvim
 
-      dashboard-nvim
+      # dashboard-nvim
 
       trouble-nvim
     ];
