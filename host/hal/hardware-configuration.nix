@@ -24,7 +24,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   # Disable ipv6 NUCLEAR OPTION
-  boot.kernelParams = [ "ipv6.disable=1" ];
+  # boot.kernelParams = [ "ipv6.disable=1" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {

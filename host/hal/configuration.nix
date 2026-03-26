@@ -28,9 +28,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Enable networking
-  networking.networkmanager.enable = true;
-
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -182,7 +179,7 @@
 
     transmission = {
       enable = true;
-      uiPort = 9090;
+      uiPort = 7070;
       vpn.enable = true;
       peerPort = 49517; # Set this to the port forwarded by your VPN
     };
