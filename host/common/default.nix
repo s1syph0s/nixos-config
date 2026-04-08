@@ -277,4 +277,9 @@
       ip46tables -t mangle -D nixos-fw-rpfilter -p udp -m udp --dport 1637 -j RETURN || true
     '';
   };
+
+  documentation = {
+    dev.enable = true;
+    man.cache.enable = true;
+  };
 }
