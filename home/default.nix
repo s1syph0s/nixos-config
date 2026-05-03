@@ -580,12 +580,16 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gnome
-      xdg-desktop-portal-gtk
+    xdgOpenUsePortal = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-gnome
     ];
-    configPackages = [ pkgs.niri ];
+    config = {
+      common.default = [ "gnome" ];
+    };
   };
+
   xdg.userDirs =
     let
       homeDir = config.home.homeDirectory;
