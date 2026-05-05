@@ -27,115 +27,112 @@
     nixarr.url = "github:rasmus-kirk/nixarr";
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      deploy-rs,
-      ...
-    }@inputs:
-    let
-      lib = nixpkgs.lib;
-      system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
-      deployPkgs = import nixpkgs {
+  outputs = {
+    self,
+    nixpkgs,
+    deploy-rs,
+    ...
+  } @ inputs: let
+    lib = nixpkgs.lib;
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {inherit system;};
+    deployPkgs = import nixpkgs {
+      inherit system;
+      overlays = [
+        deploy-rs.overlays.default # or deploy-rs.overlays.default
+        (self: super: {
+          deploy-rs = {
+            inherit (pkgs) deploy-rs;
+            lib = super.deploy-rs.lib;
+          };
+        })
+      ];
+    };
+  in {
+    nixosConfigurations = {
+      saturn = lib.nixosSystem {
         inherit system;
-        overlays = [
-          deploy-rs.overlays.default # or deploy-rs.overlays.default
-          (self: super: {
-            deploy-rs = {
-              inherit (pkgs) deploy-rs;
-              lib = super.deploy-rs.lib;
-            };
-          })
+        specialArgs = {
+          inherit inputs;
+        };
+        modules = [
+          ./host/saturn/configuration.nix
+          ./pkgs/overlay.nix
         ];
       };
-    in
-    {
-      nixosConfigurations = {
-        saturn = lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            ./host/saturn/configuration.nix
-            ./pkgs/overlay.nix
-          ];
-        };
 
-        greenbox = lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            ./host/greenbox/configuration.nix
-            ./pkgs/overlay.nix
-          ];
+      greenbox = lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs;
         };
-
-        johndoe = lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            ./host/johndoe/configuration.nix
-            ./pkgs/overlay.nix
-            inputs.nixos-hardware.nixosModules.dell-precision-3490-intel
-          ];
-        };
-
-        hal = lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            ./host/hal/configuration.nix
-            ./pkgs/overlay.nix
-            ./modules/immich.nix
-            ./modules/postgres.nix
-            inputs.sops-nix.nixosModules.sops
-            inputs.nixarr.nixosModules.default
-          ];
-        };
-
-        terabithia = lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            ./host/terabithia/configuration.nix
-            ./pkgs/overlay.nix
-            inputs.disko.nixosModules.disko
-            inputs.sops-nix.nixosModules.sops
-          ];
-        };
+        modules = [
+          ./host/greenbox/configuration.nix
+          ./pkgs/overlay.nix
+        ];
       };
 
-      deploy.nodes = {
-        hal = {
-          hostname = "hal";
-          profiles.system = {
-            sshUser = "root";
-            user = "root";
-            path = deployPkgs.deploy-rs.lib.activate.nixos self.nixosConfigurations.hal;
-          };
+      johndoe = lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs;
         };
-        terabithia = {
-          hostname = "terabithia";
-          profiles.system = {
-            sshUser = "root";
-            user = "root";
-            path = deployPkgs.deploy-rs.lib.activate.nixos self.nixosConfigurations.terabithia;
-          };
-        };
+        modules = [
+          ./host/johndoe/configuration.nix
+          ./pkgs/overlay.nix
+          inputs.nixos-hardware.nixosModules.dell-precision-3490-intel
+        ];
       };
 
-      # This is highly advised, and will prevent many possible mistakes
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+      hal = lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs;
+        };
+        modules = [
+          ./host/hal/configuration.nix
+          ./pkgs/overlay.nix
+          ./modules/immich.nix
+          ./modules/postgres.nix
+          inputs.sops-nix.nixosModules.sops
+          inputs.nixarr.nixosModules.default
+        ];
+      };
+
+      terabithia = lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs;
+        };
+        modules = [
+          ./host/terabithia/configuration.nix
+          ./pkgs/overlay.nix
+          inputs.disko.nixosModules.disko
+          inputs.sops-nix.nixosModules.sops
+        ];
+      };
     };
+
+    deploy.nodes = {
+      hal = {
+        hostname = "hal";
+        profiles.system = {
+          sshUser = "root";
+          user = "root";
+          path = deployPkgs.deploy-rs.lib.activate.nixos self.nixosConfigurations.hal;
+        };
+      };
+      terabithia = {
+        hostname = "terabithia";
+        profiles.system = {
+          sshUser = "root";
+          user = "root";
+          path = deployPkgs.deploy-rs.lib.activate.nixos self.nixosConfigurations.terabithia;
+        };
+      };
+    };
+
+    # This is highly advised, and will prevent many possible mistakes
+    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+  };
 }

@@ -3,8 +3,7 @@
   pkgs,
   inputs,
   ...
-}:
-{
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "fistanto";
@@ -16,11 +15,11 @@
     ../../home
     ./app/hyprland
   ];
-  _module.args = { inherit inputs; };
+  _module.args = {inherit inputs;};
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
-      autoconnect = [ "qemu:///system" ];
-      uris = [ "qemu:///system" ];
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
     };
   };
   programs.nh = {
@@ -43,8 +42,11 @@
   sops = {
     age.keyFile = "/home/fistanto/.config/sops/age/keys.txt";
     defaultSopsFile = ../../secrets/secrets.yaml;
-    secrets."email/ibr" = { };
+    secrets."email/ibr" = {};
+    secrets."saturn/access-tokens" = {};
   };
+
+  nix.extraOptions = "!include ${config.sops.secrets."saturn/access-tokens".path}";
 
   me.niri = {
     profile = ../../home/niri/johndoe.kdl;
@@ -87,13 +89,19 @@
       };
       "orwa.ibr" = {
         hostname = "orwa";
-        proxyJump = "x1.ibr";
+        proxyJump = "jump.ibr";
         user = "fistanto";
         identityFile = "~/.ssh/fistanto-orwa";
+      };
+      "jump.ibr" = {
+        hostname = "jump.ibr.cs.tu-bs.de";
+        user = "fistanto";
+        identityFile = "~/.ssh/fistanto-x1";
       };
       "scp*" = {
         user = "root";
         identityFile = "~/.ssh/scp";
+        proxyJump = "jump.ibr";
       };
 
       "git.fstn.top" = {

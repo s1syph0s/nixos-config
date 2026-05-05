@@ -4,8 +4,7 @@
   lib,
   inputs,
   ...
-}:
-{
+}: {
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -210,7 +209,7 @@
     ".ssh/config".force = true;
   };
 
-  home.activation.fixSshConfigPermissions = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+  home.activation.fixSshConfigPermissions = lib.hm.dag.entryAfter ["linkGeneration"] ''
     run mkdir -p "$HOME/.ssh"
     run chmod 700 "$HOME/.ssh"
 
@@ -323,7 +322,7 @@
       # launch fish
       # FIXME: This is a temporary hack to fix lix problem starting `nix-shell`
       # https://git.lix.systems/lix-project/lix/issues/1131
-      # 
+      #
       # if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
       # then
       #   shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
@@ -359,7 +358,7 @@
       enable = true;
       caseSensitive = false;
       prompt.theme = "pure";
-      syntaxHighlighting.highlighters = [ "main" ];
+      syntaxHighlighting.highlighters = ["main"];
       utility.safeOps = false;
       pmodules = [
         "environment"
@@ -424,6 +423,14 @@
       set -U pure_symbol_nixdevshell_prefix "󱄅 "
       set -U pure_show_subsecond_command_duration true
     '';
+    functions = {
+      openbg = {
+        description = "Open file using xdg-open and deattach from shell";
+        body = ''
+          xdg-open $argv[1] 2>/dev/null &; disown
+        '';
+      };
+    };
   };
 
   me.niri = {
@@ -586,28 +593,26 @@
       pkgs.xdg-desktop-portal-gnome
     ];
     config = {
-      common.default = [ "gnome" ];
+      common.default = ["gnome"];
     };
   };
 
-  xdg.userDirs =
-    let
-      homeDir = config.home.homeDirectory;
-    in
-    {
-      enable = true;
-      createDirectories = true;
+  xdg.userDirs = let
+    homeDir = config.home.homeDirectory;
+  in {
+    enable = true;
+    createDirectories = true;
 
-      desktop = null;
-      templates = null;
-      publicShare = null;
+    desktop = null;
+    templates = null;
+    publicShare = null;
 
-      documents = "${homeDir}/doc";
-      download = "${homeDir}/tmp";
-      music = "${homeDir}/media/music";
-      pictures = "${homeDir}/media/img";
-      videos = "${homeDir}/media/video";
-    };
+    documents = "${homeDir}/doc";
+    download = "${homeDir}/tmp";
+    music = "${homeDir}/media/music";
+    pictures = "${homeDir}/media/img";
+    videos = "${homeDir}/media/video";
+  };
   xdg.configFile = {
     # HACK: For some reason the `kdePackages.kservice` package doesn't provide `applications.menu`. Take it from somewhere!
     "menus/applications.menu".text =
@@ -616,21 +621,21 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "x-scheme-handler/http" = [ "firefox.desktop" ];
-      "x-scheme-handler/https" = [ "firefox.desktop" ];
-      "x-scheme-handler/chrome" = [ "firefox.desktop" ];
-      "x-scheme-handler/discord" = [ "vesktop.desktop" ];
-      "text/html" = [ "firefox.desktop" ];
-      "application/pdf" = [ "okularApplication_pdf.desktop" ];
-      "application/x-extension-htm" = [ "firefox.desktop" ];
-      "application/x-extension-html" = [ "firefox.desktop" ];
-      "application/x-extension-shtml" = [ "firefox.desktop" ];
-      "application/xhtml+xml" = [ "firefox.desktop" ];
-      "application/x-extension-xhtml" = [ "firefox.desktop" ];
-      "application/x-extension-xht" = [ "firefox.desktop" ];
+      "x-scheme-handler/http" = ["firefox.desktop"];
+      "x-scheme-handler/https" = ["firefox.desktop"];
+      "x-scheme-handler/chrome" = ["firefox.desktop"];
+      "x-scheme-handler/discord" = ["vesktop.desktop"];
+      "text/html" = ["firefox.desktop"];
+      "application/pdf" = ["okularApplication_pdf.desktop"];
+      "application/x-extension-htm" = ["firefox.desktop"];
+      "application/x-extension-html" = ["firefox.desktop"];
+      "application/x-extension-shtml" = ["firefox.desktop"];
+      "application/xhtml+xml" = ["firefox.desktop"];
+      "application/x-extension-xhtml" = ["firefox.desktop"];
+      "application/x-extension-xht" = ["firefox.desktop"];
     };
     associations.added = {
-      "application/pdf" = [ "okularApplication_pdf.desktop" ];
+      "application/pdf" = ["okularApplication_pdf.desktop"];
     };
   };
 
