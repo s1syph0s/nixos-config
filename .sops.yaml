@@ -6,6 +6,7 @@ keys:
   - &fistanto age1lkl7yt0m76fhvunl6mztawjxwq9hrp6hmwuhr2rphxr9lw79uvgsfnyefp
   - &terabithia age1g328kctvhetezj39gjr5hc78eu2aksavshy6d2f6lptggv65qvgqjk9ycz
   - &hal age1ercfdgdvdcqk7npc3h4dvym0hpghna4q98aap3qlrccyhha6dy3qx6tmd4
+  - &saturn age13rydymu9rq7hg99csyr06stvmju6gmllq3q28ltjqsq3g0fn2ctsnthg2j
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
@@ -13,3 +14,4 @@ creation_rules:
       - *fistanto
       - *terabithia
       - *hal
+      - *saturn

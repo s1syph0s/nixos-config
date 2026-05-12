@@ -83,6 +83,7 @@
   home-manager = {
     useGlobalPkgs = true;
     extraSpecialArgs = { inherit inputs; };
+    sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
     backupFileExtension = "backup";
     users = {
       sisyph0s = import ./home.nix;

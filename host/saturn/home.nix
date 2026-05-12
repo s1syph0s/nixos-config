@@ -79,4 +79,12 @@
       };
     };
   };
+
+  sops = {
+    age.keyFile = "/home/sisyph0s/.config/sops/age/keys.txt";
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    secrets."saturn/access-tokens" = { };
+  };
+
+  nix.extraOptions = "!include ${config.sops.secrets."saturn/access-tokens".path}";
 }
