@@ -61,21 +61,23 @@
         hostname = "x1.ibr.cs.tu-bs.de";
         user = "fistanto";
         identityFile = "~/.ssh/fistanto-x1";
+        proxyJump = "jump.ibr";
       };
       "jump.ibr" = {
         hostname = "jump.ibr.cs.tu-bs.de";
         user = "fistanto";
-        identityFile = "~/.ssh/fistanto-jump";
+        identityFile = "~/.ssh/fistanto-x1";
       };
       "orwa.ibr" = {
         hostname = "orwa";
-        proxyJump = "x1.ibr";
+        proxyJump = "jump.ibr";
         user = "fistanto";
         identityFile = "~/.ssh/fistanto-orwa";
       };
-      "scp1.ibr" = {
-        hostname = "scp1.ibr.cs.tu-bs.de";
-        proxyJump = "x1.ibr";
+      "scp*" = {
+        user = "root";
+        identityFile = "~/.ssh/scp";
+        proxyJump = "jump.ibr";
       };
     };
   };
