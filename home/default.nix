@@ -613,11 +613,11 @@
     pictures = "${homeDir}/media/img";
     videos = "${homeDir}/media/video";
   };
-  xdg.configFile = {
-    # HACK: For some reason the `kdePackages.kservice` package doesn't provide `applications.menu`. Take it from somewhere!
-    "menus/applications.menu".text =
-      builtins.readFile "${pkgs.libsForQt5.kservice}/etc/xdg/menus/applications.menu";
-  };
+  # xdg.configFile = {
+  #   # HACK: For some reason the `kdePackages.kservice` package doesn't provide `applications.menu`. Take it from somewhere!
+  #   "menus/applications.menu".text =
+  #     builtins.readFile "${pkgs.libsForQt5.kservice}/etc/xdg/menus/applications.menu";
+  # };
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
