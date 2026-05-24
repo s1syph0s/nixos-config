@@ -665,14 +665,18 @@
         left = ["Tempo" "Workspaces"];
         center = ["WindowTitle"];
         right = [
-          ["Tray" "SystemInfo"]
-          ["Notifications" "Privacy" "Settings"]
+          ["CustomNotifications" "Tray" "SystemInfo"]
+          # ["Notifications" "Privacy" "Settings"]
+          ["Privacy" "Settings"]
         ];
       };
       settings = {
         audio_indicator_format = "IconAndPercentage";
         microphone_indicator_format = "IconAndPercentage";
         network_indicator_format = "IconAndPercentage";
+      };
+      tempo = {
+        weather_location = "Current";
       };
       workspaces = {
         visibility_mode = "MonitorSpecific";
@@ -684,7 +688,22 @@
         max_notifications = 10;
         show_bodies = true;
       };
+      CustomModule = [
+        {
+          name = "CustomNotifications";
+          type = "Button";
+          icon = "";
+          command = "swaync-client -t -sw";
+          listen_cmd = "swaync-client -swb";
+          icons."dnd.*" = "";
+          alert = ".*notification";
+        }
+      ];
     };
+  };
+
+  services.swaync = {
+    enable = true;
   };
 
   # Let Home Manager install and manage itself.
