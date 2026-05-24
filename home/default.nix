@@ -31,7 +31,7 @@
     ./emacs
     ./tmux
     ./hyprland
-    ./waybar
+    # ./waybar
     ./zellij
     ./email
     ./rofi
@@ -519,29 +519,29 @@
     };
   };
 
-  services.mako = {
-    enable = true;
-    settings = {
-      font = "JetBrainsMono 8";
-      anchor = "top-center";
-      background-color = "#2e3440";
-      height = 50;
-      margin = "5";
-      padding = "0,5,10";
-      border-size = 2;
-      border-color = "#88c0d0";
-      border-radius = 15;
-      max-icon-size = 32;
-      default-timeout = 5000;
-      "urgency=normal" = {
-        border-color = "#d08770";
-      };
-      "urgency=high" = {
-        border-color = "#bf616a";
-        default-timeout = 0;
-      };
-    };
-  };
+  # services.mako = {
+  #   enable = true;
+  #   settings = {
+  #     font = "JetBrainsMono 8";
+  #     anchor = "top-center";
+  #     background-color = "#2e3440";
+  #     height = 50;
+  #     margin = "5";
+  #     padding = "0,5,10";
+  #     border-size = 2;
+  #     border-color = "#88c0d0";
+  #     border-radius = 15;
+  #     max-icon-size = 32;
+  #     default-timeout = 5000;
+  #     "urgency=normal" = {
+  #       border-color = "#d08770";
+  #     };
+  #     "urgency=high" = {
+  #       border-color = "#bf616a";
+  #       default-timeout = 0;
+  #     };
+  #   };
+  # };
 
   programs.bat = {
     enable = true;
@@ -636,6 +636,54 @@
     };
     associations.added = {
       "application/pdf" = ["okularApplication_pdf.desktop"];
+    };
+  };
+
+  programs.ashell = {
+    enable = true;
+    settings = {
+      appearance = {
+        font_name = "JetBrainsMono NFP";
+        scale_factor = 1;
+
+        # Tokyo Night
+        primary_color = "#7aa2f7";
+        success_color = "#9ece6a";
+        warning_color = "#e0af68";
+        danger_color = "#f7768e";
+        text_color = "#a9b1d6";
+
+        workspace_colors = ["#7aa2f7" "#9ece6a"];
+
+        background_color = {
+          base = "#1a1b26";
+          weak = "#24273a";
+          strong = "#414868";
+        };
+      };
+      modules = {
+        left = ["Tempo" "Workspaces"];
+        center = ["WindowTitle"];
+        right = [
+          ["Tray" "SystemInfo"]
+          ["Notifications" "Privacy" "Settings"]
+        ];
+      };
+      settings = {
+        audio_indicator_format = "IconAndPercentage";
+        microphone_indicator_format = "IconAndPercentage";
+        network_indicator_format = "IconAndPercentage";
+      };
+      workspaces = {
+        visibility_mode = "MonitorSpecific";
+        group_by_monitor = true;
+      };
+      notifications = {
+        format = "%H:%M";
+        show_timestamps = true;
+        max_notifications = 10;
+        show_bodies = true;
+      };
     };
   };
 
