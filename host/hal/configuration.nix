@@ -7,8 +7,7 @@
   lib,
   inputs,
   ...
-}:
-{
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./backup.nix
@@ -62,8 +61,7 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
+  nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
     ];
 
@@ -71,7 +69,7 @@
     enable = true;
     keyboards = {
       default = {
-        ids = [ "*" ];
+        ids = ["*"];
         settings = {
           main = {
             capslock = "overload(control, esc)";
@@ -115,8 +113,8 @@
 
   sops = {
     defaultSopsFile = ../../secrets/secrets.yaml;
-    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-    secrets."hal/wg/private" = { };
+    age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+    secrets."hal/wg/private" = {};
     secrets."transmission/airvpn-nl.conf" = {
       owner = config.users.users.transmission.name;
     };
@@ -137,7 +135,7 @@
     interfaces = {
       wg1 = {
         # WireGuard interface IP on VPS (server side)
-        ips = [ "10.100.0.2/24" ];
+        ips = ["10.100.0.2/24"];
         mtu = 1280;
 
         # Listen port on VPS
@@ -149,7 +147,7 @@
           {
             name = "Terabithia";
             publicKey = "osE3KSQK8Y7y54CTBzKVgnxT4UYAr3PXeQdpViccRnE=";
-            allowedIPs = [ "10.100.0.0/24" ]; # home server WireGuard IP
+            allowedIPs = ["10.100.0.0/24"]; # home server WireGuard IP
             endpoint = "185.194.141.148:51820";
             persistentKeepalive = 25;
           }
@@ -158,42 +156,51 @@
     };
   };
 
-  nixarr = {
-    enable = true;
-    # These two values are also the default, but you can set them to whatever
-    # else you want
-    # WARNING: Do _not_ set them to `/home/user/whatever`, it will not work!
-    mediaDir = "/data/media";
-    stateDir = "/data/media/.state/nixarr";
-
-    vpn = {
+  nixarr =
+    {
       enable = true;
-      # WARNING: This file must _not_ be in the config git directory
-      # You can usually get this wireguard file from your VPN provider
-      wgConf = config.sops.secrets."transmission/airvpn-nl.conf".path;
-    };
+      # These two values are also the default, but you can set them to whatever
+      # else you want
+      # WARNING: Do _not_ set them to `/home/user/whatever`, it will not work!
+      mediaDir = "/data/media";
+      stateDir = "/data/media/.state/nixarr";
 
-    jellyfin = {
-      enable = true;
-    };
+      vpn = {
+        enable = true;
+        # WARNING: This file must _not_ be in the config git directory
+        # You can usually get this wireguard file from your VPN provider
+        wgConf = config.sops.secrets."transmission/airvpn-nl.conf".path;
+      };
 
-    transmission = {
-      enable = true;
-      uiPort = 7070;
-      vpn.enable = true;
-      peerPort = 49517; # Set this to the port forwarded by your VPN
-    };
+      transmission = {
+        enable = true;
+        uiPort = 7070;
+        vpn.enable = true;
+        peerPort = 49517; # Set this to the port forwarded by your VPN
+      };
 
-    # It is possible for this module to run the *Arrs through a VPN, but it
-    # is generally not recommended, as it can cause rate-limiting issues.
-    bazarr.enable = true;
-    lidarr.enable = true;
-    prowlarr.enable = true;
-    radarr.enable = true;
-    readarr.enable = true;
-    sonarr.enable = true;
-    jellyseerr.enable = true;
-  };
+      # It is possible for this module to run the *Arrs through a VPN, but it
+      # is generally not recommended, as it can cause rate-limiting issues.
+      # bazarr.enable = true;
+      # lidarr.enable = true;
+      # prowlarr.enable = true;
+      # radarr.enable = true;
+      # sonarr.enable = true;
+      # seerr.enable = true;
+    }
+    // (lib.genAttrs [
+        "bazarr"
+        "lidarr"
+        "prowlarr"
+        "radarr"
+        "sonarr"
+        "jellyfin"
+        "seerr"
+      ] (name: {
+        enable = true;
+        openFirewall = true;
+      }));
+
   services.flaresolverr.enable = true;
 
   services.internal.backup.serviceNames = [
