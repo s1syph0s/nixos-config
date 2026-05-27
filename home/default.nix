@@ -31,7 +31,7 @@
     ./emacs
     ./tmux
     ./hyprland
-    # ./waybar
+    ./waybar
     ./zellij
     ./email
     ./rofi
