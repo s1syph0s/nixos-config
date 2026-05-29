@@ -25,6 +25,7 @@
     anyrun.url = "github:anyrun-org/anyrun";
     zjstatus.url = "github:dj95/zjstatus";
     nixarr.url = "github:rasmus-kirk/nixarr";
+    ashell.url = "github:MalpenZibo/ashell";
   };
 
   outputs = {

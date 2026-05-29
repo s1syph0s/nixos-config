@@ -31,7 +31,7 @@
     ./emacs
     ./tmux
     ./hyprland
-    ./waybar
+    # ./waybar
     ./zellij
     ./email
     ./rofi
@@ -665,8 +665,7 @@
         left = ["Tempo" "Workspaces"];
         center = ["WindowTitle"];
         right = [
-          ["CustomNotifications" "Tray" "SystemInfo"]
-          # ["Notifications" "Privacy" "Settings"]
+          ["Notifications" "Tray" "SystemInfo"]
           ["Privacy" "Settings"]
         ];
       };
@@ -685,26 +684,25 @@
       notifications = {
         format = "%H:%M";
         show_timestamps = true;
-        max_notifications = 10;
         show_bodies = true;
       };
-      CustomModule = [
-        {
-          name = "CustomNotifications";
-          type = "Button";
-          icon = "";
-          command = "swaync-client -t -sw";
-          listen_cmd = "swaync-client -swb";
-          icons."dnd.*" = "";
-          alert = ".*notification";
-        }
-      ];
+      # CustomModule = [
+      #   {
+      #     name = "CustomNotifications";
+      #     type = "Button";
+      #     icon = "";
+      #     command = "swaync-client -t -sw";
+      #     listen_cmd = "swaync-client -swb";
+      #     icons."dnd.*" = "";
+      #     alert = ".*notification";
+      #   }
+      # ];
     };
   };
 
-  services.swaync = {
-    enable = true;
-  };
+  # services.swaync = {
+  #   enable = true;
+  # };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

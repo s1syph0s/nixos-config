@@ -4,19 +4,18 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   overlays = [
-    (self: super: {
-      hypr-kblayout = super.callPackage ./hypr-kblayout { };
+    (final: prev: {
+      hypr-kblayout = prev.callPackage ./hypr-kblayout {};
       # openssh = super.openssh.overrideAttrs (old: {
       #   patches = (old.patches or []) ++ [../patch/openssh.patch];
       #   doCheck = false;
       # });
-      zjstatus = inputs.zjstatus.packages.${self.system}.default;
+      zjstatus = inputs.zjstatus.packages.${final.system}.default;
+      ashell = inputs.ashell.packages.${final.system}.default;
     })
   ];
-in
-{
+in {
   nixpkgs.overlays = overlays;
 }
