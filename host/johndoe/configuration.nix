@@ -7,8 +7,7 @@
   lib,
   inputs,
   ...
-}:
-{
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -70,8 +69,8 @@
 
   home-manager = {
     useGlobalPkgs = true;
-    extraSpecialArgs = { inherit inputs; };
-    sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
+    extraSpecialArgs = {inherit inputs;};
+    sharedModules = [inputs.sops-nix.homeManagerModules.sops];
     users = {
       fistanto = import ./home.nix;
     };

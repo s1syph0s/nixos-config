@@ -673,6 +673,7 @@
         audio_indicator_format = "IconAndPercentage";
         microphone_indicator_format = "IconAndPercentage";
         network_indicator_format = "IconAndPercentage";
+        battery_format = "IconAndPercentage";
       };
       tempo = {
         weather_location = "Current";

@@ -4,8 +4,7 @@
   lib,
   inputs,
   ...
-}:
-{
+}: {
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -13,11 +12,11 @@
   # Enable networking
   networking.networkmanager = {
     enable = true;
-    plugins = with pkgs; [ networkmanager-openvpn ];
+    plugins = with pkgs; [networkmanager-openvpn];
   };
 
   networking.hosts = {
-    "192.168.0.226" = [ "hal.local" ];
+    "192.168.0.226" = ["hal.local"];
   };
 
   nix.package = pkgs.lix;
@@ -54,7 +53,7 @@
   services.protonmail-bridge = {
     enable = true;
     logLevel = "info";
-    path = with pkgs; [ gnome-keyring ];
+    path = with pkgs; [gnome-keyring];
   };
 
   # Configure keymap in X11
@@ -65,7 +64,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-  services.printing.drivers = [ pkgs.hplip ];
+  services.printing.drivers = [pkgs.hplip];
   services.avahi = {
     enable = true;
     nssmdns4 = true;
@@ -95,7 +94,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  security.pam.services.hyprlock = { };
+  security.pam.services.hyprlock = {};
 
   services.udisks2.enable = true;
 
@@ -170,7 +169,7 @@
   };
 
   #nix LSP
-  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   environment.variables.EDITOR = "neovim";
 
@@ -189,8 +188,8 @@
   services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 8384 ];
-  networking.firewall.allowedUDPPorts = [ 24727 ];
+  networking.firewall.allowedTCPPorts = [8384];
+  networking.firewall.allowedUDPPorts = [24727];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
@@ -222,6 +221,10 @@
     ];
   };
 
+  services.upower = {
+    enable = true;
+  };
+
   services.locate.enable = true;
   services.locate.package = pkgs.mlocate;
 
@@ -229,7 +232,7 @@
     enable = true;
     keyboards = {
       default = {
-        ids = [ "*" ];
+        ids = ["*"];
         settings = {
           main = {
             capslock = "overload(control, esc)";
