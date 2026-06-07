@@ -52,7 +52,7 @@ output "PNP(UGD) CD120FH 20210617" {
 }
 
 output "Acer Technologies XV271U M3 1322131231233" {
-    mode "2560x1440@60"
+    mode "2560x1440@59.951"
     scale 1
     transform "normal"
     position x=1920 y=0
@@ -60,7 +60,7 @@ output "Acer Technologies XV271U M3 1322131231233" {
 }
 
 output "Acer Technologies VG271U TG0EE004856E" {
-    mode "2560x1440@60"
+    mode "2560x1440@59.951"
     scale 1
     transform "normal"
     position x=4480 y=0
