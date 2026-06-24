@@ -8,6 +8,19 @@
   programs.msmtp.enable = true;
   programs.notmuch = {
     enable = true;
+    new.tags = ["new"];
+  };
+  programs.afew = {
+    enable = true;
+    extraConfig = ''
+      [ArchiveSentMailsFilter]
+
+      [FolderNameFilter]
+      folder_explicit_list = Spam
+      folder_lowercases = true
+
+      [InboxFilter]
+    '';
   };
 
   accounts.email = {
