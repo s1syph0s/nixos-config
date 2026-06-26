@@ -4,8 +4,7 @@
   inputs,
   lib,
   ...
-}:
-{
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "sisyph0s";
@@ -17,14 +16,14 @@
     ../../home
     ./app/hyprland
   ];
-  _module.args = { inherit inputs; };
+  _module.args = {inherit inputs;};
   home.packages = with pkgs; [
     drawio
   ];
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
-      autoconnect = [ "qemu:///system" ];
-      uris = [ "qemu:///system" ];
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
     };
   };
   programs.nh = {
@@ -85,8 +84,9 @@
   sops = {
     age.keyFile = "/home/sisyph0s/.config/sops/age/keys.txt";
     defaultSopsFile = ../../secrets/secrets.yaml;
-    secrets."saturn/access-tokens" = { };
+    secrets."nix/access-tokens" = {};
+    secrets."llm/gemini" = {};
   };
 
-  nix.extraOptions = "!include ${config.sops.secrets."saturn/access-tokens".path}";
+  nix.extraOptions = "!include ${config.sops.secrets."nix/access-tokens".path}";
 }

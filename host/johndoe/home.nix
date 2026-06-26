@@ -43,10 +43,11 @@
     age.keyFile = "/home/fistanto/.config/sops/age/keys.txt";
     defaultSopsFile = ../../secrets/secrets.yaml;
     secrets."email/ibr" = {};
-    secrets."saturn/access-tokens" = {};
+    secrets."nix/access-tokens" = {};
+    secrets."llm/gemini" = {};
   };
 
-  nix.extraOptions = "!include ${config.sops.secrets."saturn/access-tokens".path}";
+  nix.extraOptions = "!include ${config.sops.secrets."nix/access-tokens".path}";
 
   me.niri = {
     profile = ../../home/niri/johndoe.kdl;
