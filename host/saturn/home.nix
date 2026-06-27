@@ -86,6 +86,7 @@
     defaultSopsFile = ../../secrets/secrets.yaml;
     secrets."nix/access-tokens" = {};
     secrets."llm/gemini" = {};
+    secrets."irc/libera" = {};
   };
 
   nix.extraOptions = "!include ${config.sops.secrets."nix/access-tokens".path}";
