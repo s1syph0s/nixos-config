@@ -7,8 +7,7 @@
   lib,
   inputs,
   ...
-}:
-{
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -54,7 +53,7 @@
     context.rules = [
       {
         matches = [
-          { "application.name" = "Baldur's Gate 3"; }
+          {"application.name" = "Baldur's Gate 3";}
         ];
         actions = {
           update-props = {
@@ -73,6 +72,7 @@
   # FIXME: Temporary allow jitsi meet
   nixpkgs.config.permittedInsecurePackages = [
     "jitsi-meet-1.0.8792"
+    "pnpm-10.29.2"
   ];
 
   nix.settings.experimental-features = [
@@ -82,8 +82,8 @@
 
   home-manager = {
     useGlobalPkgs = true;
-    extraSpecialArgs = { inherit inputs; };
-    sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
+    extraSpecialArgs = {inherit inputs;};
+    sharedModules = [inputs.sops-nix.homeManagerModules.sops];
     backupFileExtension = "backup";
     users = {
       sisyph0s = import ./home.nix;

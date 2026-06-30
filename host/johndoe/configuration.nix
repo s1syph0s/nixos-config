@@ -51,6 +51,7 @@
   # FIXME: Temporary allow jitsi meet
   nixpkgs.config.permittedInsecurePackages = [
     "jitsi-meet-1.0.8792"
+    "pnpm-10.29.2"
   ];
 
   nix.settings.experimental-features = [
