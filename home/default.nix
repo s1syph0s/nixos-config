@@ -133,7 +133,7 @@
     telegram-desktop
     signal-desktop
 
-    spotify
+    # spotify
 
     # custom packages
     hypr-kblayout
