@@ -3,11 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.me.niri;
-in
-{
+in {
   # This is included by config.kdl
   options.me.niri = {
     enable = lib.mkEnableOption "niri";
