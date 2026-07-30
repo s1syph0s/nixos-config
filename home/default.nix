@@ -255,12 +255,11 @@
   programs.ghostty = {
     enable = true;
     enableFishIntegration = true;
-    enableZshIntegration = true;
     settings = {
-      command = "${pkgs.zsh}/bin/zsh";
+      command = "${pkgs.fish}/bin/fish";
 
       font-family = "SauceCodePro NF Medium";
-      # theme = "kanagawabones";
+      theme = "Ayu Mirage";
       font-style = "Regular";
       font-family-bold = "SauceCodePro NF";
       font-style-bold = "Bold";
@@ -270,7 +269,6 @@
       font-style-bold-italic = "Bold Italic";
       font-size = 11;
 
-      background-opacity = 0.95;
       window-decoration = false;
       confirm-close-surface = false;
 
