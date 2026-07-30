@@ -155,9 +155,6 @@
 
   programs.niri = {
     enable = true;
-    package = pkgs.niri.override {
-      libdisplay-info = pkgs.libdisplay-info_0_3;
-    };
   };
   programs.nix-ld.enable = true;
 
