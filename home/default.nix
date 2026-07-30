@@ -713,6 +713,7 @@
 
   programs.atuin = {
     enable = true;
+    flags = ["--disable-up-arrow"];
   };
 
   # services.swaync = {
