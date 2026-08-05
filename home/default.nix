@@ -30,7 +30,7 @@
     ./neovim
     ./emacs
     ./tmux
-    ./hyprland
+    # ./hyprland
     # ./waybar
     ./zellij
     ./email

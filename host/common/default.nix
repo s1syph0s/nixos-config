@@ -164,10 +164,10 @@
 
   programs.command-not-found.enable = false;
 
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
+  # programs.hyprland = {
+  #   enable = true;
+  #   xwayland.enable = true;
+  # };
 
   #nix LSP
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
