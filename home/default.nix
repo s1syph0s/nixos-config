@@ -259,7 +259,7 @@
       command = "${pkgs.fish}/bin/fish";
 
       font-family = "SauceCodePro NF Medium";
-      theme = "Ayu Mirage";
+      theme = "Catppuccin Macchiato";
       font-style = "Regular";
       font-family-bold = "SauceCodePro NF";
       font-style-bold = "Bold";

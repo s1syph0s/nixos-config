@@ -17,7 +17,14 @@
         plugin = catppuccin;
         extraConfig = ''
           set -g @catppuccin_window_status_style "rounded"
-          set -g @catppuccin_flavor "mocha"
+          set -g @catppuccin_flavor "macchiato"
+          set -g status-position "top"
+          set -g status-right-length 100
+          set -g status-left-length 100
+          set -g status-left ""
+          set -g status-right "#{E:@catppuccin_status_application}"
+          set -g @catppuccin_window_text " #{s|^$HOME|~|:pane_current_path}"
+          set -g @catppuccin_window_current_text " #{s|^$HOME|~|:pane_current_path}"
         '';
       }
     ];
@@ -29,7 +36,6 @@
 
       set -s escape-time 0
       bind-key C-Space send-prefix
-      set -g status-style 'bg=#333333 fg=#5eacd3'
 
       bind -T copy-mode-vi v send-keys -X begin-selection
       bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'wl-copy'
@@ -38,14 +44,6 @@
       bind '%' split-window -h -c "#{pane_current_path}"
       bind 'c' new-window -c "#{pane_current_path}"
       bind 'r' source-file ~/.config/tmux/tmux.conf
-
-
-      # Catpuccin config
-      set -g status-position "top"
-      set -g status-right-length 100
-      set -g status-left-length 100
-      set -g status-left ""
-      set -g status-right "#{E:@catppuccin_status_application}"
     '';
   };
 }
