@@ -1,9 +1,10 @@
-{ config, pkgs, ... }:
-
-let
-  util = import ./util.nix { };
-in
 {
+  config,
+  pkgs,
+  ...
+}: let
+  util = import ./util.nix {};
+in {
   imports = [
     ./module/bookmarks.nix
     ./module/dap.nix
@@ -38,7 +39,7 @@ in
         config = util.toLua "vim.cmd.colorscheme 'kanagawa'";
       }
 
-      # vim-tmux-navigator
+      vim-tmux-navigator
       zellij-nav-nvim
 
       vim-sleuth
@@ -150,14 +151,15 @@ in
       nvim-treesitter-textobjects
       nvim-treesitter-context
       (nvim-treesitter.withPlugins (
-        p: with p; [
-          tree-sitter-nix
-          tree-sitter-lua
-          tree-sitter-rust
-          tree-sitter-go
-          tree-sitter-c
-          tree-sitter-cpp
-        ]
+        p:
+          with p; [
+            tree-sitter-nix
+            tree-sitter-lua
+            tree-sitter-rust
+            tree-sitter-go
+            tree-sitter-c
+            tree-sitter-cpp
+          ]
       ))
       {
         plugin = oil-nvim;
