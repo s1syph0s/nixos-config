@@ -435,7 +435,7 @@
       openbg = {
         description = "Open file using xdg-open and deattach from shell";
         body = ''
-          xdg-open $argv[1] 2>/dev/null &; disown
+          xdg-open $argv[1] &>/dev/null &; disown
         '';
       };
     };
