@@ -135,9 +135,6 @@
 
     # spotify
 
-    # custom packages
-    hypr-kblayout
-
     sqlite
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
