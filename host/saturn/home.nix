@@ -15,6 +15,7 @@
   imports = [
     ../../home
     ./app/hyprland
+    ../../modules/agent-vm
   ];
   _module.args = {inherit inputs;};
   home.packages = with pkgs; [
@@ -79,6 +80,11 @@
         proxyJump = "jump.ibr";
       };
     };
+  };
+
+  internal.clankerVm = {
+    enable = true;
+    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOsyc8DPnzH7Q78pvAHqYbwtpeFQZtrr8foUw1Uw2A8i clanker";
   };
 
   sops = {
