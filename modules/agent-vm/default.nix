@@ -44,9 +44,9 @@
 
   runner = guest.config.microvm.declaredRunner;
 
-  # Start/stop the VM on demand. No systemd involved.
+  # Start/stop the VM on demand, and hand repos to it. No systemd involved.
   clankerCtl = pkgs.writeShellScriptBin "clankerctl" ''
-    export PATH=${lib.makeBinPath [pkgs.coreutils pkgs.openssh pkgs.util-linux]}:$PATH
+    export PATH=${lib.makeBinPath [pkgs.coreutils pkgs.openssh pkgs.util-linux pkgs.git]}:$PATH
     # directory name kept as "agent-vm" so existing disk images are reused
     state="''${XDG_STATE_HOME:-$HOME/.local/state}/agent-vm"
     mkdir -p "$state" "$HOME/agent"
@@ -84,8 +84,45 @@
       logs)
         exec tail -f "$state/vm.log"
         ;;
+      add)
+        # Copy a host repo into ~/agent by pushing it. The repo is created inside
+        # the VM over ssh, so nothing on the host writes into ~/agent, and git on
+        # the host only ever runs in the (trusted) source repo.
+        src=$(git -C "''${2:-.}" rev-parse --show-toplevel) || exit 1
+        case "$src" in
+          "$HOME/agent" | "$HOME/agent"/*)
+            echo "clankerctl: $src is already inside ~/agent" >&2
+            exit 1
+            ;;
+        esac
+        name=$(basename "$src")
+        branch=$(git -C "$src" symbolic-ref --short HEAD) || exit 1
+        dest="$HOME/agent/$name"
+        q=$(printf '%q' "$dest")
+
+        "$0" up || exit 1
+        if ssh -n -T ${sshHost} "test -e $q"; then
+          echo "clankerctl: $dest already exists" >&2
+          exit 1
+        fi
+        # updateInstead: a push to the checked-out branch also updates the files,
+        # and is refused if the agent has uncommitted changes there.
+        ssh -n -T ${sshHost} "git init -q -b $(printf '%q' "$branch") $q &&
+          git -C $q config receive.denyCurrentBranch updateInstead" || exit 1
+
+        if git -C "$src" remote get-url clanker >/dev/null 2>&1; then
+          echo "clankerctl: repointing existing remote 'clanker' to $dest" >&2
+          git -C "$src" remote set-url clanker "${sshHost}:$dest"
+        else
+          git -C "$src" remote add clanker "${sshHost}:$dest"
+        fi
+        # plain `git push clanker` then pushes this branch (forced, like a sync)
+        git -C "$src" config remote.clanker.push "+refs/heads/$branch:refs/heads/$branch"
+        git -C "$src" push clanker || exit 1
+        echo "clankerctl: $name is at $dest; update it with: git push clanker" >&2
+        ;;
       *)
-        echo "usage: clankerctl up|down|status|logs" >&2
+        echo "usage: clankerctl up|down|status|logs|add [repo]" >&2
         exit 2
         ;;
     esac
