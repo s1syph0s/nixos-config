@@ -15,7 +15,7 @@
   imports = [
     ../../home
     ./app/hyprland
-    ../../modules/agent-vm
+    ../../modules/clanker-vm
   ];
   _module.args = {inherit inputs;};
   home.packages = with pkgs; [
