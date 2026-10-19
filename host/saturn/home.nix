@@ -85,6 +85,10 @@
   internal.clankerVm = {
     enable = true;
     publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOsyc8DPnzH7Q78pvAHqYbwtpeFQZtrr8foUw1Uw2A8i clanker";
+    git = {
+      userName = "Pasha Fistanto";
+      userEmail = "pasha@fstn.top";
+    };
   };
 
   sops = {

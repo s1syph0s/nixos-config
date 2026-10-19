@@ -5,6 +5,7 @@
   hostHome,
   agentUid,
   agentPubKey,
+  agentGit,
   ...
 }: let
   vmUser = "clanker"; # login name inside the VM; the only place it is set
@@ -133,8 +134,16 @@ in {
     nix-direnv.enable = true;
   };
 
+  # System-wide /etc/gitconfig, so it is rebuilt with the VM and does not
+  # depend on anything stored in the persistent home volume.
+  programs.git = {
+    enable = true;
+    config.user =
+      lib.optionalAttrs (agentGit.userName != null) {name = agentGit.userName;}
+      // lib.optionalAttrs (agentGit.userEmail != null) {email = agentGit.userEmail;};
+  };
+
   environment.systemPackages = with pkgs; [
-    git
     openssh
     curl
     jq

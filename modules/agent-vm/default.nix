@@ -29,6 +29,7 @@
       inherit hostHome;
       agentPubKey = cfg.publicKey;
       agentUid = hostUid;
+      agentGit = cfg.git;
     };
     modules = [
       inputs.microvm.nixosModules.microvm
@@ -113,6 +114,22 @@ in {
       type = lib.types.str;
       example = "ssh-ed25519 AAAA... clanker";
       description = "Public key authorised for the VM user. Its private half is ~/.ssh/clanker.";
+    };
+
+    git = {
+      userName = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+        example = "clanker";
+        description = "user.name for commits made inside the VM.";
+      };
+
+      userEmail = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+        example = "clanker@example.com";
+        description = "user.email for commits made inside the VM.";
+      };
     };
   };
 
