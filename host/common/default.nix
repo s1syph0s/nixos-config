@@ -19,7 +19,6 @@
     "192.168.0.226" = ["hal.local"];
   };
 
-  # FIXME: lix 2.95.4 has no mimalloc option. Wait for 2.96 release
   nix.package = pkgs.lixPackageSets.stable.lix;
 
   # Select internationalisation properties.
