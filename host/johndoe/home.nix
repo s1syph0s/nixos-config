@@ -57,7 +57,7 @@
 
   internal.clankerVm = {
     enable = true;
-    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEorvbT0E0+nMumXAxwKeswh3fc2DgaJNX93luuk7vJf clanker@johndoe ";
+    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEorvbT0E0+nMumXAxwKeswh3fc2DgaJNX93luuk7vJf clanker@johndoe";
     git = {
       userName = "Pasha Fistanto";
       userEmail = "pasha@fstn.top";
