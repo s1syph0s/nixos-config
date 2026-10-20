@@ -65,7 +65,7 @@ microVM, so it can work on code without access to the rest of the host.
 | `clankerctl down` | shut it down |
 | `clankerctl status` | print `up` / `down` |
 | `clankerctl logs` | follow the VM's console log |
-| `clankerctl add [repo]` | copy a host repo into `~/agent` (see below) |
+| `clankerctl add [repo [branch]]` | copy a host repo into `~/agent` (see below) |
 
 ## Moving code in and out
 
@@ -87,6 +87,18 @@ path would resolve against the VM user's home) to the host repo with a push refs
 current branch, and pushes it. Each later `git push clanker` force-updates that
 branch and its files in the VM. If the agent has uncommitted changes there, the
 push is refused and nothing changes.
+
+For a (colocated) jj repo, name the bookmark, since jj keeps git's `HEAD`
+detached:
+
+```sh
+clankerctl add ~/.doom.d main
+jj git push --remote clanker --bookmark main   # every time after that
+```
+
+`add` also runs `jj bookmark track main@clanker`, without which jj refuses to
+push to the bookmark it didn't create. jj ignores the git push refspec, hence
+the explicit `--bookmark`.
 
 **VM → host.** Let the agent commit to its own branch, then on the host:
 

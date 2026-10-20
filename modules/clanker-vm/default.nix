@@ -88,7 +88,14 @@
         # Copy a host repo into ~/agent by pushing it. The repo is created inside
         # the VM over ssh, so nothing on the host writes into ~/agent, and git on
         # the host only ever runs in the (trusted) source repo.
-        src=$(git -C "''${2:-.}" rev-parse --show-toplevel) || exit 1
+        if ! src=$(git -C "''${2:-.}" rev-parse --show-toplevel 2>/dev/null); then
+          if [ -d "''${2:-.}/.jj" ]; then
+            echo "clankerctl: jj repo without a .git; make it colocated first" >&2
+          else
+            echo "clankerctl: ''${2:-.} is not a git repository" >&2
+          fi
+          exit 1
+        fi
         case "$src" in
           "$HOME/agent" | "$HOME/agent"/*)
             echo "clankerctl: $src is already inside ~/agent" >&2
@@ -96,7 +103,19 @@
             ;;
         esac
         name=$(basename "$src")
-        branch=$(git -C "$src" symbolic-ref --short HEAD) || exit 1
+        # jj keeps git's HEAD detached, so jj repos need the bookmark spelled out
+        if [ -n "''${3:-}" ]; then
+          branch=$3
+        elif ! branch=$(git -C "$src" symbolic-ref --short -q HEAD); then
+          echo "clankerctl: HEAD is detached (jj repo?); name a branch/bookmark:" >&2
+          echo "  clankerctl add $src <branch>" >&2
+          echo "available: $(git -C "$src" for-each-ref --format='%(refname:short)' refs/heads | tr '\n' ' ')" >&2
+          exit 1
+        fi
+        if ! git -C "$src" rev-parse -q --verify "refs/heads/$branch" >/dev/null; then
+          echo "clankerctl: no branch/bookmark '$branch' in $src" >&2
+          exit 1
+        fi
         dest="$HOME/agent/$name"
         q=$(printf '%q' "$dest")
 
@@ -119,10 +138,23 @@
         # plain `git push clanker` then pushes this branch (forced, like a sync)
         git -C "$src" config remote.clanker.push "+refs/heads/$branch:refs/heads/$branch"
         git -C "$src" push clanker || exit 1
-        echo "clankerctl: $name is at $dest; update it with: git push clanker" >&2
+
+        if [ -d "$src/.jj" ]; then
+          # jj won't push over a remote bookmark it doesn't track
+          if command -v jj >/dev/null; then
+            jj -R "$src" bookmark track "$branch@clanker" >/dev/null 2>&1 \
+              || echo "clankerctl: could not track $branch@clanker in jj" >&2
+          else
+            echo "clankerctl: jj not found; run: jj bookmark track $branch@clanker" >&2
+          fi
+          update="jj git push --remote clanker --bookmark $branch"
+        else
+          update="git push clanker"
+        fi
+        echo "clankerctl: $name is at $dest; update it with: $update" >&2
         ;;
       *)
-        echo "usage: clankerctl up|down|status|logs|add [repo]" >&2
+        echo "usage: clankerctl up|down|status|logs|add [repo [branch]]" >&2
         exit 2
         ;;
     esac
