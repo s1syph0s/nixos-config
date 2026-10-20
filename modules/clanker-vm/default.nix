@@ -55,6 +55,25 @@
       ssh -n -T -o BatchMode=yes -o ConnectTimeout=2 -o LogLevel=ERROR ${sshHost} true 2>/dev/null
     }
 
+    # true if $1 is the top of a git repo, not just a directory inside one
+    is_repo() {
+      top=$(git -C "$1" rev-parse --show-toplevel 2>/dev/null) &&
+        [ "$top" = "$(cd "$1" && pwd -P)" ]
+    }
+
+    # push the branch `add` set up to the repo's clanker remote
+    push_one() {
+      spec=$(git -C "$1" config --get remote.clanker.push) || return 1
+      b=''${spec#+refs/heads/}
+      b=''${b%%:*}
+      echo "clankerctl: pushing $(basename "$1") ($b)" >&2
+      if [ -d "$1/.jj" ]; then
+        jj -R "$1" git push --remote clanker --bookmark "$b"
+      else
+        git -C "$1" push clanker
+      fi
+    }
+
     case "''${1:-}" in
       up)
         if is_up; then echo "clanker-vm: already running" >&2; exit 0; fi
@@ -88,11 +107,24 @@
         # Copy a host repo into ~/agent by pushing it. The repo is created inside
         # the VM over ssh, so nothing on the host writes into ~/agent, and git on
         # the host only ever runs in the (trusted) source repo.
-        if ! src=$(git -C "''${2:-.}" rev-parse --show-toplevel 2>/dev/null); then
-          if [ -d "''${2:-.}/.jj" ]; then
+        shift
+        into=
+        if [ "''${1:-}" = --into ]; then
+          into=''${2:-}
+          case "$into" in
+            "" | . | .. | */*)
+              echo "clankerctl: --into needs a plain directory name" >&2
+              exit 2
+              ;;
+          esac
+          shift 2
+        fi
+        repo=''${1:-.}
+        if ! src=$(git -C "$repo" rev-parse --show-toplevel 2>/dev/null); then
+          if [ -d "$repo/.jj" ]; then
             echo "clankerctl: jj repo without a .git; make it colocated first" >&2
           else
-            echo "clankerctl: ''${2:-.} is not a git repository" >&2
+            echo "clankerctl: $repo is not a git repository" >&2
           fi
           exit 1
         fi
@@ -103,20 +135,29 @@
             ;;
         esac
         name=$(basename "$src")
-        # jj keeps git's HEAD detached, so jj repos need the bookmark spelled out
-        if [ -n "''${3:-}" ]; then
-          branch=$3
+        # jj keeps git's HEAD detached, so fall back to main, then master
+        if [ -n "''${2:-}" ]; then
+          branch=$2
         elif ! branch=$(git -C "$src" symbolic-ref --short -q HEAD); then
-          echo "clankerctl: HEAD is detached (jj repo?); name a branch/bookmark:" >&2
-          echo "  clankerctl add $src <branch>" >&2
-          echo "available: $(git -C "$src" for-each-ref --format='%(refname:short)' refs/heads | tr '\n' ' ')" >&2
-          exit 1
+          branch=
+          for b in main master; do
+            if git -C "$src" rev-parse -q --verify "refs/heads/$b" >/dev/null; then
+              branch=$b
+              break
+            fi
+          done
+          if [ -z "$branch" ]; then
+            echo "clankerctl: HEAD is detached (jj repo?) and there is no main or master; name a branch/bookmark:" >&2
+            echo "  clankerctl add ''${into:+--into $into }$src <branch>" >&2
+            echo "available: $(git -C "$src" for-each-ref --format='%(refname:short)' refs/heads | tr '\n' ' ')" >&2
+            exit 1
+          fi
         fi
         if ! git -C "$src" rev-parse -q --verify "refs/heads/$branch" >/dev/null; then
           echo "clankerctl: no branch/bookmark '$branch' in $src" >&2
           exit 1
         fi
-        dest="$HOME/agent/$name"
+        dest="$HOME/agent/''${into:+$into/}$name"
         q=$(printf '%q' "$dest")
 
         "$0" up || exit 1
@@ -153,8 +194,60 @@
         fi
         echo "clankerctl: $name is at $dest; update it with: $update" >&2
         ;;
+      add-project)
+        # `add` every repo directly under a project dir, into ~/agent/<project>/
+        if ! root=$(cd "''${2:-.}" 2>/dev/null && pwd -P); then
+          echo "clankerctl: ''${2:-.} is not a directory" >&2
+          exit 1
+        fi
+        project=$(basename "$root")
+        "$0" up || exit 1
+        added="" skipped="" failed=""
+        for c in "$root"/*/; do
+          c=''${c%/}
+          name=$(basename "$c")
+          if ! is_repo "$c"; then
+            if [ -d "$c/.jj" ]; then
+              echo "clankerctl: $name: jj repo without a .git; make it colocated first" >&2
+              failed="$failed $name"
+            fi
+            continue
+          fi
+          if [ "$(git -C "$c" remote get-url clanker 2>/dev/null)" = "${sshHost}:$HOME/agent/$project/$name" ]; then
+            skipped="$skipped $name"
+            continue
+          fi
+          if "$0" add --into "$project" "$c"; then
+            added="$added $name"
+          else
+            failed="$failed $name"
+          fi
+        done
+        echo "clankerctl: project at $HOME/agent/$project" >&2
+        [ -n "$added" ] && echo "  added:$added" >&2
+        [ -n "$skipped" ] && echo "  already added:$skipped" >&2
+        [ -n "$failed" ] && echo "  failed:$failed" >&2
+        [ -z "$failed" ]
+        ;;
+      push)
+        # push every repo under a project dir that has a clanker remote
+        root=''${2:-.}
+        "$0" up || exit 1
+        failed=""
+        for c in "$root"/*/; do
+          c=''${c%/}
+          is_repo "$c" && git -C "$c" remote get-url clanker >/dev/null 2>&1 || continue
+          push_one "$c" || failed="$failed $(basename "$c")"
+        done
+        if [ -n "$failed" ]; then
+          echo "clankerctl: push failed:$failed" >&2
+          exit 1
+        fi
+        ;;
       *)
-        echo "usage: clankerctl up|down|status|logs|add [repo [branch]]" >&2
+        echo "usage: clankerctl up|down|status|logs" >&2
+        echo "       clankerctl add [--into project] [repo [branch]]" >&2
+        echo "       clankerctl add-project [dir] | push [dir]" >&2
         exit 2
         ;;
     esac

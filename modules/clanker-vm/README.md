@@ -65,7 +65,9 @@ microVM, so it can work on code without access to the rest of the host.
 | `clankerctl down` | shut it down |
 | `clankerctl status` | print `up` / `down` |
 | `clankerctl logs` | follow the VM's console log |
-| `clankerctl add [repo [branch]]` | copy a host repo into `~/agent` (see below) |
+| `clankerctl add [--into project] [repo [branch]]` | copy a host repo into `~/agent` (see below) |
+| `clankerctl add-project [dir]` | `add` every repo directly under `dir` into `~/agent/<dir name>/` |
+| `clankerctl push [dir]` | push every repo directly under `dir` that has a `clanker` remote |
 
 ## Moving code in and out
 
@@ -88,17 +90,36 @@ current branch, and pushes it. Each later `git push clanker` force-updates that
 branch and its files in the VM. If the agent has uncommitted changes there, the
 push is refused and nothing changes.
 
-For a (colocated) jj repo, name the bookmark, since jj keeps git's `HEAD`
-detached:
+For a (colocated) jj repo, jj keeps git's `HEAD` detached, so `add` uses
+`main`, or else `master`. For any other bookmark, name it:
 
 ```sh
-clankerctl add ~/.doom.d main
-jj git push --remote clanker --bookmark main   # every time after that
+clankerctl add ~/.doom.d dev
+jj git push --remote clanker --bookmark dev   # every time after that
 ```
 
 `add` also runs `jj bookmark track main@clanker`, without which jj refuses to
 push to the bookmark it didn't create. jj ignores the git push refspec, hence
 the explicit `--bookmark`.
+
+**Projects of several repos.** For a directory of repos such as
+`~/src/project_foo/{api,web}`:
+
+```sh
+clankerctl add-project ~/src/project_foo   # -> ~/agent/project_foo/{api,web}
+clankerctl push ~/src/project_foo          # every time after that
+```
+
+Then run the agent in `~/agent/project_foo`. `add-project` only takes repos
+directly under the directory and ignores other files. Repos already added are
+skipped, so you can run it again after adding a repo. A repo whose branch can't
+be guessed is reported; add it yourself with
+`clankerctl add --into project_foo <repo> <branch>`.
+
+**Submodules.** Only the repo itself is pushed, so its submodule directories are
+empty in the VM. `git submodule update --init` inside the VM clones from the
+URLs in `.gitmodules`, which works only for public URLs: the VM has no host
+credentials, and relative URLs have no `origin` to resolve against.
 
 **VM → host.** Let the agent commit to its own branch, then on the host:
 
