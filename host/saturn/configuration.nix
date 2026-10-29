@@ -69,10 +69,9 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # FIXME: Temporary allow jitsi meet
   nixpkgs.config.permittedInsecurePackages = [
-    "jitsi-meet-1.0.8792"
     "pnpm-10.29.2"
+    "firefox-esr-140-bin-unwrapped-140.17.0esr"
   ];
 
   nix.settings.experimental-features = [

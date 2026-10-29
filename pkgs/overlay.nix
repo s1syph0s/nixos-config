@@ -18,7 +18,7 @@
       ashell = inputs.ashell.packages.${final.system}.default;
 
       # FIXME: remove after NixOS/nixpkgs#568692 is fixed
-      inherit (inputs.nixpkgs-zotero.legacyPackages.${final.stdenv.hostPlatform.system}) zotero;
+      # inherit (inputs.nixpkgs-zotero.legacyPackages.${final.stdenv.hostPlatform.system}) zotero;
     })
   ];
 in {
