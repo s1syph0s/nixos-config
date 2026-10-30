@@ -33,7 +33,6 @@
     # ./hyprland
     # ./waybar
     ./zellij
-    ./email
     ./rofi
     ./niri
   ];

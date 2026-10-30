@@ -12,6 +12,7 @@
   fonts.fontconfig.enable = true;
 
   imports = [
+    ../../home/email
     ../../home
     ./app/hyprland
     ../../modules/clanker-vm

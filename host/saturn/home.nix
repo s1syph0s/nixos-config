@@ -18,9 +18,12 @@
     ../../modules/clanker-vm
   ];
   _module.args = {inherit inputs;};
+
   home.packages = with pkgs; [
     drawio
+    protontricks
   ];
+
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
       autoconnect = ["qemu:///system"];
