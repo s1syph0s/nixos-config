@@ -69,7 +69,7 @@ in {
       {
         image = "nix-rw.img";
         mountPoint = "/nix/.rw-store";
-        size = 16384;
+        size = 65536;
       }
       {
         # agent login, history, caches, nix-direnv caches: all persistent
