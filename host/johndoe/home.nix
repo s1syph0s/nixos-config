@@ -63,6 +63,8 @@
       userName = "Pasha Fistanto";
       userEmail = "pasha@fstn.top";
     };
+    vcpu = 8;
+    mem = 8192;
   };
 
   programs.ssh = {

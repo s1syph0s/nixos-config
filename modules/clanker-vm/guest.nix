@@ -6,6 +6,8 @@
   agentUid,
   agentPubKey,
   agentGit,
+  vmMem,
+  vmVcpu,
   ...
 }: let
   vmUser = "clanker"; # login name inside the VM; the only place it is set
@@ -22,8 +24,8 @@ in {
   ## ---------------------------------------------------------------- microVM
   microvm = {
     hypervisor = "qemu"; # supports 9p + user-mode networking + port forwarding
-    vcpu = 4;
-    mem = 4096; # MiB
+    vcpu = vmVcpu;
+    mem = vmMem; # MiB
 
     # User-mode networking: no root, no bridge. Outbound traffic is unrestricted.
     interfaces = [

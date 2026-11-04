@@ -92,6 +92,8 @@
       userName = "Pasha Fistanto";
       userEmail = "pasha@fstn.top";
     };
+    vcpu = 8;
+    mem = 4096;
   };
 
   sops = {

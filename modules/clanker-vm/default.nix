@@ -30,6 +30,8 @@
       agentPubKey = cfg.publicKey;
       agentUid = hostUid;
       agentGit = cfg.git;
+      vmMem = cfg.mem;
+      vmVcpu = cfg.vcpu;
     };
     modules = [
       inputs.microvm.nixosModules.microvm
@@ -292,6 +294,20 @@ in {
         example = "clanker@example.com";
         description = "user.email for commits made inside the VM.";
       };
+    };
+
+    vcpu = lib.mkOption {
+      type = lib.types.ints.unsigned;
+      default = 8;
+      example = 8;
+      description = "Number of vCPUs the VM has.";
+    };
+
+    mem = lib.mkOption {
+      type = lib.types.ints.unsigned;
+      default = 4096;
+      example = 4096;
+      description = "Memory size of the VM.";
     };
   };
 
