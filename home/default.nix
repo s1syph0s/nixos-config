@@ -647,6 +647,9 @@
 
   services.swaync = {
     enable = true;
+    style = ''
+      ${builtins.readFile ./swaync/style.css}
+    '';
   };
 
   programs.ashell = {
@@ -675,7 +678,7 @@
         left = ["Tempo" "Workspaces"];
         center = ["WindowTitle"];
         right = [
-          ["Notifications" "Tray" "SystemInfo"]
+          ["CustomNotifications" "Tray" "SystemInfo"]
           ["Privacy" "Settings"]
         ];
       };
