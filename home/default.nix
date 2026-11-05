@@ -645,6 +645,10 @@
     };
   };
 
+  services.swaync = {
+    enable = true;
+  };
+
   programs.ashell = {
     enable = true;
     settings = {
@@ -688,22 +692,22 @@
         visibility_mode = "MonitorSpecific";
         group_by_monitor = true;
       };
-      notifications = {
-        format = "%H:%M";
-        show_timestamps = true;
-        show_bodies = true;
-      };
-      # CustomModule = [
-      #   {
-      #     name = "CustomNotifications";
-      #     type = "Button";
-      #     icon = "";
-      #     command = "swaync-client -t -sw";
-      #     listen_cmd = "swaync-client -swb";
-      #     icons."dnd.*" = "";
-      #     alert = ".*notification";
-      #   }
-      # ];
+      # notifications = {
+      #   format = "%H:%M";
+      #   show_timestamps = true;
+      #   show_bodies = true;
+      # };
+      CustomModule = [
+        {
+          name = "CustomNotifications";
+          type = "Button";
+          icon = "";
+          command = "swaync-client -t -sw";
+          listen_cmd = "swaync-client -swb";
+          icons."dnd.*" = "";
+          alert = ".*notification";
+        }
+      ];
     };
   };
 
