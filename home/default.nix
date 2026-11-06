@@ -632,7 +632,7 @@
       "x-scheme-handler/chrome" = ["firefox.desktop"];
       "x-scheme-handler/discord" = ["vesktop.desktop"];
       "text/html" = ["firefox.desktop"];
-      # "application/pdf" = ["okularApplication_pdf.desktop"];
+      "application/pdf" = ["okularApplication_pdf.desktop"];
       "application/x-extension-htm" = ["firefox.desktop"];
       "application/x-extension-html" = ["firefox.desktop"];
       "application/x-extension-shtml" = ["firefox.desktop"];
@@ -641,7 +641,7 @@
       "application/x-extension-xht" = ["firefox.desktop"];
     };
     associations.added = {
-      # "application/pdf" = ["okularApplication_pdf.desktop"];
+      "application/pdf" = ["okularApplication_pdf.desktop"];
     };
   };
 
