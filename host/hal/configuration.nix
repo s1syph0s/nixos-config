@@ -201,6 +201,10 @@
         openFirewall = true;
       }));
 
+  systemd.services.wg = {
+    after = ["nscd.service"];
+    wants = ["nscd.service"];
+  };
   services.flaresolverr.enable = true;
 
   services.internal.backup.serviceNames = [
