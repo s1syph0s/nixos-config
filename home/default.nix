@@ -436,6 +436,16 @@
           xdg-open $argv[1] &>/dev/null &; disown
         '';
       };
+      fish_title = {
+        description = "Fish title";
+        body = ''
+          if set -q argv[1]
+              echo (prompt_pwd) "|" $argv[1]
+          else
+              prompt_pwd
+          end
+        '';
+      };
     };
   };
 

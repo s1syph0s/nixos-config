@@ -4,9 +4,7 @@
   pkgs,
   inputs,
   ...
-}:
-
-{
+}: {
   environment.systemPackages = with pkgs; [
     fishPlugins.pure
     fishPlugins.fzf
@@ -19,6 +17,17 @@
       set -U pure_enable_nixdevshell true
       set -U pure_show_subsecond_command_duration true
     '';
+    shellFunctions = {
+      fish_title = {
+        body = ''
+          if set -q argv[1]
+              echo (prompt_pwd) "|" $argv[1]
+          else
+              prompt_pwd
+          end
+        '';
+      };
+    };
   };
 
   programs.bash = {
@@ -38,5 +47,4 @@
     maxretry = 5;
     bantime = "24h";
   };
-
 }

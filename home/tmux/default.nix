@@ -23,8 +23,8 @@
           set -g status-left-length 100
           set -g status-left ""
           set -g status-right "#{E:@catppuccin_status_application}"
-          set -g @catppuccin_window_text " #{s|^$HOME|~|:pane_current_path}"
-          set -g @catppuccin_window_current_text " #{s|^$HOME|~|:pane_current_path}"
+          set -g @catppuccin_window_text " #{?#{==:#{pane_current_command},ssh},(ssh) ,}#T"
+          set -g @catppuccin_window_current_text " #{?#{==:#{pane_current_command},ssh},(ssh) ,}#T"
         '';
       }
     ];
