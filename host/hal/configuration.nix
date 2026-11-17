@@ -217,6 +217,10 @@
     "transmission"
   ];
 
+  services.syncthing = {
+    enable = true;
+  };
+
   virtualisation.containers.enable = true;
   # docker
   # virtualisation.docker = {
