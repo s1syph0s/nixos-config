@@ -68,17 +68,6 @@
         ];
       };
 
-      # greenbox = lib.nixosSystem {
-      #   inherit system;
-      #   specialArgs = {
-      #     inherit inputs;
-      #   };
-      #   modules = [
-      #     ./host/greenbox/configuration.nix
-      #     ./pkgs/overlay.nix
-      #   ];
-      # };
-
       johndoe = lib.nixosSystem {
         inherit system;
         specialArgs = {
